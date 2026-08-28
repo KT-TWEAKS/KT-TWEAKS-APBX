@@ -1,0 +1,511 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/index.css';
+---
+
+<BaseLayout title="KT TWEAKS APBX — Playbooks para Windows 10 e 11" description="KT TWEAKS APBX - 16 playbooks originais da comunidade AME para Windows 10 e 11. Downloads diretos, comparacao lado a lado, auditoria tecnica e verificacao de integridade. Curadoria sem modificacoes.">
+<Fragment slot="head-extra">
+<meta name="keywords" content="KT TWEAKS, APBX, playbooks, AME Wizard, Windows 10, Windows 11, AtlasOS, ReviOS, FSOS-XR10, otimizacao Windows, debloat">
+<meta name="author" content="KT TWEAKS">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KT TWEAKS APBX - Playbooks originais da comunidade AME para Windows 10 e 11">
+<meta property="og:description" content="16 playbooks originais com downloads diretos, comparacao tecnica e auditoria de risco. Curadoria sem modificacoes.">
+<meta property="og:url" content="https://kt-tweaks-apbx.vercel.app/">
+<meta property="og:image" content="https://kt-tweaks-apbx.vercel.app/kt-logo.png">
+<meta property="og:site_name" content="KT TWEAKS APBX">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KT TWEAKS APBX - Playbooks para Windows 10 e 11">
+<meta name="twitter:description" content="16 playbooks originais da comunidade AME. Downloads diretos e auditoria.">
+<meta name="twitter:image" content="https://kt-tweaks-apbx.vercel.app/kt-logo.png">
+<link rel="canonical" href="https://kt-tweaks-apbx.vercel.app/">
+<script type="application/ld+json" is:inline>{"@context":"https://schema.org","@type":"WebSite","name":"KT TWEAKS APBX","url":"https://kt-tweaks-apbx.vercel.app/","description":"Playbooks originais da comunidade AME para Windows 10 e 11 com downloads diretos e auditoria.","potentialAction":{"@type":"SearchAction","target":"https://kt-tweaks-apbx.vercel.app/comparar.html?pb={search_term_string}","query-input":"required name=search_term_string"}}</script>
+    <meta name="description" content="KT TWEAKS APBX: playbooks da comunidade AME adaptados para Windows 10/11 - verificados oficialmente para o KT WIRZADE. Download direto.">
+    <script type="importmap" is:inline>{ "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }</script>
+</Fragment>
+    <canvas id="bg-canvas"></canvas>
+    <div class="scan"></div>
+    <div class="noise"></div>
+
+    <div id="loader">
+        <div class="loader-logo">KT TWEAKS APBX</div>
+        <div class="boot-lines">
+            <div class="boot-line"><span class="b-ok">[  OK  ]</span> Iniciando kernel de otimização...</div>
+            <div class="boot-line"><span class="b-ok">[  OK  ]</span> Carregando playbooks do repositório...</div>
+            <div class="boot-line"><span class="b-info">[ INFO ]</span> Detectado suporte Win10 + Win11</div>
+            <div class="boot-line"><span class="b-warn">[ WARN ]</span> Antivírus pode sinalizar (falso positivo)</div>
+            <div class="boot-line"><span class="b-ok">[  OK  ]</span> Sistema pronto.</div>
+        </div>
+        <div class="boot-bar"><div class="boot-progress"></div></div>
+    </div>
+
+    <nav id="nav">
+        <div class="nav-in">
+            <a href="#" class="nav-logo"><img src="kt-logo.png" alt="KT" class="nav-logo-img">KT TWEAKS <span class="nav-apbx">APBX</span></a>
+            <div class="nav-links"><a href="https://kt-wirzade-site.vercel.app" target="_blank" class="nav-a">KT WIRZADE ↗</a><a href="comparar.html" class="nav-a">Comparar</a>
+                <a href="#sobre" class="nav-a">Playbooks</a>
+                <a href="#antivirus" class="nav-a">Antivírus</a>
+                <a href="#como-usar" class="nav-a">Como Usar</a>
+                <a href="#wizard" class="nav-a">KT WIRZADE</a>
+                <a href="#downloads" class="nav-a">Downloads</a>
+                <a href="#changelogs" class="nav-a">Changelogs</a><a href="changelog-playbooks.html" target="_blank" class="nav-a">Diffs</a>
+                <a href="#faq" class="nav-a">FAQ</a>
+                <a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="nav-cta"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+            <button class="ham" id="ham" onclick="toggleMob()"><i class="fas fa-bars"></i></button>
+        </div>
+        <div class="nav-progress" id="nav-progress"></div>
+    </nav>
+    <div class="mob-nav" id="mob-nav">
+        <a href="#sobre" class="mob-a">Playbooks</a><a href="#antivirus" class="mob-a">Antivírus</a><a href="#como-usar" class="mob-a">Como Usar</a><a href="#wizard" class="mob-a">KT WIRZADE</a><a href="#downloads" class="mob-a">Downloads</a><a href="#changelogs" class="mob-a">Changelogs</a><a href="#faq" class="mob-a">FAQ</a>
+        <a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="mob-a"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+
+    <section class="hero sec">
+        <div class="parallax-layer" data-speed="0.3">
+            <div class="parallax-orb" style="top:10%;left:5%;width:200px;height:200px;background:radial-gradient(circle,rgba(139,92,246,.06),transparent 70%)"></div>
+            <div class="parallax-orb" style="top:40%;right:8%;width:300px;height:300px;background:radial-gradient(circle,rgba(167,139,250,.04),transparent 70%);filter:blur(50px)"></div>
+        </div>
+        <div style="position:absolute;top:18%;left:12%;width:80px;height:80px;border:1px solid rgba(139,92,246,.15);border-radius:20px;background:rgba(139,92,246,.04);animation:floatRotate 7s ease-in-out infinite;pointer-events:none;z-index:1"></div>
+        <div style="position:absolute;top:25%;right:10%;width:60px;height:60px;border:1px solid rgba(167,139,250,.12);border-radius:50%;background:rgba(167,139,250,.03);animation:floatRotate 5s ease-in-out infinite .5s;pointer-events:none;z-index:1"></div>
+        <div style="position:absolute;bottom:20%;left:8%;width:50px;height:50px;border:1px solid rgba(196,181,253,.1);border-radius:14px;background:rgba(196,181,253,.03);animation:floatRotate 6s ease-in-out infinite 1s;pointer-events:none;z-index:1"></div>
+        <div class="hero-eyebrow"><span class="eyebrow-dot"></span> Playbooks Originais da Comunidade AME · Windows 10 & 11 · 100% Gratuito</div>
+        <h1 class="hero-title"><span class="fill">KT TWEAKS</span></h1>
+        <p class="hero-subtitle">PLAYBOOKS</p>
+        <p class="hero-desc">Os <strong>playbooks originais</strong> da comunidade AME — <strong>AtlasOS, ReviOS, RapidOS, FSOS-XR10 e mais</strong> — sem modificações, prontos para o <strong>KT WIRZADE</strong> e compatíveis com Windows 10 e 11. Sem custo. Sem complicação.</p>
+        <div class="hero-actions">
+            <a href="#downloads" class="btn-main"><i class="fas fa-download"></i> Ver Playbooks</a>
+            <a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> Código Fonte</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hstat"><div class="hstat-n" data-count="16">16</div><div class="hstat-l">Playbooks</div></div>
+            <div class="hstat"><div class="hstat-n">Win <span>10</span></div><div class="hstat-l">Suporte</div></div>
+            <div class="hstat"><div class="hstat-n"><span>100</span>%</div><div class="hstat-l">Gratuito</div></div>
+            <div class="hstat"><div class="hstat-n"><span>KW</span></div><div class="hstat-l">KT WIRZADE</div></div>
+        </div>
+        <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span>SCROLL</span></div>
+    </section>
+
+    <section id="sobre" class="sec pad"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">PLAYBOOKS</div><h2 class="s-title">O que são <span class="hl">Playbooks</span>?</h2><p class="s-body">Scripts automatizados que modificam o Windows profundamente — removem bloatware, desativam telemetria, ajustam latência e maximizam performance.</p></div>
+        <div class="feat-grid">
+            <div class="feat-card" data-reveal><div class="feat-icon fi-v"><i class="fas fa-gamepad"></i></div><h3>Gaming</h3><p>Timers de alta resolução, DPC otimizado, scheduler ajustado e GPU em modo máxima performance.</p></div>
+            <div class="feat-card" data-reveal><div class="feat-icon fi-g"><i class="fas fa-user-shield"></i></div><h3>Privacy</h3><p>Remoção completa de telemetria, bloqueio de rastreamento e reforço da privacidade digital.</p></div>
+            <div class="feat-card" data-reveal><div class="feat-icon fi-p"><i class="fas fa-tachometer-alt"></i></div><h3>Performance</h3><p>Processos eliminados, boot mais rápido e sistema geral muito mais ágil e responsivo.</p></div>
+            <div class="feat-card" data-reveal><div class="feat-icon fi-a"><i class="fas fa-feather"></i></div><h3>Leveza</h3><p>Remoção de apps pré-instalados e bloatware. Ideal para PCs mais antigos.</p></div>
+        </div>
+        <div class="win10-banner" data-reveal>
+            <div class="win10-icon"><i class="fas fa-code-branch"></i></div>
+            <div><div class="win10-title">Playbooks <span style="color:var(--gn)">Originais, sem modificações</span></div>
+            <div style="color:var(--t2);font-size:16px;line-height:1.7"><p>Todos os playbooks do site são os <strong>originais da comunidade AME</strong> — Atlas Playbook, AtmosphereOS, ReviOS, RapidOS, FSOS-XR10, Vain e outros — <strong>sem nenhuma alteração</strong> nos scripts internos.</p><p style="margin-top:12px">Cada pacote passou por <strong>auditoria automatizada</strong> (mesmo motor do APBX Developer do KT WIRZADE) e está <strong>verificado no licensing oficial</strong>.</p></div>
+            <div class="win10-chips"><span class="win10-chip"><i class="fas fa-check"></i> Win 10 Build 19041+</span><span class="win10-chip"><i class="fas fa-check"></i> Win 10 21H2 / 22H2</span><span class="win10-chip"><i class="fas fa-check"></i> Win 11 suportado</span><span class="win10-chip"><i class="fas fa-check"></i> Home & Pro</span></div></div>
+        </div>
+    </div></section>
+
+    <section id="antivirus" class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">SEGURANÇA</div><h2 class="s-title">Por que o <span class="hl2">Antivírus</span> detecta?</h2><p class="s-body">Entenda por que é um falso positivo.</p></div>
+        <div class="av-grid">
+            <div class="av-card wide" data-reveal><div class="av-head"><div class="av-ic warn"><i class="fas fa-exclamation-triangle"></i></div><h3>Falso Positivo — Totalmente Esperado</h3></div><p>Arquivos <code style="background:rgba(255,255,255,.04);padding:2px 6px;border-radius:6px">.apbx</code> contêm scripts que modificam configurações profundas do Windows — qualquer ferramenta que faça isso é sinalizada automaticamente.</p><p style="margin-top:12px">Isso ocorre com <strong>AtlasOS oficial</strong>, <strong>ReviOS oficial</strong>, <strong>RapidOS</strong> e todos os projetos AME.</p></div>
+            <div class="av-card" data-reveal><div class="av-head"><div class="av-ic ok"><i class="fas fa-check-circle"></i></div><h3>Por que é seguro?</h3></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:16px"><div><i class="fas fa-circle" style="font-size:8px;color:var(--gn);margin-right:8px"></i> Código 100% open source</div><div><i class="fas fa-circle" style="font-size:8px;color:var(--gn);margin-right:8px"></i> Sem executáveis ocultos</div><div><i class="fas fa-circle" style="font-size:8px;color:var(--gn);margin-right:8px"></i> AME verifica integridade</div><div><i class="fas fa-circle" style="font-size:8px;color:var(--gn);margin-right:8px"></i> Mesmo padrão de AtlasOS/ReviOS</div></div></div>
+            <div class="av-card" data-reveal><div class="av-head"><div class="av-ic info"><i class="fas fa-info-circle"></i></div><h3>O que fazer?</h3></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:16px"><div><i class="fas fa-circle" style="font-size:8px;color:#8b5cf6;margin-right:8px"></i> Desative o Defender antes</div><div><i class="fas fa-circle" style="font-size:8px;color:#8b5cf6;margin-right:8px"></i> Execute como Administrador</div><div><i class="fas fa-circle" style="font-size:8px;color:#8b5cf6;margin-right:8px"></i> Reinicie após aplicar</div><div><i class="fas fa-circle" style="font-size:8px;color:#8b5cf6;margin-right:8px"></i> Crie ponto de restauração</div></div></div>
+        </div>
+        
+    </div></section>
+
+    <section id="como-usar" class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">GUIA</div><h2 class="s-title">Como <span class="hl">Usar</span>?</h2><p class="s-body">Quatro passos simples para transformar seu Windows.</p></div>
+        <div class="steps-track">
+            <div class="step" data-reveal><div class="step-circle"><span style="position:absolute;top:-5px;right:-5px;background:var(--p);width:22px;height:22px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">1</span><i class="fas fa-download"></i></div><h3>KT WIRZADE</h3><p>Baixe o wizard em <a href="https://kt-wirzade-site.vercel.app" target="_blank" style="color:var(--vi)">kt-wirzade-site.vercel.app</a> assim que for lançado. Por enquanto use o AME Wizard original.</p></div>
+            <div class="step" data-reveal><div class="step-circle"><span style="position:absolute;top:-5px;right:-5px;background:var(--p);width:22px;height:22px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">2</span><i class="fas fa-file-archive"></i></div><h3>PLAYBOOK</h3><p>Escolha e baixe um dos playbooks disponíveis.</p></div>
+            <div class="step" data-reveal><div class="step-circle"><span style="position:absolute;top:-5px;right:-5px;background:var(--p);width:22px;height:22px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">3</span><i class="fas fa-shield-virus"></i></div><h3>ANTIVÍRUS</h3><p>Desative o Windows Defender temporariamente.</p></div>
+            <div class="step" data-reveal><div class="step-circle"><span style="position:absolute;top:-5px;right:-5px;background:var(--p);width:22px;height:22px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">4</span><i class="fas fa-rocket"></i></div><h3>APLICAR</h3><p>Carregue o .apbx no wizard e aplique.</p></div>
+        </div>
+    </div></section>
+
+    <section id="wizard" class="sec pad" style="background:linear-gradient(180deg,transparent,rgba(139,92,246,.02),transparent);border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div class="tucli-grid">
+            <div data-reveal="left"><div class="s-eyebrow">REQUISITO</div><h3 style="font-family:var(--fd);font-size:42px;letter-spacing:2px">KT <span style="color:var(--vi)">WIRZADE</span></h3><p style="color:var(--t2);margin:22px 0;font-size:17px">O KT WIRZADE é o wizard brasileiro que executa todos estes playbooks com rollback real, dashboard, multi-idioma e verificação integrada de playbooks. <br><a href="https://kt-wirzade-site.vercel.app" target="_blank" class="soon-badge" style="text-decoration:none"><i class="fas fa-clock"></i> LANÇAMENTO EM BREVE</a></p>
+            <div style="display:flex;flex-direction:column;gap:12px;margin:26px 0"><div><i class="fas fa-check-circle" style="color:var(--gn);margin-right:10px"></i> Rollback real de cada alteração</div><div><i class="fas fa-check-circle" style="color:var(--gn);margin-right:10px"></i> Interface 100% em português</div><div><i class="fas fa-check-circle" style="color:var(--gn);margin-right:10px"></i> Open Source — código auditável</div></div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap"><a href="https://kt-wirzade-site.vercel.app" target="_blank" class="btn-main" style="text-decoration:none"><i class="fas fa-circle-info"></i> Ver Detalhes</a><a href="#downloads" class="btn-ghost"><i class="fas fa-arrow-down"></i> Ver Playbooks</a></div></div>
+            <div class="terminal" data-reveal="right"><div class="term-bar"><div class="term-btn tb-r"></div><div class="term-btn tb-y"></div><div class="term-btn tb-g"></div><div class="term-title">Terminal — PowerShell (Admin)</div></div>
+            <div class="term-body"><div><span class="tc-c"># KT-Wizard.exe — prévias do desenvolvimento (em breve)</span></div><div><span class="tc-p">PS</span><span class="tc-d"> C:\&gt;</span> KT-Wizard.exe --list</div><div><span class="tc-o">  FSOS-XR10.apbx       ✓ Verificado</span></div><div><span class="tc-o">  vain-v14.apbx        ✓ Verificado</span></div><div><span class="tc-o">  ReviOS-26.04.apbx    ✓ Verificado</span></div><div style="margin-top:16px"><span class="tc-p">PS</span><span class="tc-d"> C:\&gt;</span> KT-Wizard.exe apply FSOS-XR10.apbx</div><div><span class="tc-o">  Rollback salvo. Aplicando playbook...</span></div><div><span class="tc-o">✔ Sistema otimizado!</span></div><div><span class="tc-p">PS</span><span class="tc-d"> C:\Downloads&gt;</span> <span class="tc-cursor"></span></div></div></div>
+        </div>
+    </div></section>
+
+    
+    <section class="sec pad" style="border-top:1px solid var(--bdr2);background:rgba(116,2,247,.04)">
+        <div class="wrap">
+            <div class="s-eyebrow">ENTENDA O SITE</div>
+            <h2 style="font-family:var(--fd);font-size:clamp(28px,4vw,42px);letter-spacing:1px;margin:8px 0 14px">Como comparar e ler os detalhes</h2>
+            <p style="color:var(--t2);max-width:760px;font-size:15.5px;line-height:1.7;margin-bottom:26px">Cada playbook da comunidade AME foi analisado por nossa auditoria automatizada. Use a <b style="color:var(--vi)">Comparação</b> para colocar dois ou mais playbooks lado a lado e ver diferenças de tamanho, quantidade de ações e riscos. Clique em <b style="color:var(--vi)">Detalhes</b> em qualquer card para abrir o relatório completo do que aquele playbook toca no sistema.</p>
+            <div class="exp-grid">
+                <div class="exp-card"><div class="exp-ic" style="background:rgba(167,139,250,.15);color:#a78bfa"><i class="fas fa-scale-balanced"></i></div><div><h4>Comparação lado a lado</h4><p>Selecione playbooks e veja uma tabela com tamanho, ações, serviços, registro e risco. Ideal para escolher o melhor pro seu uso (gaming, privacidade, performance).</p></div></div>
+                <div class="exp-card"><div class="exp-ic" style="background:rgba(96,165,250,.15);color:#60a5fa"><i class="fas fa-microscope"></i></div><div><h4>Detalhes técnicos</h4><p>Relatório da auditoria: quantas chaves de registro, serviços e comandos o playbook altera, além da lista de riscos detectados (ex: modificação de boot, área crítica do sistema).</p></div></div>
+                <div class="exp-card"><div class="exp-ic" style="background:rgba(52,211,153,.15);color:#34d399"><i class="fas fa-shield-halved"></i></div><div><h4>Verificação de integridade</h4><p>Todos os 16 playbooks são verificados no licensing KT WIRZADE (hash SHA-256). O selo <span style="color:#35d56d">✓ Verificado</span> garante que o arquivo não foi alterado.</p></div></div>
+                <div class="exp-card"><div class="exp-ic" style="background:rgba(245,158,11,.15);color:#fbbf24"><i class="fas fa-triangle-exclamation"></i></div><div><h4>O que são os riscos</h4><p>Riscos são ações que tocam áreas sensíveis (boot, Defender, drivers). Não significa perigo — é transparência do que o playbook faz. Sempre leia antes de aplicar.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="downloads" class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div class="pb-header"><div data-reveal><div class="s-eyebrow">DOWNLOADS</div><h2 class="s-title">Playbooks <span class="hl">Disponíveis</span></h2><p class="s-body" style="margin-top:8px"><span id='pb-total'>16</span> playbooks com suporte a Windows 10 e 11. Verificados para o KT WIRZADE.</p></div>
+        <div><div class="filter-wrap" id="filters"><button class="f-btn active" data-f="all">Todos</button><button class="f-btn" data-f="gaming">🎮 Gaming</button><button class="f-btn" data-f="privacy">🔒 Privacy</button><button class="f-btn" data-f="performance">⚡ Performance</button><button class="f-btn" data-f="balanced">⚖️ Balanceado</button><button class="f-btn" data-f="lightweight">🍃 Leve</button></div><div class="pb-count" id="pb-count">Mostrando 16 playbooks</div></div></div>
+        <div class="creator-highlight" data-reveal><img class="creator-avatar" id="creator-avatar" src="https://avatars.githubusercontent.com/u/113907052?v=4" alt="kelvenapk"><div class="creator-info"><span class="creator-label"><i class="fas fa-clipboard-check"></i> CURADORIA E VERIFICAÇÃO</span><span class="creator-name" id="creator-name">kelvenapk</span><span class="creator-badge"><i class="fas fa-check-circle"></i> 16 playbooks originais · auditados e verificados p/ KT WIRZADE</span></div><div class="creator-stats"><div class="creator-stat"><div class="creator-stat-value">16</div><div class="creator-stat-label">Playbooks</div></div><div class="creator-stat"><div class="creator-stat-value">Win10</div><div class="creator-stat-label">Suporte</div></div></div></div>
+        <div class="highlights-grid" style="margin-bottom:32px" data-reveal>
+            <div class="hl-card hl-card-fsos">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#8b5cf6,#a78bfa,transparent)"></div>
+                <div>
+                    <div style="display:inline-flex;align-items:center;gap:8px;padding:4px 14px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);border-radius:999px;font-family:var(--fm);font-size:10px;color:#8b5cf6;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px"><i class="fas fa-star" style="font-size:8px"></i> DESTAQUE</div>
+                    <h3 style="font-family:var(--fd);font-size:36px;letter-spacing:1px;margin-bottom:10px">FSOS-XR10</h3>
+                    <p style="color:var(--t2);font-size:16px;line-height:1.7;margin-bottom:20px">O playbook mais completo da comunidade AME, agora na versão XR10. Otimizações agressivas para máxima performance — ideal para gamers competitivos e PCs de alta performance. Win10 + Win11.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                        <span class="tag tag-performance">⚡ Performance</span>
+                        <span class="tag tag-gaming">🎮 Gaming</span>
+                        <span class="tag tag-win10">Win 10</span>
+                        <span class="tag tag-win11">Win 11</span>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap">
+                        <a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/v1.0/FSOS-XR10.apbx" target="_blank" class="btn-main" onclick="return confirm('FSOS-XR10 — playbook original da comunidade AME. Continuar?')"><i class="fas fa-download"></i> Baixar FSOS-XR10</a>
+                    </div>
+                </div>
+                <div style="text-align:center;padding:20px">
+                    <div style="width:100px;height:100px;border-radius:24px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.15);display:flex;align-items:center;justify-content:center;font-size:42px;color:var(--vi)"><i class="fas fa-tachometer-alt"></i></div>
+                    <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:12px;letter-spacing:1px;text-transform:uppercase">v10.0 · 416 MB · via Releases</div>
+                </div>
+            </div>
+            <div class="hl-card hl-card-vain">
+                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#35d56d,#059669,transparent)"></div>
+                <div>
+                    <div style="display:inline-flex;align-items:center;gap:8px;padding:4px 14px;background:rgba(53,213,109,.15);border:1px solid rgba(53,213,109,.25);border-radius:999px;font-family:var(--fm);font-size:10px;color:#35d56d;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px"><i class="fas fa-fire" style="font-size:8px"></i> DESTAQUE</div>
+                    <h3 style="font-family:var(--fd);font-size:36px;letter-spacing:1px;margin-bottom:10px">Vain v14 hotfix6</h3>
+                    <p style="color:var(--t2);font-size:16px;line-height:1.7;margin-bottom:20px">Performance extrema com OpenShell, seleção de browser e power plan customizado. Original da comunidade AME.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                        <span class="tag tag-performance">⚡ Performance</span>
+                        <span class="tag tag-gaming">🎮 Gaming</span>
+                        <span class="tag tag-win10">Win 10</span>
+                        <span class="tag tag-win11">Win 11</span>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap">
+                        <a href="https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/vain-v14-hotfix6.apbx" target="_blank" class="btn-main" style="background:linear-gradient(145deg,#059669,#35d56d);box-shadow:0 14px 32px -8px rgba(53,213,109,.4)" onclick="return confirm('Vain v14 — playbook original da comunidade AME. Continuar?')"><i class="fas fa-download"></i> Baixar Vain</a>
+                        
+                    </div>
+                </div>
+                <div style="text-align:center;padding:20px">
+                    <div style="width:100px;height:100px;border-radius:24px;background:rgba(53,213,109,.1);border:1px solid rgba(53,213,109,.15);display:flex;align-items:center;justify-content:center;font-size:42px;color:var(--gn)"><i class="fas fa-fire"></i></div>
+                    <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:12px;letter-spacing:1px;text-transform:uppercase">v14 hf6</div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-grid" id="pb-grid"></div>
+    </div></section>
+
+    <section id="changelogs" class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">AUDITORIA</div><h2 class="s-title">Análise de <span class="hl">cada playbook</span></h2><p class="s-body">Auditoria automatizada dos pacotes: ações, riscos, serviços, registros e downloads — mesma tecnologia do APBX Developer. <a href="changelog-playbooks.html" target="_blank" style="color:var(--vi);text-decoration:underline">Ver diffs completos &rarr;</a></p></div>
+        <div class="cl-grid" id="cl-grid"></div>
+    </div></section>
+
+    <section class="sec"><div class="wrap"><div class="stats-row" data-reveal="scale">
+        <div class="stat-cell"><div class="stat-n" data-count="16">16</div><div class="stat-l">Playbooks</div></div>
+        <div class="stat-cell"><div class="stat-n">Win <span>10</span></div><div class="stat-l">Suporte</div></div>
+        <div class="stat-cell"><div class="stat-n"><span>4</span></div><div class="stat-l">Categorias</div></div>
+        <div class="stat-cell"><div class="stat-n"><span>100</span>%</div><div class="stat-l">Gratuito</div></div>
+    </div></div></section>
+
+    <section id="faq" class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">FAQ</div><h2 class="s-title">Perguntas <span class="hl">Frequentes</span></h2></div>
+        <div class="faq-list" id="faq-list"></div>
+    </div></section>
+
+    <footer class="footer-sec"><div class="footer-inner">
+        <div class="footer-brand"><div class="footer-logo"><img src="kt-logo.png" alt="KT" class="nav-logo-img">KT TWEAKS</div><p>Os playbooks originais da comunidade AME — auditados, verificados e prontos para o KT WIRZADE.</p></div>
+        <div class="footer-col"><h4>LINKS</h4><div class="footer-links"><a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="footer-link"><i class="fab fa-github"></i> GitHub</a><a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/issues" target="_blank" class="footer-link"><i class="fas fa-bug"></i> Reportar Bug</a><a href="https://kt-wirzade-site.vercel.app" target="_blank" class="footer-link"><i class="fas fa-wand-magic-sparkles"></i> KT WIRZADE</a></div></div>
+        <div class="footer-col"><h4>CATEGORIAS</h4><div class="footer-links"><a href="#downloads" class="footer-link">🎮 Gaming</a><a href="#downloads" class="footer-link">🔒 Privacy</a><a href="#downloads" class="footer-link">⚡ Performance</a><a href="#downloads" class="footer-link">🍃 Leve</a></div></div>
+    </div><div class="footer-bottom"><span>© 2026 KT TWEAKS · kelvenapk</span><span style="font-family:var(--fm)">Win 10 + 11 · AME Compatible</span></div></footer>
+
+<script type="module" is:inline>
+        import * as THREE from 'three';
+        const canvas = document.getElementById('bg-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+        const pGeo = new THREE.BufferGeometry();
+        const cnt = 1800;
+        const pos = new Float32Array(cnt * 3);
+        const col = new Float32Array(cnt * 3);
+        const c1 = new THREE.Color('#a78bfa');
+        const c2 = new THREE.Color('#8b5cf6');
+        const c3 = new THREE.Color('#35d56d');
+        for (let i = 0; i < cnt * 3; i += 3) {
+            const r = 22 + Math.random() * 32;
+            const t = Math.random() * Math.PI * 2;
+            const p = Math.acos((Math.random() * 2) - 1);
+            pos[i] = Math.sin(p) * Math.cos(t) * r;
+            pos[i+1] = Math.sin(p) * Math.sin(t) * r;
+            pos[i+2] = Math.cos(p) * r;
+            const m = c1.clone().lerp(c2, Math.random());
+            if (Math.random() > 0.6) m.lerp(c3, Math.random());
+            col[i] = m.r; col[i+1] = m.g; col[i+2] = m.b;
+        }
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        pGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        const pMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.16, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+        scene.add(pMesh);
+        const sGeo = new THREE.BufferGeometry();
+        const sPos = new Float32Array(1000 * 3);
+        for (let i = 0; i < 1000 * 3; i += 3) { sPos[i] = (Math.random()-.5)*220; sPos[i+1] = (Math.random()-.5)*220; sPos[i+2] = (Math.random()-.5)*220; }
+        sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+        scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.1, transparent: true })));
+        let mx = 0, my = 0;
+        window.addEventListener('mousemove', e => { mx = (e.clientX/window.innerWidth)*2-1; my = -(e.clientY/window.innerHeight)*2+1; });
+        (function anim() {
+            requestAnimationFrame(anim);
+            pMesh.rotation.y += .0009; pMesh.rotation.x += .0004;
+            camera.position.x += (mx*6 - camera.position.x) * .02;
+            camera.position.y += (my*4 - camera.position.y) * .02;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+        })();
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+
+        
+const CATALOG = [{"file":"AtlasPlaybook_v0.5.0-hotfix.apbx","name":"Atlas Playbook","productCode":"64","numericCode":"64","title":"Atlas v0.5.0","version":"0.5.0","desc":"O playbook mais popular da comunidade AME, versao hotfix.","cat":"performance","tags":["performance","gaming"],"featured":true,"sizeMB":45.8,"sha256":"13c4d8e7fc0ed38c37c5942ebcabf7f636389972e6de391a192ae649967602d8","totalActions":2500,"taskFiles":191,"networkRequired":0,"parseErrors":0,"risksCount":3,"severity":"high","riskBreakdown":{"registry":421,"services":13,"files":1,"downloads":0,"commands":104,"apps":49,"others":1912},"supportedBuilds":["26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/atlas-playbook-v0.5.0-hotfix.apbx","deep":{"servicesCount":12,"servicesSample":["OneSyncSvc","TrkWks","PcaSvc","DiagTrack","diagnosticshub.standardcollector.service","WerSvc","wercplsupport","UCPD","GpuEnergyDrv","NetBT","Telemetry","w32time"],"appxCount":0,"appxSample":[],"registryCount":421,"commandsCount":104,"downloadsCount":0,"downloads":[],"scheduledTaskCount":8,"defenderRelated":0,"telemetryKeywords":2,"optionsPages":[]},"risksList":["Comando que reinicia/desliga a maquina: del \"%ProgramData%\\Microsoft\\Diagnosis\\ETLLogs\\AutoLogger\\DiagTrack*\" \"%ProgramData%\\Microsoft\\Diagnosis\\ETLLogs\\Shutdow...  <Disallow Telemetry and Data Collection (Configuration/tweaks/privacy/telemetry/disallow-data-collection.yml)>","Comando que modifica dados de boot: bcdedit /timeout 10  <Configure Boot Configuration (Configuration/tweaks/qol/bcdedit-tweaks.yml)>","Comando que modifica dados de boot: bcdedit /set bootmenupolicy legacy  <Configure Boot Configuration (Configuration/tweaks/qol/bcdedit-tweaks.yml)>"]}, {"file":"AtmosphereOS.apbx","name":"AtmosphereOS","productCode":"ATMOSPHEREOS","numericCode":null,"title":"Windows 11 \\ 10 AtmosphereOS Playbook","version":"0.2.0","desc":"Gaming de alta performance. Scheduler e DPC.","cat":"gaming","tags":["gaming"],"featured":false,"sizeMB":12.13,"sha256":"bbc2c58adfe5143e57b3152b932416284cbfbd3635d03a300b91487bf6851de3","totalActions":4008,"taskFiles":207,"networkRequired":26,"parseErrors":0,"risksCount":14,"severity":"high","riskBreakdown":{"registry":1104,"services":56,"files":326,"downloads":24,"commands":143,"apps":171,"others":2184},"supportedBuilds":["19045","22631","26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/atmosphereos.apbx","deep":{"servicesCount":49,"servicesSample":["WSearch","GpuEnergyDrv","NetBT","Telemetry","w32time","?","bits","appidsvc","cryptsvc","UsoSvc","WaaSMedicSvc","wuauserv","WpcMonSvc","WMPNetworkSvc","StorSvc","wisvc","Sense","webthreatdefusersvc*","webthreatdefsvc","UevAgentService","cloudidsvc","SecurityHealthService","wscsvc","BITS"],"appxCount":0,"appxSample":[],"registryCount":1104,"commandsCount":143,"downloadsCount":24,"downloads":[{"url":"git:https://github.com/AtmosphereTeam/AtmosphereTool","dest":"Iso\\Installers\\AtmosphereTool.zip"},{"url":"https://cdn.files.community/files/stable/Files.Package_3.9.1.0_Test/Files.Package_3.9.1.0_x64_arm64.msixbundle","dest":"Iso\\Installers\\Files.msixbundle"},{"url":"git:https://github.com/0x7c13/Notepads","dest":"Iso\\Installers\\Notepads.msixbundle"},{"url":"git:https://github.com/Ameliorated-LLC/appfetch/","dest":"Iso\\Installers\\AppFetch.exe"},{"url":"git:https://github.com/marticliment/UniGetUI/","dest":"Iso\\Installers\\UniGetUI.exe"},{"url":"git:https://github.com/felixse/FluentTerminal","dest":"Iso\\Installers\\FluentTerminal.zip"},{"url":"https://laptop-updates.brave.com/latest/winx64","dest":"Iso\\Installers\\BraveSetup.exe"},{"url":"https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US","dest":"Iso\\Installers\\FirefoxSetup.exe"},{"url":"https://download.opera.com/download/get/?id=71824&location=424&nothanks=yes&sub=marine&utm_tryagain=yes","dest":"Iso\\Installers\\OperaGXSetup.exe"},{"url":"git:https://github.com/Open-Shell/Open-Shell-Menu","dest":"Iso\\Installers\\OpenShellSetup.exe"},{"url":"git:https://github.com/ip7z/7zip","dest":"Iso\\Installers\\7zip.exe"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"}],"scheduledTaskCount":33,"defenderRelated":0,"telemetryKeywords":2,"optionsPages":[]},"risksList":["26 download(s)/etapa(s) precisam de internet durante a aplicacao.","Toca em area critica (System32\\drivers) via remocao de arquivo  <Files (Configuration/Tasks/advanced/files.yml)>","Toca em area critica (System32\\drivers) via remocao de arquivo  <Windows Defender (Configuration/Tasks/advanced/windows defender.yml)>","Toca em area critica (ProgramData\\Microsoft\\Windows Defender) via remocao de arquivo  <Windows Defender (Configuration/Tasks/advanced/windows defender.yml)>","Download executavel: https://github.com/Ameliorated-LLC/appfetch/  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Download executavel: https://github.com/marticliment/UniGetUI/  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Download executavel: https://laptop-updates.brave.com/latest/winx64  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Download executavel: https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Download executavel: https://download.opera.com/download/get/?id=71824&location=424&nothanks=yes&sub=marine&utm_tryagain=yes  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Download executavel: https://github.com/Open-Shell/Open-Shell-Menu  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Download executavel: https://github.com/ip7z/7zip  <Iso Downloads (Configuration/Tasks/iso/iso.yml)>","Comando que reinicia/desliga a maquina: del \"%ProgramData%\\Microsoft\\Diagnosis\\ETLLogs\\AutoLogger\\DiagTrack*\" \"%ProgramData%\\Microsoft\\Diagnosis\\ETLLogs\\Shutdow...  <Disallow Telemetry and Data Collection (Configuration/Tasks/privacy/telemetry/disallow-data-collection.yml)>"]}, {"file":"Atom.Playbook.v0.0.7.apbx","name":"Atom Playbook","productCode":"ATOM-PLAYBOOK","numericCode":null,"title":"Atom Playbook","version":"0.0.7","desc":"Minimalista e ultra-leve.","cat":"lightweight","tags":["lightweight"],"featured":false,"sizeMB":119.09,"sha256":"3c5a21e35cbafaccd8f15908afd2010fe1e50a5d14facaf6a4e4fa92b664fbee","totalActions":1127,"taskFiles":15,"networkRequired":0,"parseErrors":0,"risksCount":11,"severity":"high","riskBreakdown":{"registry":527,"services":174,"files":0,"downloads":0,"commands":76,"apps":187,"others":163},"supportedBuilds":["19044","19045","22000","22621","22631","23620","26100","26200","27000","27100","27200","27300","27400","27500","27600","27700","27800","27900","28000"],"optionsCount":0,"url":"https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/v1.0/Atom.Playbook.v0.0.7.apbx","deep":{"servicesCount":80,"servicesSample":["DiagTrack","dmwappushservice","diagnosticshub.standardcollector.service","diagsvc","WdiServiceHost","WdiSystemHost","WerSvc","wercplsupport","PcaSvc","Telemetry","pla","wmiApSrv","Wecsvc","DPS","TroubleshootingSvc","OneSyncSvc","WpnService","WpnUserService","DataUsageSvc","Dssvc","DsSvc","CloudIdSvc","CloudBackupRestoreSvc","cbdhsvc"],"appxCount":0,"appxSample":[],"registryCount":527,"commandsCount":76,"downloadsCount":0,"downloads":[],"scheduledTaskCount":10,"defenderRelated":0,"telemetryKeywords":2,"optionsPages":[]},"risksList":["Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que modifica dados de boot: bcdedit /deletevalue useplatformclock  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que modifica dados de boot: bcdedit /set {current} nx optin  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que modifica dados de boot: bcdedit /set {current} recoveryenabled no  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que modifica dados de boot: bcdedit /set {current} disableelamdrivers yes  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que modifica dados de boot: bcdedit /set {current} hypervisorlaunchtype off  <Performance (Configuration/Tasks/05-performance.yml)>","Comando que remove tarefas agendadas: schtasks /Delete /TN \"\\Microsoft\\Windows\\AppxAllUserStore\\UScheduler\" /F 2>nul  <Final (Configuration/Tasks/10-final.yml)>","Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <Gaming (Configuration/Tasks/12-gaming.yml)>","Comando que modifica dados de boot: bcdedit /set useplatformtick yes  <Gaming (Configuration/Tasks/12-gaming.yml)>","Comando que modifica dados de boot: bcdedit /set tscsyncpolicy enhanced  <Gaming (Configuration/Tasks/12-gaming.yml)>"]}, {"file":"Eternity.v1.4.apbx","name":"Eternity OS","productCode":"ETERNITY-OS","numericCode":null,"title":"Eternity Playbook","version":"1.4","desc":"Gaming extremo com tweaks avancados.","cat":"gaming","tags":["gaming","performance"],"featured":false,"sizeMB":3.27,"sha256":"f9019225ef5904a43c10b6cbbe719fc8c924ee23122ac5b26822b8f90e1e8330","totalActions":1724,"taskFiles":58,"networkRequired":0,"parseErrors":0,"risksCount":31,"severity":"high","riskBreakdown":{"registry":1083,"services":150,"files":40,"downloads":0,"commands":105,"apps":219,"others":127},"supportedBuilds":["19045","22621"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/eternity-v1.4.apbx","deep":{"servicesCount":80,"servicesSample":["ALG","AppMgmt","AppReadiness","autotimesvc","AxInstSV","bam","Beep","BluetoothUserService","BTAGService","CertPropSvc","DoSvc","DusmSvc","DevQueryBroker","DPS","embeddedmode","EntAppSvc","fdPHost","FDResPub","fhsvc","FontCache","FontCache3.0.0.0","GraphicsPerfSvc","GpuEnergyDrv","IpxlatCfgSvc"],"appxCount":0,"appxSample":[],"registryCount":1083,"commandsCount":105,"downloadsCount":0,"downloads":[],"scheduledTaskCount":83,"defenderRelated":0,"telemetryKeywords":2,"optionsPages":[]},"risksList":["Comando que altera componentes online do Windows: DISM /Online /Enable-Feature /FeatureName:\"LegacyComponents\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Enable-Feature /FeatureName:\"DirectPlay\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"MicrosoftWindowsPowerShellV2Root\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"MicrosoftWindowsPowerShellV2\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"WorkFolders-Client\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"Printing-Foundation-Features\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"Printing-Foundation-InternetPrinting-Client\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"SmbDirect\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que altera componentes online do Windows: DISM /Online /Disable-Feature /FeatureName:\"MSRDC-Infrastructure\" /NoRestart  <start (Configuration/eternity/start.yml)>","Comando que modifica dados de boot: bcdedit /set description \"EternityOS\"  <boot-settings (Configuration/tweaks/main-settings/boot-settings.yml)>","Comando que modifica dados de boot: bcdedit /set useplatformtick yes  <boot-settings (Configuration/tweaks/main-settings/boot-settings.yml)>","Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <boot-settings (Configuration/tweaks/main-settings/boot-settings.yml)>"]}, {"file":"FSOS-XR10.apbx","name":"FSOS-XR10","productCode":null,"numericCode":null,"title":"FSOS-X R10","version":"10.0","desc":"O mais completo da comunidade. Otimizacoes agressivas para maxima performance — feito para gamers competitivos.","cat":"performance","tags":["performance","gaming"],"featured":true,"sizeMB":415.84,"sha256":"09aedd9ac6acb54776a539bc94671810fba85e9f17b9c83acfbd634b3272cdb0","totalActions":1655,"taskFiles":8,"networkRequired":0,"parseErrors":0,"risksCount":10,"severity":"high","riskBreakdown":{"registry":730,"services":105,"files":7,"downloads":0,"commands":177,"apps":159,"others":477},"supportedBuilds":["1.6","6.1","6.2","6.3","6.4","6.5","7.0","8.0","9.0","19044","19045","22631","26100","26200","26300"],"optionsCount":0,"url":"https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/v1.0/FSOS-XR10.apbx","deep":{"servicesCount":105,"servicesSample":["DiagTrack","PcaSvc","InventorySvc","WpnService","webthreatdefsvc","webthreatdefusersvc","Spooler","PrintNotify","WlanSvc","wcncsvc","bthserv","BthAvctpSvc","BluetoothUserService","diagnosticshub.standardcollector.service","dmwappushservice","wisvc","MapsBroker","lfsvc","CDPUserSvc","Telemetry","GpuEnergyDrv","NetBT","icssvc","lmhosts"],"appxCount":149,"appxSample":["Microsoft.549981C3F5F10*","Microsoft.BingNews*","Microsoft.BingWeather*","Microsoft.BingSearch*","MicrosoftCorporationII.Bing*","Clipchamp.Clipchamp*","Microsoft.GetHelp*","Microsoft.Getstarted*","7EE7776C.LinkedInforWindows*","Microsoft.Microsoft3DViewer*","Microsoft.MicrosoftOfficeHub*","Microsoft.MicrosoftSolitaireCollection*","Microsoft.MicrosoftStickyNotes*","Microsoft.Office.OneNote*","Microsoft.OutlookForWindows*","Microsoft.People*"],"registryCount":730,"commandsCount":177,"downloadsCount":0,"downloads":[],"scheduledTaskCount":8,"defenderRelated":56,"telemetryKeywords":13,"optionsPages":[]},"risksList":["Comando que muda permissoes de sistema: $dotDefault = 'Registry::HKEY_USERS\\.DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'\ntry { Remove-ItemProperty -P...  <Configuration/Tasks/phase2-strip.yml>","Comando que muda permissoes de sistema: try {\n  $patterns = @('Microsoft.WindowsStore','Microsoft.StorePurchaseApp')\n  Get-AppxPackage -AllUsers -ErrorAction Si...  <Configuration/Tasks/phase2-strip.yml>","Comando que muda permissoes de sistema: $svcList = @('Sense','WinDefend','MsSecCore','wscsvc','WdFilter','WdBoot','WdNisDrv','WdNisSvc','MsSecWfp','MsSecFlt','w...  <Configuration/Tasks/phase2-strip.yml>","Toca em area critica (System32\\drivers) via remocao de arquivo  <Configuration/Tasks/phase2-strip.yml>","Comando que muda permissoes de sistema: $taskDir = Join-Path $env:windir 'System32\\Tasks\\Microsoft\\Windows\\Windows Defender'\nif (Test-Path -LiteralPath $taskDir...  <Configuration/Tasks/phase2-strip.yml>","Comando que muda permissoes de sistema: function Take-ClsidOwnership {\n  param([string]$subKey)\n  try {\n    $adminSid = New-Object System.Security.Principal.Sec...  <Configuration/Tasks/phase2-strip.yml>","Comando que modifica dados de boot: bcdedit /set hypervisorlaunchtype off  <Configuration/Tasks/phase2-strip.yml>","Comando que muda permissoes de sistema: function Start-Bounded {\n  param($f, $a, $ms)\n  try {\n    $p = $null\n    if ($a -and $a.Trim()) { $p = Start-Process -Fi...  <Configuration/Tasks/phase2-strip.yml>","Comando que reinicia/desliga a maquina: $nicClass = 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e972-e325-11ce-bfc1-08002be10318}'\nif (Test-Path $nicClas...  <Configuration/Tasks/phase4-gaming.yml>","Comando que reinicia/desliga a maquina: $packages = @(\n  'MicrosoftWindows.Client.CBS_cw5n1h2txyewy',\n  'Microsoft.UI.Xaml.CBS_8wekyb3d8bbwe',\n  'MicrosoftWindo...  <Configuration/Tasks/phase5-apply.yml>"]}, {"file":"NOVA_v0.5.0.apbx","name":"NOVA","productCode":"NOVA","numericCode":null,"title":"NOVA Playbook for Windows 11","version":"0.5.0","desc":"Nova geracao NOVA com foco em gaming.","cat":"gaming","tags":["gaming"],"featured":false,"sizeMB":18.09,"sha256":"015f5216c2fdaee36375e2e49163f2ab4e2a59ab03b3c8750f37771b83eb4306","totalActions":1061,"taskFiles":11,"networkRequired":17,"parseErrors":0,"risksCount":6,"severity":"high","riskBreakdown":{"registry":678,"services":21,"files":27,"downloads":1,"commands":88,"apps":113,"others":133},"supportedBuilds":["26100","26200","22631"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/nova-v0.5.0.apbx","deep":{"servicesCount":21,"servicesSample":["DiagTrack","dmwappushservice","WerSvc","lfsvc","MapsBroker","wisvc","RetailDemo","BDESVC","swprv","VSS","SDRSVC","wbengine","XblAuthManager","XblGameSave","XboxGipSvc","XboxNetApiSvc","edgeupdate","edgeupdatem","MicrosoftEdgeElevationService","OneSyncSvc*","WSAIFabricSvc"],"appxCount":0,"appxSample":[],"registryCount":678,"commandsCount":88,"downloadsCount":1,"downloads":[{"url":"git:","dest":"?"}],"scheduledTaskCount":28,"defenderRelated":0,"telemetryKeywords":0,"optionsPages":[]},"risksList":["17 download(s)/etapa(s) precisam de internet durante a aplicacao.","Comando que modifica dados de boot: bcdedit /timeout 5  <Performance Settings (Configuration/Tasks/registry/performance.yml)>","Comando que modifica dados de boot: bcdedit /set {current} bootmenupolicy legacy  <Performance Settings (Configuration/Tasks/registry/performance.yml)>","Comando que modifica dados de boot: bcdedit /set x2apicpolicy enable  <Performance Settings (Configuration/Tasks/registry/performance.yml)>","Comando que modifica dados de boot: bcdedit /set quietboot Yes  <Performance Settings (Configuration/Tasks/registry/performance.yml)>","Comando que modifica dados de boot: bcdedit /set bootux Disabled  <Performance Settings (Configuration/Tasks/registry/performance.yml)>"]}, {"file":"Nova-V6.2.apbx","name":"NovaOS V6.2","productCode":"NOVAOS-V6-2","numericCode":null,"title":"NovaOS V6.2","version":"6.2","desc":"Quarta geracao. Interrompcoes e GPU.","cat":"gaming","tags":["gaming"],"featured":false,"sizeMB":97.42,"sha256":"d5f033640824229a63134c397751de61666e9518a4eac121c4901d662dabe43d","totalActions":1827,"taskFiles":35,"networkRequired":10,"parseErrors":0,"risksCount":21,"severity":"high","riskBreakdown":{"registry":1157,"services":107,"files":47,"downloads":10,"commands":137,"apps":230,"others":139},"supportedBuilds":["22631","26100","26200"],"optionsCount":0,"url":"https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/v1.0/Nova-V6.2.apbx","deep":{"servicesCount":80,"servicesSample":["w32time","DoSvc","edgeupdate","edgeupdatem","MicrosoftEdgeElevationService","WpnService","WpnUserService","MsSecCore","MsSecFlt","MsSecWfp","SecurityHealthService","Sense","WdBoot","WdFilter","WdNisDrv","WdNisSvc","WinDefend","wscsvc","MDCoreSvc","SgrmAgent","SgrmBroker","webthreatdefsvc","webthreatdefusersvc","acpipagr"],"appxCount":0,"appxSample":[],"registryCount":1157,"commandsCount":137,"downloadsCount":10,"downloads":[{"url":"https://aka.ms/vc14/vc_redist.x64.exe","dest":"%temp%\\vc_redist.x64.exe"},{"url":"https://aka.ms/vc14/vc_redist.x86.exe","dest":"%temp%\\vc_redist.x86.exe"},{"url":"https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe","dest":"%temp%\\dotnet6_desktop_x64.exe"},{"url":"https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x86.exe","dest":"%temp%\\dotnet6_desktop_x86.exe"},{"url":"https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x64.exe","dest":"%temp%\\dotnet8_desktop_x64.exe"},{"url":"https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x86.exe","dest":"%temp%\\dotnet8_desktop_x86.exe"},{"url":"https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe","dest":"%temp%\\dxwebsetup.exe"},{"url":"https://www.7-zip.org/a/7z2602-x64.exe","dest":"%temp%\\7Zip.exe"},{"url":"https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.3/npp.8.9.3.Installer.x64.exe","dest":"%temp%\\NotepadPlusPlus.exe"},{"url":"https://www.startallback.com/download.php","dest":"%temp%\\StartAllBack.exe"}],"scheduledTaskCount":117,"defenderRelated":1,"telemetryKeywords":4,"optionsPages":[]},"risksList":["10 download(s)/etapa(s) precisam de internet durante a aplicacao.","Toca em area critica (System32\\drivers) via remocao de arquivo  <Windows Defender (Configuration/debloat/defender.yml)>","Toca em area critica (ProgramData\\Microsoft\\Windows Defender) via remocao de arquivo  <Windows Defender (Configuration/debloat/defender.yml)>","Comando que modifica dados de boot: bcdedit /set {current} disableelamdrivers yes  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set {current} isolatedcontext No  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set {current} nx optin  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set {current} recoveryenabled no  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set {current} integrityservices disable  <bcdedit (Configuration/setup/bcdedit.yml)>","Comando que modifica dados de boot: bcdedit /set {current} description \"NovaOS\"  <Branding (Configuration/setup/branding.yml)>","Download executavel: https://aka.ms/vc14/vc_redist.x64.exe  <Software (Configuration/software/software.yml)>"]}, {"file":"PeakOS V1.0.2 (AS IS).apbx","name":"PeakOS","productCode":"PEAKOS","numericCode":null,"title":"PeakOS 1.0.2","version":"1.0.2","desc":"Pico de desempenho. Servicos removidos. AS IS.","cat":"performance","tags":["performance"],"featured":false,"sizeMB":15.51,"sha256":"bf3f8a1dfbbdfd8b428727a314bee3090f1a4d8d24909f14620158562e471347","totalActions":359,"taskFiles":8,"networkRequired":0,"parseErrors":0,"risksCount":0,"severity":"ok","riskBreakdown":{"registry":175,"services":3,"files":10,"downloads":0,"commands":44,"apps":59,"others":68},"supportedBuilds":["19044","19045","22000","22621","22631","22635","26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/peakos-v1.0.2.apbx","deep":{"servicesCount":3,"servicesSample":["edgeupdate","edgeupdatem","MicrosoftEdgeElevationService"],"appxCount":0,"appxSample":[],"registryCount":175,"commandsCount":44,"downloadsCount":0,"downloads":[],"scheduledTaskCount":0,"defenderRelated":1,"telemetryKeywords":0,"optionsPages":[]},"risksList":[]}, {"file":"RapidOS.apbx","name":"RapidOS","productCode":"RAPIDOS","numericCode":null,"title":"Rapid Playbook v1.3","version":"1.3","desc":"Privacidade e customizacao via YAML.","cat":"privacy","tags":["privacy","performance"],"featured":false,"sizeMB":2.39,"sha256":"73bc95cbfd04afdd77a384161a316af8225f5c3eb59d4d89b0a4699345f12445","totalActions":500,"taskFiles":74,"networkRequired":0,"parseErrors":0,"risksCount":4,"severity":"high","riskBreakdown":{"registry":289,"services":29,"files":0,"downloads":0,"commands":93,"apps":5,"others":84},"supportedBuilds":["19045","22621","22631","26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/rapidos.apbx","deep":{"servicesCount":23,"servicesSample":["MicrosoftEdgeElevationService","edgeupdate","edgeupdatem","WpnService","WpnUserService*","AppMgmt","DoSvc","LanmanServer","MapsBroker","MSDTC","PcaSvc","SEMgrSvc","SSDPSRV","ShellHWDetection","TrkWks","DiagTrack","diagsvc","NvTelemetryContainer","Telemetry","TroubleshootingSvc","uhssvc","NetBT","OneSyncSvc"],"appxCount":0,"appxSample":[],"registryCount":289,"commandsCount":93,"downloadsCount":0,"downloads":[],"scheduledTaskCount":0,"defenderRelated":3,"telemetryKeywords":3,"optionsPages":[]},"risksList":["Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <Boot configuration (Configuration/Core/System/Boot.yml)>","Comando que modifica dados de boot: bcdedit /set debug no  <Boot configuration (Configuration/Core/System/Boot.yml)>","Comando que modifica dados de boot: bcdedit /timeout 15  <Boot configuration (Configuration/Core/System/Boot.yml)>","Comando que remove tarefas agendadas: $user = whoami; Register-ScheduledTask -TaskName 'gpupdate' -Action (New-ScheduledTaskAction -Execute 'powershell' -Argu...  <Finalize installation (Configuration/Core/System/Finalize.yml)>"]}, {"file":"RaxOS.apbx","name":"RaxOS","productCode":"RAXOS","numericCode":null,"title":"RaxOS Playbook","version":"001","desc":"Competitivo: input lag e framerate.","cat":"gaming","tags":["gaming"],"featured":false,"sizeMB":3.46,"sha256":"75cbb41c380545cbb4d70daae77095c88afe01baaa151005e0a2bdf7a66722a5","totalActions":1586,"taskFiles":30,"networkRequired":0,"parseErrors":0,"risksCount":1,"severity":"medium","riskBreakdown":{"registry":1135,"services":24,"files":36,"downloads":0,"commands":44,"apps":121,"others":226},"supportedBuilds":["19045","22621","22631"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/raxos.apbx","deep":{"servicesCount":24,"servicesSample":["OneSyncSvc*","dam","GpuEnergyDrv","NetBT","Telemetry","diagnosticshub.standardcollector.service","WerSvc","DiagTrack","wisvc","PcaSvc","DPS","WdiServiceHost","WdiSystemHost","tcpipreg","edgeupdate","Wecsvc","UCPD","DusmSvc","FontCache","MapsBroker","SysMain","TrkWks","WSearch","DsSvc"],"appxCount":0,"appxSample":[],"registryCount":1135,"commandsCount":44,"downloadsCount":0,"downloads":[],"scheduledTaskCount":48,"defenderRelated":0,"telemetryKeywords":0,"optionsPages":[]},"risksList":["Toca em area critica (WinSxS) via remocao de arquivo  <Components (Configuration/features/RaxOS/components.yml)>"]}, {"file":"Revi-PB-26.04.apbx","name":"ReviOS","productCode":"32","numericCode":"32","title":"ReviOS Playbook","version":"26.04","desc":"Equilibrio privacidade e performance.","cat":"privacy","tags":["privacy","performance"],"featured":true,"sizeMB":1.13,"sha256":"03c74cf3baecb869e4300b65d6340246a494d135c4f5d081a3abdc055ddd32c1","totalActions":1377,"taskFiles":53,"networkRequired":5,"parseErrors":0,"risksCount":1,"severity":"medium","riskBreakdown":{"registry":838,"services":21,"files":2,"downloads":4,"commands":67,"apps":6,"others":439},"supportedBuilds":["19044","19045","22631","26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/revios-26.04.apbx","deep":{"servicesCount":21,"servicesSample":["bam","Beep","GraphicsPerfSvc","Ndu","DPS","dam","GpuEnergyDrv","NetBT","Telemetry","diagnosticshub.standardcollector.service","WerSvc","DiagTrack","wisvc","PcaSvc","WdiServiceHost","WdiSystemHost","tcpipreg","edgeupdate","Wecsvc","UCPD","condrv"],"appxCount":0,"appxSample":[],"registryCount":838,"commandsCount":67,"downloadsCount":4,"downloads":[{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"},{"url":"git:","dest":"?"}],"scheduledTaskCount":0,"defenderRelated":0,"telemetryKeywords":0,"optionsPages":[]},"risksList":["5 download(s)/etapa(s) precisam de internet durante a aplicacao."]}, {"file":"SapphireOS.apbx","name":"SapphireOS","productCode":"SAPPHIREOS","numericCode":null,"title":"SapphireOS","version":"0.0.3","desc":"Refinado e estavel.","cat":"performance","tags":["performance","gaming"],"featured":false,"sizeMB":23.5,"sha256":"6188b89c1eac537e4b5affabd53972306c72c8f35b49f4ed7b3bca55d5c55766","totalActions":959,"taskFiles":8,"networkRequired":4,"parseErrors":0,"risksCount":13,"severity":"high","riskBreakdown":{"registry":493,"services":246,"files":10,"downloads":3,"commands":55,"apps":72,"others":80},"supportedBuilds":["19044","19045","22621","22631","26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/sapphireos.apbx","deep":{"servicesCount":80,"servicesSample":["OneSyncSvc*","diagnosticshub.standardcollector.service","diagsvc","DiagTrack","dmwappushservice","lfsvc","MapsBroker","MessagingService","OneSyncSvc","RetailDemo","SessionEnv","TermService","Themes","TroubleshootingSvc","UmRdpService","wercplsupport","WerSvc","PcaSvc","wisvc","WSearch","VacSvc","UserDataSvc","UnistoreSvc","spectrum"],"appxCount":0,"appxSample":[],"registryCount":493,"commandsCount":55,"downloadsCount":3,"downloads":[{"url":"https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.20/windowsdesktop-runtime-8.0.20-win-x64.exe","dest":"runtime.exe"},{"url":"https://github.com/abbodi1406/vcredist/releases/download/v0.101.0/VisualCppRedist_AIO_x86_x64.exe","dest":"vcpp.exe"},{"url":"https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v4.4.198/OpenShellSetup_4_4_198.exe","dest":"OpenShell.exe"}],"scheduledTaskCount":0,"defenderRelated":1,"telemetryKeywords":4,"optionsPages":[]},"risksList":["4 download(s)/etapa(s) precisam de internet durante a aplicacao.","Comando que modifica dados de boot: bcdedit /set {current} description \"SapphireOS\"  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set {current} recoveryenabled no  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set {current} disableelamdrivers yes  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set {current} integrityservices disable  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set {current} hypervisorlaunchtype off  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set {current} vm off  <Configuration/SapphireOS/tweaks/commands.yml>","Comando que modifica dados de boot: bcdedit /set {current} vsmlaunchtype off  <Configuration/SapphireOS/tweaks/commands.yml>","Download executavel: https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.20/windowsdesktop-runtime-8.0.20-win-x64.exe  <Configuration/SapphireOS/tweaks/commands.yml>","Download executavel: https://github.com/abbodi1406/vcredist/releases/download/v0.101.0/VisualCppRedist_AIO_x86_x64.exe  <Configuration/SapphireOS/tweaks/commands.yml>"]}, {"file":"SynergyOS.apbx","name":"SynergyOS","productCode":"48","numericCode":"48","title":"SynergyOS","version":"1.5.0","desc":"Equilibrio entre performance, privacidade e estabilidade.","cat":"balanced","tags":["performance","privacy"],"featured":false,"sizeMB":18.71,"sha256":"437021c8348ca4131bc150fca60a9f7050c002101169634ea73adee48ea7ba34","totalActions":402,"taskFiles":9,"networkRequired":2,"parseErrors":0,"risksCount":3,"severity":"high","riskBreakdown":{"registry":182,"services":65,"files":5,"downloads":2,"commands":35,"apps":68,"others":45},"supportedBuilds":["19044","19045","22000","22621","22631","22635","26100","26200"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/synergyos.apbx","deep":{"servicesCount":65,"servicesSample":["edgeupdate","edgeupdatem","MicrosoftEdgeElevationService","OneSyncSvc*","WSAIFabricSvc","AxInstSV","bam","BcastDVRUserService_389fd","BDESVC","Beep","BluetoothUserService","BthAvctpSvc","bthserv","CldFlt","CscService","diagsvc","DiagTrack","dmwappushservice","DoSvc","dps","dusmsvc","Fax","GpuEnergyDrv","icssvc"],"appxCount":0,"appxSample":[],"registryCount":182,"commandsCount":35,"downloadsCount":2,"downloads":[{"url":"https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x64.exe","dest":"%temp%\\dotnet8_desktop_x64.exe"},{"url":"https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x86.exe","dest":"%temp%\\dotnet8_desktop_x86.exe"}],"scheduledTaskCount":3,"defenderRelated":1,"telemetryKeywords":0,"optionsPages":[]},"risksList":["2 download(s)/etapa(s) precisam de internet durante a aplicacao.","Download executavel: https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x64.exe  <Software (Configuration/Tasks/software.yml)>","Download executavel: https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x86.exe  <Software (Configuration/Tasks/software.yml)>"]}, {"file":"XOS V0.574.apbx","name":"XOS","productCode":"XOS","numericCode":null,"title":"XOS Playbook v0.574","version":"0.574","desc":"Estabilidade de framerate.","cat":"gaming","tags":["gaming"],"featured":false,"sizeMB":8.87,"sha256":"89d91e2e030920bf7cbdb5cd3d3f31cc5945ecbd4a8a2508df761c7547a97391","totalActions":1012,"taskFiles":1,"networkRequired":0,"parseErrors":0,"risksCount":6,"severity":"high","riskBreakdown":{"registry":610,"services":56,"files":18,"downloads":0,"commands":147,"apps":118,"others":63},"supportedBuilds":["17763","18362","18363","19041","19042","19043","19044","19045","22000","22621","22631","26100","26200","28000"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/xos-v0.574.apbx","deep":{"servicesCount":56,"servicesSample":["dmwappushservice","diagnosticshub.standardcollector.service","RetailDemo","MapsBroker","CSC","CSCSERVICE","Telemetry","WdiSystemHost","WdiServiceHost","troubleshootingsvc","diagsvc","svsvc","diagtrack","wercplsupport","dps","GraphicsPerfSvc","Ndu","pcasvc","dusmsvc","DSSvc","wisvc","InventorySvc","WSAIFabricSvc","amdfendr"],"appxCount":0,"appxSample":[],"registryCount":610,"commandsCount":147,"downloadsCount":0,"downloads":[],"scheduledTaskCount":117,"defenderRelated":6,"telemetryKeywords":3,"optionsPages":[]},"risksList":["Comando que remove tarefas agendadas: $s = 'sc.exe stop MDCoreSvc; sc.exe stop WinDefend; sc.exe stop WdNisSvc; Start-Sleep -Seconds 5;' +\n     'reg add HKLM\\...  <Configuration/custom.yml>","Comando que modifica dados de boot: bcdedit.exe /deletevalue useplatformclock  <Configuration/custom.yml>","Comando que modifica dados de boot: bcdedit.exe /deletevalue useplatformtick  <Configuration/custom.yml>","Comando que modifica dados de boot: bcdedit.exe /set bootmenupolicy legacy  <Configuration/custom.yml>","Comando que modifica dados de boot: bcdedit.exe /timeout 10  <Configuration/custom.yml>","Comando que modifica dados de boot: bcdedit.exe /set {current} description \"XOS-Playbook\"  <Configuration/custom.yml>"]}, {"file":"Z_LAG_OS.apbx","name":"Z-LAG OS","productCode":"Z-LAG-OS","numericCode":null,"title":"Z LAG OS - Zero Lag Gaming Operating System","version":"5.16","desc":"Foco em reducao de input lag.","cat":"gaming","tags":["gaming"],"featured":false,"sizeMB":4.94,"sha256":"3cf322688ec423b9433842720dd89b692272f5fc8e4c9ae43ecd3360f9c5ad49","totalActions":647,"taskFiles":39,"networkRequired":0,"parseErrors":0,"risksCount":3,"severity":"high","riskBreakdown":{"registry":348,"services":48,"files":0,"downloads":0,"commands":84,"apps":4,"others":163},"supportedBuilds":[],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/z-lag-os.apbx","deep":{"servicesCount":48,"servicesSample":["DiagTrack","dmwappushservice","WerSvc","PcaSvc","SysMain","WSearch","WbioSrvc","MapsBroker","Fax","XblAuthManager","XblGameSave","XboxNetApiSvc","XboxGipSvc","RetailDemo","RemoteRegistry","VSS","SwPrv","RpcLocator","SNMPTRAP","vds","WMPNetworkSvc","ssh-agent","MSDTC","SDRSVC"],"appxCount":0,"appxSample":[],"registryCount":348,"commandsCount":84,"downloadsCount":0,"downloads":[],"scheduledTaskCount":0,"defenderRelated":0,"telemetryKeywords":4,"optionsPages":[]},"risksList":["Comando que modifica dados de boot: bcdedit /deletevalue useplatformclock >nul 2>&1 || ver >nul  <ZLAG Gaming Core Engine (Configuration/Tasks/26_gamingCore.yml)>","Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <ZLAG Gaming Core Engine (Configuration/Tasks/26_gamingCore.yml)>","Comando que altera componentes online do Windows: dism /online /cleanup-image /startcomponentcleanup /quiet  <Deep system clean (temp files, event logs, complete OneDrive removal) (Configuration/Tasks/38_deepClean.yml)>"]}, {"file":"vain v14 hotfix6.apbx","name":"Vain v14 hf6","productCode":"VAIN-V14-HF6","numericCode":null,"title":"Vain playbook","version":"14","desc":"Performance extrema com OpenShell, browser picker e power plan customizado.","cat":"performance","tags":["performance","gaming"],"featured":true,"sizeMB":91.43,"sha256":"1d27d52774934b64e4c9e457baa7f5accf87ecdabaffafaf439dc42776102c7e","totalActions":2045,"taskFiles":1,"networkRequired":21,"parseErrors":0,"risksCount":37,"severity":"high","riskBreakdown":{"registry":1179,"services":80,"files":64,"downloads":21,"commands":230,"apps":290,"others":181},"supportedBuilds":["22631","26100","26200","28000"],"optionsCount":0,"url":"https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/vain-v14-hotfix6.apbx","deep":{"servicesCount":79,"servicesSample":["WpnService","luafv","wsearch","edgeupdate","edgeupdatem","MicrosoftEdgeElevationService","BDESVC","CldFlt","UCPD","onesyncsvc","ShellHWDetection","sysmain","themes","Beep","CloudIdSvc","WPCMonSvc","MapsBroker","CloudBackupRestoreSvc","fhsvc","semgrsvc","wisvc","Telemetry","WdiSystemHost","WdiServiceHost"],"appxCount":0,"appxSample":[],"registryCount":1179,"commandsCount":230,"downloadsCount":21,"downloads":[{"url":"https://download.microsoft.com/download/8/B/4/8B42259F-5D70-43F4-AC2E-4B208FD8D66A/vcredist_x86.EXE","dest":"%temp%\\2005_86.exe"},{"url":"https://download.microsoft.com/download/8/B/4/8B42259F-5D70-43F4-AC2E-4B208FD8D66A/vcredist_x64.EXE","dest":"%temp%\\2005_64.exe"},{"url":"https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x86.exe","dest":"%temp%\\2008_86.exe"},{"url":"https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x64.exe","dest":"%temp%\\2008_64.exe"},{"url":"https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe","dest":"%temp%\\2010_86.exe"},{"url":"https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe","dest":"%temp%\\2010_64.exe"},{"url":"https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe","dest":"%temp%\\2012_86.exe"},{"url":"https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe","dest":"%temp%\\2012_64.exe"},{"url":"https://aka.ms/highdpimfc2013x86enu","dest":"%temp%\\2013_86.exe"},{"url":"https://aka.ms/highdpimfc2013x64enu","dest":"%temp%\\2013_64.exe"},{"url":"https://aka.ms/vs/17/release/vc_redist.x86.exe","dest":"%temp%\\2015_2022_86.exe"},{"url":"https://aka.ms/vs/17/release/vc_redist.x64.exe","dest":"%temp%\\2015_2022_64.exe"},{"url":"https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe","dest":"%temp%\\DirectX.exe"},{"url":"git:https://github.com/ip7z/7zip","dest":"%temp%\\7Zip.exe"},{"url":"git:https://github.com/Open-Shell/Open-Shell-Menu","dest":"%temp%\\OpenShellSetup.exe"},{"url":"https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=win64&lang=en-US","dest":"%temp%\\FirefoxDev.exe"},{"url":"https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US","dest":"%temp%\\Firefox.exe"},{"url":"https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi","dest":"%temp%\\Chrome.msi"},{"url":"https://laptop-updates.brave.com/latest/winx64","dest":"%temp%\\Brave.exe"},{"url":"git:https://github.com/Alex313031/Mercury","dest":"%temp%\\Mercury.exe"},{"url":"git:https://github.com/Alex313031/Thorium-Win","dest":"%temp%\\Thorium.exe"}],"scheduledTaskCount":129,"defenderRelated":0,"telemetryKeywords":5,"optionsPages":[]},"risksList":["21 download(s)/etapa(s) precisam de internet durante a aplicacao.","Toca em area critica (System32\\drivers) via remocao de arquivo  <Configuration/custom.yml>","Toca em area critica (ProgramData\\Microsoft\\Windows Defender) via remocao de arquivo  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/8/B/4/8B42259F-5D70-43F4-AC2E-4B208FD8D66A/vcredist_x86.EXE  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/8/B/4/8B42259F-5D70-43F4-AC2E-4B208FD8D66A/vcredist_x64.EXE  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x86.exe  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x64.exe  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe  <Configuration/custom.yml>","Download executavel: https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe  <Configuration/custom.yml>","Download executavel: https://aka.ms/highdpimfc2013x86enu  <Configuration/custom.yml>"]}];
+
+        const B_RAW = 'https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/';
+        const B_CODE = null;  
+        const ICONS = { gaming:'gamepad', privacy:'shield-halved', performance:'tachometer-alt', lightweight:'feather', balanced:'scale-balanced' };
+        const TAGS = { gaming:'Gaming', privacy:'Privacy', performance:'Performance', lightweight:'Leve', balanced:'Balanceado' };
+        function renderPBs(f='all') {
+            const g = document.getElementById('pb-grid');
+            const c = document.getElementById('pb-count');
+            let l = f === 'all' ? CATALOG : CATALOG.filter(p => p.cat === f);
+            c.textContent = `Mostrando ${l.length} playbook${l.length !== 1 ? 's' : ''}`;
+            g.innerHTML = '';
+            l.forEach((p, i) => {
+                const dl = p.url || ('https://raw.githubusercontent.com/KT-TWEAKS/KT-TWEAKS-APBX/main/playbooks/' + encodeURIComponent(p.file));
+                const code = 'https://github.com/KT-TWEAKS/KT-TWEAKS-APBX';
+                const sev = p.severity === 'high' ? ['ALTO','#8b5cf6'] : p.severity === 'medium' ? ['MEDIO','#f59e0b'] : ['BAIXO','#35d56d'];
+                const d = document.createElement('div');
+                d.className = 'pbc';
+                d.style.animationDelay = `${i * 0.06}s`;
+                d.innerHTML = `<div class="pbc-top"><div class="pbc-icon icon-${p.cat}"><i class="fas fa-${ICONS[p.cat] || 'bolt'}"></i></div><div class="pbc-meta"><div class="pbc-ver">v${p.version}</div></div></div><div class="pbc-body"><div class="pbc-name"><span>${p.name}</span><span title="Verificado no licensing KT WIRZADE" style="color:#35d56d;font-size:12px;margin-left:6px"><i class="fas fa-circle-check"></i></span></div><div class="pbc-desc">${p.desc}</div><div style="display:flex;gap:10px;flex-wrap:wrap;font-family:var(--fm);font-size:10.5px;color:var(--t3);margin-top:8px"><span><i class="fas fa-list-check"></i> ${p.totalActions} acoes</span><span><i class="fas fa-weight-hanging"></i> ${p.sizeMB} MB</span><span><i class="fas fa-wifi"></i> ${p.networkRequired} rede</span><span style="color:${sev[1]}"><i class="fas fa-shield-halved"></i> risco ${sev[0]}</span></div><div class="pbc-tags">${p.tags.map(t => `<span class="tag tag-${t}">${TAGS[t] || t}</span>`).join('')}<span class="tag tag-win10">Win 10</span><span class="tag tag-win11">Win 11</span></div></div><div class="pbc-footer"><div class="pbc-cmd">ORIGINAL · compatível ${p.name}</div><a href="${dl}" target="_blank" class="pbc-dl" onclick="return confirm('${p.name} — playbook original da comunidade AME. Continuar?')"><i class="fas fa-download"></i> Baixar</a><a href="comparar.html?pb=${encodeURIComponent(p.productCode)}" class="pbc-code" style="color:#c4b5fd"><i class="fas fa-scale-balanced"></i> Comparar</a><a href="#" class="pbc-code" data-details="${encodeURIComponent(p.productCode)}" style="color:#c4b5fd"><i class="fas fa-microscope"></i> Detalhes</a></div>`;
+                g.appendChild(d);
+                d.addEventListener('mousemove', e => {
+                    const r = d.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - .5;
+                    const y = (e.clientY - r.top) / r.height - .5;
+                    d.style.transform = `translateY(-8px) perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 5}deg)`;
+                    d.style.transition = 'transform 0.1s ease';
+                });
+                d.addEventListener('mouseleave', () => { d.style.transform = 'translateY(0)'; d.style.transition = 'var(--ts)'; });
+            });
+        }
+        const FAQS = [
+            { q:'Os playbooks são modificados?', a:'<strong>Não.</strong> Todos são os pacotes originais da comunidade AME, sem modificações — apenas hospedados e verificados para o KT WIRZADE.' },
+            { q:'Por que o antivírus detecta?', a:'<strong>Falso positivo</strong>. .apbx modifica o Windows profundamente.' },
+            { q:'Onde baixo o KT WIRZADE?', a:'O lançamento é <strong>em breve</strong>. Acompanhe as prévias em <a href="https://kt-wirzade-site.vercel.app" target="_blank" style="color:var(--vi)">kt-wirzade-site.vercel.app</a>. Enquanto isso, os playbooks também funcionam no AME Wizard Beta original (<code>winget install AmelioratedLLC.TrustedUninstallerCLI</code>).' },
+            { q:'Desativo o Defender?', a:'Alguns playbooks pedem. Temporariamente e por sua conta — leia a auditoria de cada pacote na página Comparar.' },
+            { q:'Posso reverter?', a:'No KT WIRZADE sim — rollback real de cada alteração. No AME Beta, crie ponto de restauração antes.' },
+            { q:'Qual escolher?', a:'Gaming: Vain, AtmosphereOS. Privacy: RapidOS, ReviOS.' }
+        ];
+
+                const CHANGELOGS = [
+            { name:'Atlas Playbook', ver:'v0.5.0 hotfix', changes:['Suporte Win10 (19044/19045) + Win11 24H2/26H2','191 arquivos de tarefa - o mais completo em registro (421 mudanças)','Hotfix de estabilidade sobre o v0.5.0 original'] },
+            { name:'AtmosphereOS', ver:'v0.2.0', changes:['Builds 19042-19045 + Win11 até 26200','4008 acoes - maior playbook do catalogo','Scheduler/DPC e 49 serviços otimizados'] },
+            { name:'Atom Playbook', ver:'v0.0.7', changes:['Suporte Win10 nativo','80 serviços afetados, foco leveza','1127 ações + toolbox própria'] },
+            { name:'Eternity OS', ver:'v1.4', changes:['Builds 19042-19045 mantidos','Gaming extremo: 80 serviços + 1083 registros','Downloads zero - tudo embutido'] },
+            { name:'FSOS-XR10', ver:'v10.0', changes:['Sucessor do XR9 - builds 9.x a 26300','149 apps UWP removidos (o mais agressivo)','416MB com ferramentas embutidas'] },
+            { name:'NOVA', ver:'v0.5.0', changes:['Nova geração NOVA para gaming','21 serviços + 17 etapas de rede (instala softwares)','Power plan e browser picker próprios'] },
+            { name:'NovaOS V6.2', ver:'v6.2', changes:['Builds 19042+ completos','1157 mudanças de registro','80 serviços revisados'] },
+            { name:'PeakOS', ver:'v1.0.2 AS IS', changes:['Distribuído como está (AS IS)','O mais leve: 359 ações, 3 serviços, risco BAIXO','Zero downloads externos'] },
+            { name:'RapidOS', ver:'v1.3', changes:['Builds Win10 20H2-22H2','Customização YAML preservada','289 registros - abordagem conservadora'] },
+            { name:'RaxOS', ver:'v001', changes:['Build 19045 (Win10 22H2) + Win11','1135 registros focados em input lag','Apenas 1 risco detectado'] },
+            { name:'ReviOS', ver:'26.04', changes:['Builds 19044-19045 + Win11','838 mudanças de registro','Equilíbrio privacidade/performance'] },
+            { name:'SapphireOS', ver:'v0.0.3', changes:['Suporte Win10 já existente','493 registros + 80 serviços','13 riscos conhecidos documentados'] },
+            { name:'SynergyOS', ver:'v1.5.0', changes:['Balanceado: performance + privacy + estabilidade','65 serviços, apenas 182 registros','Ideal pra uso diário'] },
+            { name:'Vain', ver:'v14 hf6', changes:['OpenShell default + seleção de browser','Power plan customizado + Vain Toolbox embutida','1179 registros - o mais profundo'] },
+            { name:'XOS', ver:'v0.574', changes:['Suporte Win10 desde 1809','56 serviços + 610 registros','Estabilidade de framerate'] },
+            { name:'Z-LAG OS', ver:'v5.16', changes:['Foco total em redução de lag','48 serviços, remove WiFi/Bluetooth opcional','Process floor e deep clean próprios'] },
+        ];
+        function renderCL(){const g=document.getElementById('cl-grid');CHANGELOGS.forEach(c=>{const d=document.createElement('div');d.className='cl-card';d.setAttribute('data-reveal','');d.innerHTML=`<h4>${c.name}</h4><div class="cl-ver">${c.ver}</div><ul>${c.changes.map(ch=>`<li>${ch}</li>`).join('')}</ul>`;g.appendChild(d);io.observe(d)})}
+        function renderFAQ(){const l=document.getElementById('faq-list');FAQS.forEach(f=>{const e=document.createElement('div');e.className='faq-item';e.innerHTML=`<button class="faq-q" onclick="this.parentElement.classList.toggle('open')">${f.q}<i class="fas fa-chevron-down"></i></button><div class="faq-answer"><div class="faq-body">${f.a}</div></div>`;l.appendChild(e)})}
+        document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.f-btn');if(!b)return;document.querySelectorAll('.f-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderPBs(b.dataset.f)});
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 50));
+        window.toggleMob = () => { const m = document.getElementById('mob-nav'), h = document.getElementById('ham'); m.classList.toggle('open'); h.innerHTML = m.classList.contains('open') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; };
+        const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); e.target.querySelectorAll('[data-count]').forEach(el => { if (!el._c) { el._c = true; ctr(el, +el.dataset.count); } }); } }); }, { threshold: 0.12 });
+        document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+        document.querySelectorAll('.hero-stats, .stats-row').forEach(el => io.observe(el));
+        function ctr(el, t, d = 1200) { const s = Date.now(); (function tick() { const p = Math.min((Date.now() - s) / d, 1); el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * t); if (p < 1) requestAnimationFrame(tick); else el.textContent = t; })(); }
+        fetch('https://api.github.com/users/kelvenapk').then(r=>r.json()).then(d=>{if(d.avatar_url)document.getElementById('creator-avatar').src=d.avatar_url;if(d.name)document.getElementById('creator-name').textContent=d.name;else if(d.login)document.getElementById('creator-name').textContent=d.login}).catch(()=>{});
+        window.addEventListener('load',()=>{renderPBs();renderFAQ();renderCL();setTimeout(()=>document.getElementById('loader').classList.add('gone'),2100)});
+
+        const dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+        const ring = document.createElement('div');
+        ring.className = 'cursor-ring';
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+        let cx = 0, cy = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            cx = e.clientX;
+            cy = e.clientY;
+            dot.style.left = cx - 4 + 'px';
+            dot.style.top = cy - 4 + 'px';
+        });
+        function animRing() {
+            rx += (cx - rx) * 0.15;
+            ry += (cy - ry) * 0.15;
+            ring.style.left = rx - 10 + 'px';
+            ring.style.top = ry - 10 + 'px';
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+        document.querySelectorAll('a, button, .feat-card, .pbc, .faq-q').forEach(el => {
+            el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+            el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+        });
+
+        const navProg = document.getElementById('nav-progress');
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            navProg.style.width = (scrollY / h * 100) + '%';
+        }, { passive: true });
+
+        const parallaxLayers = document.querySelectorAll('[data-speed]');
+        window.addEventListener('scroll', () => {
+            const sy = window.scrollY;
+            parallaxLayers.forEach(layer => {
+                const speed = parseFloat(layer.dataset.speed);
+                layer.style.transform = `translateY(${sy * speed}px)`;
+            });
+        }, { passive: true });
+
+        document.querySelectorAll('.btn-main, .btn-ghost, .pbc-dl').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const r = this.getBoundingClientRect();
+                const size = Math.max(r.width, r.height);
+                ripple.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${e.clientX - r.left - size/2}px;top:${e.clientY - r.top - size/2}px;background:rgba(255,255,255,.3);border-radius:50%;animation:ripple .6s linear;pointer-events:none`;
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        document.querySelectorAll('.btn-main, .nav-cta, .pbc-dl').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
+            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+        });
+            function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+        
+        function kmCell(n, l, cls) { return '<div class="km-cell"><div class="km-n ' + (cls||'') + '">' + n + '</div><div class="km-l">' + l + '</div></div>'; }
+        function kmChips(arr) { return (arr && arr.length) ? arr.map(x => '<span class="km-chip">' + esc(String(x)) + '</span>').join('') : '<span style="color:var(--t3);font-size:12px">— nenhum —</span>'; }
+        window.showDetails = function(codeEnc) {
+            const code = decodeURIComponent(codeEnc);
+            const p = CATALOG.find(x => x.productCode === code);
+            if (!p) return;
+            const d = p.deep || {};
+            const sevColor = p.severity === 'high' ? '#a78bfa' : p.severity === 'medium' ? '#f59e0b' : '#35d56d';
+            let html = '<h3>' + esc(p.name) + '</h3><div class="km-sub">v' + esc(p.version) + ' · ProductCode ' + esc(p.productCode) + ' · SHA-256 ' + esc((p.sha256||'').slice(0,16)) + '…</div>';
+            html += '<div class="km-grid">'
+                + kmCell(p.totalActions, 'Ações totais')
+                + kmCell(p.taskFiles, 'Arquivos de tarefa')
+                + kmCell(d.registryCount || 0, 'Mudanças de registro')
+                + kmCell(d.servicesCount || 0, 'Serviços afetados')
+                + kmCell(d.appxCount || 0, 'Apps UWP removidos')
+                + kmCell(d.downloadsCount || 0, 'Downloads', d.downloadsCount ? 'hl-a' : '')
+                + kmCell(d.scheduledTaskCount || 0, 'Tarefas agendadas')
+                + kmCell('<span style="color:' + sevColor + '">' + p.severity.toUpperCase() + '</span>', 'Severidade de risco')
+                + '</div>';
+            if ((p.risksList || []).length) {
+                html += '<div class="km-sec"><h4><i class="fas fa-triangle-exclamation"></i> Riscos detectados (' + p.risks.length + ')</h4>'
+                    + p.risksList.map(r => '<div class="km-risk">' + esc(r).replace(/</g,'&lt;') + '</div>').join('') + '</div>';
+            }
+            if ((d.servicesSample || []).length)
+                html += '<div class="km-sec"><h4>Serviços afetados (' + d.servicesCount + ')</h4><div class="km-chips">' + kmChips(d.servicesSample) + '</div></div>';
+            if ((d.appxSample || []).length)
+                html += '<div class="km-sec"><h4>Apps UWP removidos</h4><div class="km-chips">' + kmChips(d.appxSample) + '</div></div>';
+            if ((d.downloads || []).length)
+                html += '<div class="km-sec"><h4>Downloads durante a aplicação</h4>' + d.downloads.slice(0,10).map(dl => '<div class="km-risk" style="background:rgba(6,182,212,.07);border-color:rgba(6,182,212,.2);color:#67e8f9">' + esc(dl.url || dl.dest || '?') + '</div>').join('') + '</div>';
+            if ((d.optionsPages || []).length) {
+                html += '<div class="km-sec"><h4>Opções customizáveis</h4>';
+                d.optionsPages.forEach(pg => {
+                    html += '<div style="margin-bottom:10px"><b style="font-size:12.5px;color:var(--t1)">' + esc(pg.page) + '</b><div class="km-chips" style="margin-top:5px">' + pg.options.slice(0,12).map(o => '<span class="km-chip" title="' + esc(o.desc||'') + '">' + esc(o.name) + '</span>').join('') + '</div></div>';
+                });
+                html += '</div>';
+            }
+            if ((p.supportedBuilds || []).length)
+                html += '<div class="km-sec"><h4>Builds suportadas</h4><div class="km-chips">' + kmChips(p.supportedBuilds) + '</div></div>';
+            document.getElementById('kt-modal-body').innerHTML = html;
+            document.getElementById('kt-modal-bg').classList.add('open');
+        };
+        document.getElementById('kt-modal-bg').addEventListener('click', e => { if (e.target.id === 'kt-modal-bg') e.target.classList.remove('open'); });
+        document.addEventListener('click', e => {
+            const t = e.target.closest('[data-details]');
+            if (t) { e.preventDefault(); showDetails(t.dataset.details); }
+        });
+
+        function showDetails(code){
+            const p = CATALOG.find(x => encodeURIComponent(x.productCode) === code || x.productCode === code);
+            if(!p) return;
+            const m = document.getElementById('kt-modal-body');
+            const d = p.deep || {};
+            const risk = (p.risksList||p.risks||[]);
+            const sev = sevOf(p.severity);
+            const reg = d.registryCount||p.riskBreakdown?.registry||0;
+            const svc = d.servicesCount||p.riskBreakdown?.services||0;
+            const cmd = d.commandsCount||p.riskBreakdown?.commands||0;
+            const apps = p.riskBreakdown?.apps||0;
+            const dl = d.downloadsCount||0;
+            const net = p.networkRequired||0;
+            m.innerHTML = `
+            <div class="km-head">
+                <div class="km-icon icon-${p.cat}"><i class="fas fa-${ICONS[p.cat]||'bolt'}"></i></div>
+                <div class="km-htext">
+                    <div class="km-title">${p.name}</div>
+                    <div class="km-sub">v${p.version} · ${p.sizeMB} MB · ${p.totalActions} ações · ${p.taskFiles} tarefas</div>
+                </div>
+                <span class="km-badge" style="background:${sev[1]}1a;color:${sev[1]};border-color:${sev[1]}55">risco ${sev[0]}</span>
+            </div>
+            <div class="km-grid">
+                ${stat('Registry', reg, '#a78bfa')}
+                ${stat('Serviços', svc, '#60a5fa')}
+                ${stat('Comandos', cmd, '#f472b6')}
+                ${stat('Apps UWP', apps, '#34d399')}
+                ${stat('Downloads', dl, '#fbbf24')}
+                ${stat('Rede req.', net+'', '#a78bfa')}
+            </div>
+            <div class="km-sec">
+                <h4><i class="fas fa-microscope"></i> Auditoria técnica</h4>
+                <p class="km-desc">${p.desc}</p>
+                <div class="km-meta"><span><i class="fas fa-windows"></i> Builds: ${p.supportedBuilds&&p.supportedBuilds.length? p.supportedBuilds.slice(0,8).join(', ') : 'todas'}</span><span><i class="fas fa-tags"></i> ${(p.tags||[]).map(t=>TAGS[t]||t).join(' · ')}</span></div>
+            </div>
+            <div class="km-sec">
+                <h4><i class="fas fa-triangle-exclamation"></i> Riscos detectados (${risk.length})</h4>
+                ${risk.length? '<ul class="km-risks">'+risk.slice(0,10).map(r=>`<li>${r.length>150? r.slice(0,150)+'…' : r}</li>`).join('')+(risk.length>10?'<li class="km-more">+ '+(risk.length-10)+' riscos adicionais analisados</li>':'')+'</ul>' : '<p class="km-ok"><i class="fas fa-circle-check"></i> Nenhum risco crítico identificado na auditoria.</p>'}
+            </div>
+            <div class="km-foot">
+                <a href="${p.url}" target="_blank" class="km-dl"><i class="fas fa-download"></i> Baixar original</a>
+                <a href="comparar.html?pb=${encodeURIComponent(p.productCode)}" class="km-cmp"><i class="fas fa-scale-balanced"></i> Comparar</a>
+            </div>`;
+            document.getElementById('kt-modal-bg').classList.add('open');
+        }
+        function stat(l,v){return `<div class="km-stat"><div class="km-stv">${v??0}</div><div class="km-stl">${l}</div></div>`}
+        function sevOf(s){return {high:['alto','#c4b5fd'],medium:['médio','#fcd34d'],ok:['baixo','#86efac']}[s]||['—','#cbd5e1']}
+</script>
+
+<div class="kt-modal-bg" id="kt-modal-bg">
+  <div class="kt-modal">
+    <button class="km-close" onclick="document.getElementById('kt-modal-bg').classList.remove('open')">&times;</button>
+    <div id="kt-modal-body"></div>
+  </div>
+</div>
+</BaseLayout>

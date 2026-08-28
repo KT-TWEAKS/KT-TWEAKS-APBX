@@ -1,0 +1,778 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/changelog-playbooks.css';
+---
+
+<BaseLayout title="KT TWEAKS APBX — Changelog de Playbooks">
+<Fragment slot="head-extra">
+    <script type="importmap" is:inline>{ "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }</script>
+</Fragment>
+<div style="max-width:1100px;margin:0 auto 30px;padding:20px 24px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.2);border-radius:16px">
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:#c4b5fd;margin-bottom:8px">CATÁLOGO RENOVADO · KT TWEAKS APBX</h2>
+<p style="color:var(--t2);font-size:14.5px;line-height:1.7">O catálogo agora tem <b style="color:#c4b5fd">16 playbooks atuais</b> — novos: FSOS-XR10 (sucessor do XR9, suporte nativo Win10), NOVA v0.5.0, NovaOS V6.2, SynergyOS v1.5, Z-LAG OS v5.16, Atom v0.0.7, Atlas v0.5.0-hotfix e XOS v0.574. Removidos: SOS 0.2.3, NovaOS-V4 e FSOS-XR9 (substituídos pelas novas gerações).</p>
+<p style="color:var(--t2);font-size:13.5px;margin-top:10px"><i class="fas fa-shield-halved" style="color:#35d56d"></i> Todos verificados no licensing oficial do <b>KT WIRZADE</b> — compare lado a lado em <a href="comparar.html" style="color:#c4b5fd">comparar.html</a>.</p>
+</div>
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="scan"></div>
+    <div class="noise"></div>
+
+    <nav id="nav">
+        <div class="nav-in">
+            <a href="index.html" class="nav-logo"><div class="nav-logo-mark"><i class="fas fa-bolt"></i></div>KT TWEAKS <span style='font-size:.55em;color:var(--vi);letter-spacing:2px'>APBX</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-a"><i class="fas fa-home"></i> Inicio</a>
+                <a href="index.html#downloads" class="nav-a">Playbooks</a>
+                <a href="index.html#changelogs" class="nav-a">Changelogs</a>
+                <a href="#diffs" class="nav-a">Diffs</a>
+                <a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="nav-cta"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+            <button class="ham" id="ham" onclick="toggleMob()"><i class="fas fa-bars"></i></button>
+        </div>
+        <div class="nav-progress" id="nav-progress"></div>
+    </nav>
+    <div class="mob-nav" id="mob-nav">
+        <a href="index.html" class="mob-a"><i class="fas fa-home"></i> Inicio</a>
+        <a href="index.html#downloads" class="mob-a">Playbooks</a>
+        <a href="index.html#changelogs" class="mob-a">Changelogs</a>
+        <a href="#diffs" class="mob-a">Diffs</a>
+        <a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="mob-a"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+
+    <section class="hero sec">
+        <div class="hero-eyebrow"><span class="eyebrow-dot"></span> DOCUMENTACAO TECNICA</div>
+        <h1 class="hero-title"><span class="fill">CHANGELOG</span> <span class="v">WIN10</span></h1>
+        <p class="hero-sub">MODIFICACOES POR PLAYBOOK</p>
+        <p class="hero-desc">Diffs detalhados das modificacoes feitas por <strong>kelvenapk</strong> em cada playbook para adicionar suporte ao <strong>Windows 10</strong>. Codigo original preservado.</p>
+        <div class="hero-actions">
+            <a href="index.html" class="btn-main"><i class="fas fa-arrow-left"></i> Voltar ao Site</a>
+            <a href="index.html#downloads" class="btn-ghost"><i class="fas fa-download"></i> Downloads</a>
+        </div>
+    </section>
+
+    <section class="sec pad"><div class="wrap">
+        <div class="stats-row" data-reveal="scale">
+            <div class="stat-cell"><div class="stat-n" data-count="14">14</div><div class="stat-l">Playbooks</div></div>
+            <div class="stat-cell"><div class="stat-n"><span>9</span></div><div class="stat-l">Modificados</div></div>
+            <div class="stat-cell"><div class="stat-n"><span>5</span></div><div class="stat-l">Ja tinham Win10</div></div>
+            <div class="stat-cell"><div class="stat-n">19041<span>-19045</span></div><div class="stat-l">Builds Win10</div></div>
+        </div>
+    </div></section>
+
+    <section id="diffs" class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">DIFFS</div><h2 class="s-title">Playbooks <span class="hl">Modificados</span></h2><p style="color:var(--t2);margin-top:16px;font-size:16px;max-width:700px">Playbooks que originalmente so suportavam Windows 11. kelvenapk adicionou builds do Windows 10 ao SupportedBuilds.</p></div>
+
+        <div style="margin-top:48px">
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon red"><i class="fas fa-wind"></i></div>
+                        <div>
+                            <div class="pb-name">AtmosphereOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v0.2.0</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">MODIFICADO</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;!-- Win10 20H2-22H2 (KELVENAPK) --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19042&lt;/string&gt;  &lt;!-- 20H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19043&lt;/string&gt;  &lt;!-- 21H1 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19044&lt;/string&gt;  &lt;!-- 21H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt;  &lt;!-- 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22631&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26100&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26200&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Descricao — Texto adicionado</div>
+                        <div class="desc-change">
+                            <p><span class="removed">AtmosphereOS Playbook for Windows 11</span></p>
+                            <p><span class="added">AtmosphereOS Playbook for Windows 11 \ 10</span></p>
+                            <p><span class="added">Modificado por kelvenapk. Suporte ao Windows 10 20H2-22H2.</span></p>
+                        </div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">19042 (20H2) +</span>
+                            <span class="build-chip added">19043 (21H1) +</span>
+                            <span class="build-chip added">19044 (21H2) +</span>
+                            <span class="build-chip added">19045 (22H2) +</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon red"><i class="fas fa-infinity"></i></div>
+                        <div>
+                            <div class="pb-name">Eternity OS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v1.4</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">MODIFICADO</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;!-- Win10 20H2-22H2 (KELVENAPK) --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19042&lt;/string&gt;  &lt;!-- 20H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19043&lt;/string&gt;  &lt;!-- 21H1 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19044&lt;/string&gt;  &lt;!-- 21H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt;  &lt;!-- 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22621&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Descricao — Texto adicionado</div>
+                        <div class="desc-change"><p><span class="added">Modificado por kelvenapk. Suporte ao Windows 10 20H2-22H2.</span></p></div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">19042 (20H2) +</span>
+                            <span class="build-chip added">19043 (21H1) +</span>
+                            <span class="build-chip added">19044 (21H2) +</span>
+                            <span class="build-chip added">19045 (22H2) +</span>
+                            <span class="build-chip win11">22621</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon red"><i class="fas fa-star"></i></div>
+                        <div>
+                            <div class="pb-name">NovaOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">V4</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">MODIFICADO</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;!-- Win10 20H2-22H2 (KELVENAPK) --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19042&lt;/string&gt;  &lt;!-- 20H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19043&lt;/string&gt;  &lt;!-- 21H1 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19044&lt;/string&gt;  &lt;!-- 21H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt;  &lt;!-- 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22621&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22631&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26100&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26200&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Descricao — Texto adicionado</div>
+                        <div class="desc-change"><p><span class="added">Modificado por kelvenapk. Suporte ao Windows 10 20H2-22H2.</span></p></div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">19042 (20H2) +</span>
+                            <span class="build-chip added">19043 (21H1) +</span>
+                            <span class="build-chip added">19044 (21H2) +</span>
+                            <span class="build-chip added">19045 (22H2) +</span>
+                            <span class="build-chip win11">22621</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon red"><i class="fas fa-bolt"></i></div>
+                        <div>
+                            <div class="pb-name">RapidOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v1.2</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">MODIFICADO</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;!-- Win10 20H2-22H2 (KELVENAPK) --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19042&lt;/string&gt; &lt;!-- 20H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19043&lt;/string&gt; &lt;!-- 21H1 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19044&lt;/string&gt; &lt;!-- 21H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt; &lt;!-- 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22621&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22631&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26100&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26200&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Descricao — Texto adicionado</div>
+                        <div class="desc-change"><p><span class="added">Modificado por kelvenapk. Suporte ao Windows 10 20H2-22H2.</span></p></div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">19042 (20H2) +</span>
+                            <span class="build-chip added">19043 (21H1) +</span>
+                            <span class="build-chip added">19044 (21H2) +</span>
+                            <span class="build-chip added">19045 (22H2) +</span>
+                            <span class="build-chip win11">22621</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon yellow"><i class="fas fa-crosshairs"></i></div>
+                        <div>
+                            <div class="pb-name">RaxOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v001</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">MODIFICADO</span><span class="badge badge-partial">PARCIAL</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;!-- Win10 22H2 (KELVENAPK) --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt;  &lt;!-- 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22621&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22631&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                        <div class="notes"><p>Apenas o build 19045 (22H2) foi adicionado. Suporte parcial — apenas Windows 10 22H2.</p></div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">19045 (22H2) +</span>
+                            <span class="build-chip win11">22621</span>
+                            <span class="build-chip win11">22631</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon red"><i class="fas fa-shield-halved"></i></div>
+                        <div>
+                            <div class="pb-name">ReviOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">26.04</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">MODIFICADO</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;!-- Win10 21H2-22H2 (KELVENAPK) --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19044&lt;/string&gt;  &lt;!-- 21H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt;  &lt;!-- 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22631&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26100&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26200&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Descricao — Texto adicionado</div>
+                        <div class="desc-change"><p><span class="added">Modificado por kelvenapk. Suporte ao Windows 10 20H2-22H2.</span></p></div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">19044 (21H2) +</span>
+                            <span class="build-chip added">19045 (22H2) +</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon red"><i class="fas fa-rocket"></i></div>
+                        <div>
+                            <div class="pb-name">FSOS-XR10</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v10.0 · sucessor do XR9</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-mod">NOVO · 2026</span><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">VERIFICADO KT WIRZADE</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">playbook.conf — SupportedBuilds (v10.0)</div>
+                        <div class="code-block">
+                            <div class="code-header"><div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><span>playbook.conf</span></div>
+                            <div class="code-body">
+                                <div class="code-line line-comment"><span class="line-content">  &lt;SupportedBuilds&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19044&lt;/string&gt;  &lt;!-- Win10 21H2 --&gt;</span></div>
+                                <div class="code-line line-add"><span class="line-num">+</span><span class="line-content">    &lt;string&gt;19045&lt;/string&gt;  &lt;!-- Win10 22H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;22631&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26100&lt;/string&gt;  &lt;!-- 24H2 --&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26200&lt;/string&gt;</span></div>
+                                <div class="code-line line-orig"><span class="line-num"> </span><span class="line-content">    &lt;string&gt;26300&lt;/string&gt;</span></div>
+                                <div class="code-line line-comment"><span class="line-content">  &lt;/SupportedBuilds&gt;</span></div>
+                            </div>
+                        </div>
+                        <div class="notes"><p>O XR10 substitui o XR9 e sai direto da FRAMESYNC com suporte nativo ao Windows 10 (19044/19045) + UpgradableFrom das builds 1.6 a 9.0 - nenhuma modificação nossa foi necessária. 149 apps UWP removidos e 105 serviços otimizados. 416MB de ferramentas embutidas - download via Releases.</p></div>
+                    </div>
+                    <div class="diff-section">
+                        <div class="diff-label">Resumo da auditoria (apbx-core)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">1655 ações</span>
+                            <span class="build-chip added">8 arquivos de tarefa</span>
+                            <span class="build-chip win11">730 registros</span>
+                            <span class="build-chip win11">105 serviços</span>
+                            <span class="build-chip win11">149 appx removidos</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+</div>
+        </div>
+    </div></section>
+
+    <section class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+        <div data-reveal><div class="s-eyebrow">ORIGINAIS</div><h2 class="s-title">Playbooks <span class="hl">Ja Compativel</span></h2><p style="color:var(--t2);margin-top:16px;font-size:16px;max-width:700px">Playbooks que ja suportavam Windows 10 em suas versoes originais. kelvenapk apenas disponibilizou para download.</p></div>
+
+        <div style="margin-top:48px">
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-layer-group"></i></div>
+                        <div>
+                            <div class="pb-name">Atlas Playbook</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v0.5.0 hotfix · substitui o v0.5.1 RC2</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-orig">ORIGINAL</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados (original)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip win10">19044 (21H2)</span>
+                            <span class="build-chip win10">19045 (22H2)</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-atom"></i></div>
+                        <div>
+                            <div class="pb-name">Atom Playbook</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v0.0.7 (era v0.0.5)</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-orig">ORIGINAL</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados (original)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip win10">19044 (21H2)</span>
+                            <span class="build-chip win10">19045 (22H2)</span>
+                            <span class="build-chip win11">22000</span>
+                            <span class="build-chip win11">22621</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100-27900</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-mountain"></i></div>
+                        <div>
+                            <div class="pb-name">PeakOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v1.0.2 (AS IS)</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-orig">ORIGINAL</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados (original)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip win10">19044 (21H2)</span>
+                            <span class="build-chip win10">19045 (22H2)</span>
+                            <span class="build-chip win11">22000</span>
+                            <span class="build-chip win11">22621</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">22635</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-gem"></i></div>
+                        <div>
+                            <div class="pb-name">SapphireOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v0.0.1</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-orig">ORIGINAL</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados (original)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip win10">19044 (21H2)</span>
+                            <span class="build-chip win10">19045 (22H2)</span>
+                            <span class="build-chip win11">22621</span>
+                            <span class="build-chip win11">22631</span>
+                            <span class="build-chip win11">26100</span>
+                            <span class="build-chip win11">26200</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-x"></i></div>
+                        <div>
+                            <div class="pb-name">XOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v0.574 (era v0.445)</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge badge-orig">ORIGINAL</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Builds suportados (amplo — desde 1809)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip win10">17763</span>
+                            <span class="build-chip win10">18362</span>
+                            <span class="build-chip win10">18363</span>
+                            <span class="build-chip win10">19041</span>
+                            <span class="build-chip win10">19042</span>
+                            <span class="build-chip win10">19043</span>
+                            <span class="build-chip win10">19044</span>
+                            <span class="build-chip win10">19045</span>
+                            <span class="build-chip win11">22000-29553</span>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+        </div>
+    </div>
+            
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-star"></i></div>
+                        <div>
+                            <div class="pb-name">NOVA</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v0.5.0 · novo 2026</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">NOVO</span><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">VERIFICADO KT WIRZADE</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Resumo da auditoria (apbx-core)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">1061 ações</span>
+                            <span class="build-chip win11">21 serviços</span>
+                            <span class="build-chip win11">678 registros</span>
+                            <span class="build-chip added">17 etapas de rede (instala softwares)</span>
+                            <span class="build-chip">18 MB</span>
+                        </div>
+                        <div class="notes"><p>Nova geração NOVA com foco em gaming: power plan próprio, browser picker e pós-instalação com MSI Mode e NIC Settings.</p></div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-scale-balanced"></i></div>
+                        <div>
+                            <div class="pb-name">SynergyOS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v1.5.0 · novo 2026</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">NOVO</span><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">VERIFICADO KT WIRZADE</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Resumo da auditoria (apbx-core)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">402 ações</span>
+                            <span class="build-chip win11">65 serviços</span>
+                            <span class="build-chip win11">182 registros</span>
+                            <span class="build-chip">19 MB</span>
+                            <span class="build-chip">risco médio</span>
+                        </div>
+                        <div class="notes"><p>Balanceado: performance + privacidade + estabilidade. Boa porta de entrada pra quem não quer algo agressivo.</p></div>
+                    </div>
+                </div></div>
+            </div>
+
+            
+            <div class="playbook-card green" data-reveal>
+                <div class="pb-header" onclick="this.parentElement.classList.toggle('open')">
+                    <div class="pb-header-left">
+                        <div class="pb-icon green"><i class="fas fa-gauge-high"></i></div>
+                        <div>
+                            <div class="pb-name">Z-LAG OS</div>
+                            <div style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:2px">v5.16 · novo 2026</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px">
+                        <div class="pb-badges"><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">NOVO</span><span class="badge" style="background:rgba(53,213,109,.12);color:#35d56d;border:1px solid rgba(53,213,109,.25)">VERIFICADO KT WIRZADE</span></div>
+                        <i class="fas fa-chevron-down pb-chevron"></i>
+                    </div>
+                </div>
+                <div class="pb-body"><div class="pb-body-inner">
+                    <div class="diff-section">
+                        <div class="diff-label">Resumo da auditoria (apbx-core)</div>
+                        <div class="builds-grid">
+                            <span class="build-chip added">647 ações</span>
+                            <span class="build-chip win11">48 serviços</span>
+                            <span class="build-chip win11">348 registros</span>
+                            <span class="build-chip">5 MB</span>
+                        </div>
+                        <div class="notes"><p>Foco total em reduzir input lag: process floor próprio, opção de remover WiFi/Bluetooth, deep clean e ZLAG Toolbox.</p></div>
+                    </div>
+                </div></div>
+            </div>
+</section>
+
+    <footer class="footer-sec"><div class="footer-inner">
+        <div class="footer-brand"><div class="footer-logo"><div class="footer-logo-mark"><i class="fas fa-bolt" style="font-size:14px;color:#fff"></i></div>KT TWEAKS</div><p>Playbooks da comunidade AME modificados por kelvenapk com suporte ao Windows 10.</p></div>
+        <div class="footer-col"><h4>LINKS</h4><div class="footer-links"><a href="index.html" class="footer-link"><i class="fas fa-home"></i> Inicio</a><a href="index.html#downloads" class="footer-link"><i class="fas fa-download"></i> Downloads</a><a href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" class="footer-link"><i class="fab fa-github"></i> GitHub</a></div></div>
+        <div class="footer-col"><h4>SECOES</h4><div class="footer-links"><a href="#diffs" class="footer-link"><i class="fas fa-code"></i> Diffs Modificados</a><a href="#diffs" class="footer-link"><i class="fas fa-check-circle"></i> Ja Compatíveis</a><a href="index.html#changelogs" class="footer-link"><i class="fas fa-file-alt"></i> Changelogs</a></div></div>
+    </div><div class="footer-bottom"><span>© 2026 KT TWEAKS · kelvenapk</span><span style="font-family:var(--fm)">Win 10 + 11 · AME Compatible</span></div></footer>
+
+<script type="module" is:inline>
+        import * as THREE from 'three';
+        const canvas = document.getElementById('bg-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+        const pGeo = new THREE.BufferGeometry();
+        const cnt = 1400;
+        const pos = new Float32Array(cnt * 3);
+        const col = new Float32Array(cnt * 3);
+        const c1 = new THREE.Color('#a78bfa');
+        const c2 = new THREE.Color('#8b5cf6');
+        const c3 = new THREE.Color('#35d56d');
+        for (let i = 0; i < cnt * 3; i += 3) {
+            const r = 22 + Math.random() * 32;
+            const t = Math.random() * Math.PI * 2;
+            const p = Math.acos((Math.random() * 2) - 1);
+            pos[i] = Math.sin(p) * Math.cos(t) * r;
+            pos[i+1] = Math.sin(p) * Math.sin(t) * r;
+            pos[i+2] = Math.cos(p) * r;
+            const m = c1.clone().lerp(c2, Math.random());
+            if (Math.random() > 0.6) m.lerp(c3, Math.random());
+            col[i] = m.r; col[i+1] = m.g; col[i+2] = m.b;
+        }
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        pGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        const pMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 0.16, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+        scene.add(pMesh);
+        const sGeo = new THREE.BufferGeometry();
+        const sPos = new Float32Array(800 * 3);
+        for (let i = 0; i < 800 * 3; i += 3) { sPos[i] = (Math.random()-.5)*220; sPos[i+1] = (Math.random()-.5)*220; sPos[i+2] = (Math.random()-.5)*220; }
+        sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+        scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.1, transparent: true })));
+        let mx = 0, my = 0;
+        window.addEventListener('mousemove', e => { mx = (e.clientX/window.innerWidth)*2-1; my = -(e.clientY/window.innerHeight)*2+1; });
+        (function anim() {
+            requestAnimationFrame(anim);
+            pMesh.rotation.y += .0009; pMesh.rotation.x += .0004;
+            camera.position.x += (mx*6 - camera.position.x) * .02;
+            camera.position.y += (my*4 - camera.position.y) * .02;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+        })();
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+</script>
+<script is:inline>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 50));
+        window.toggleMob = () => { const m = document.getElementById('mob-nav'), h = document.getElementById('ham'); m.classList.toggle('open'); h.innerHTML = m.classList.contains('open') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; };
+        const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); e.target.querySelectorAll('[data-count]').forEach(el => { if (!el._c) { el._c = true; ctr(el, +el.dataset.count); } }); } }); }, { threshold: 0.12 });
+        document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+        function ctr(el, t, d = 1200) { const s = Date.now(); (function tick() { const p = Math.min((Date.now() - s) / d, 1); el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * t); if (p < 1) requestAnimationFrame(tick); else el.textContent = t; })(); }
+        const navProg = document.getElementById('nav-progress');
+        window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; navProg.style.width = (scrollY / h * 100) + '%'; }, { passive: true });
+
+        const dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+        const ring = document.createElement('div');
+        ring.className = 'cursor-ring';
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+        let cx = 0, cy = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            cx = e.clientX;
+            cy = e.clientY;
+            dot.style.left = cx - 4 + 'px';
+            dot.style.top = cy - 4 + 'px';
+        });
+        function animRing() {
+            rx += (cx - rx) * 0.15;
+            ry += (cy - ry) * 0.15;
+            ring.style.left = rx - 10 + 'px';
+            ring.style.top = ry - 10 + 'px';
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+        document.querySelectorAll('a, button, .pb-header, .btn-main, .btn-ghost').forEach(el => {
+            el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+            el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+        });
+
+        document.querySelectorAll('.btn-main, .btn-ghost').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
+            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+        });
+
+        document.querySelectorAll('.btn-main, .btn-ghost').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const r = this.getBoundingClientRect();
+                const size = Math.max(r.width, r.height);
+                ripple.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${e.clientX - r.left - size/2}px;top:${e.clientY - r.top - size/2}px;background:rgba(255,255,255,.3);border-radius:50%;animation:ripple .6s linear;pointer-events:none`;
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+</script>
+</BaseLayout>

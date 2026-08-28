@@ -1,0 +1,15 @@
+# Vercel
+.vercel
+
+# Astro
+node_modules/
+dist/
+.astro/
+
+# Ambiente
+.env
+.env.*
+
+# Logs e SO
+*.log
+.DS_Store
