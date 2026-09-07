@@ -5,7 +5,7 @@
 <h1 align="center">KT TWEAKS APBX</h1>
 
 <p align="center">
-  Curadoria e distribuição de <b>playbooks originais da comunidade AME</b> para Windows 10 e 11 —<br>auditados, verificados por hash SHA-256 e distribuídos <b>sem nenhuma modificação</b>.
+  Curadoria e distribuição de <b>playbooks da comunidade AME</b> para Windows 10 e 11 —<br>com origem, adaptações, análise e hash SHA-256 documentados.
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@
 
 ## O que é
 
-Este repositório hospeda o site (Astro 5, saída estática) e os arquivos dos **16 playbooks originais da comunidade AME** — Atlas Playbook, AtmosphereOS, ReviOS, RapidOS, FSOS-XR10, Vain e outros — para Windows 10 e 11.
+Este repositório hospeda o site (Astro 7, saída estática) e os arquivos de **16 playbooks da comunidade AME** — Atlas Playbook, AtmosphereOS, ReviOS, RapidOS, FSOS-XR10, Vain e outros — para Windows 10 e 11.
 
 - **Downloads diretos** — 13 playbooks via raw do GitHub e 3 pesados (>100MB) via [Releases](https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/tag/v1.0)
 - **Comparação** — coloque playbooks lado a lado e veja tamanho, ações, serviços, registro e nível de risco

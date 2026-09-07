@@ -13,3 +13,6 @@ dist/
 # Logs e SO
 *.log
 .DS_Store
+
+.vercel
+.env*
