@@ -1,0 +1,118 @@
+name: Publicar APBX enviado pelo licensing
+run-name: Publicar APBX ${{ inputs.upload_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      upload_id:
+        description: Identificador do envio
+        required: true
+        type: string
+      staging_tag:
+        description: Tag da release temporaria
+        required: true
+        type: string
+      release_id:
+        description: ID da release temporaria
+        required: true
+        type: string
+      dry_run:
+        description: Apenas validar montagem e hash
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-apbx-catalog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Baixar partes e manifesto
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_ID" =~ ^[0-9]+$ ]]
+          mkdir -p "$RUNNER_TEMP/apbx-parts"
+          gh api "repos/${GITHUB_REPOSITORY}/releases/$RELEASE_ID/assets" --paginate --jq '.[] | [.name,.url] | @tsv' > "$RUNNER_TEMP/assets.tsv"
+          while IFS=$'\t' read -r name url; do
+            case "$name" in
+              *.part) gh api "$url" -H 'Accept: application/octet-stream' > "$RUNNER_TEMP/apbx-parts/$name" ;;
+              manifest.json) gh api "$url" -H 'Accept: application/octet-stream' > "$RUNNER_TEMP/manifest.json" ;;
+            esac
+          done < "$RUNNER_TEMP/assets.tsv"
+          test -s "$RUNNER_TEMP/manifest.json"
+          find "$RUNNER_TEMP/apbx-parts" -type f -name '*.part' -print0 | sort -z | xargs -0 cat > "$RUNNER_TEMP/playbook.apbx"
+
+      - name: Validar arquivo remontado
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(jq -r '.sha256' "$RUNNER_TEMP/manifest.json" | tr '[:upper:]' '[:lower:]')"
+          actual="$(sha256sum "$RUNNER_TEMP/playbook.apbx" | cut -d' ' -f1)"
+          test "$actual" = "$expected"
+          expected_size="$(jq -r '.sizeBytes' "$RUNNER_TEMP/manifest.json")"
+          actual_size="$(stat -c%s "$RUNNER_TEMP/playbook.apbx")"
+          test "$actual_size" = "$expected_size"
+
+      - name: Encerrar teste de montagem
+        if: ${{ inputs.dry_run == true }}
+        run: echo "Arquivo remontado e hash confirmado."
+
+      - name: Preparar destino
+        if: ${{ inputs.dry_run == false }}
+        id: target
+        shell: bash
+        run: |
+          set -euo pipefail
+          filename="$(jq -r '.targetFile' "$RUNNER_TEMP/manifest.json")"
+          size="$(jq -r '.sizeBytes' "$RUNNER_TEMP/manifest.json")"
+          if (( size < 104857600 )); then
+            mkdir -p playbooks
+            cp "$RUNNER_TEMP/playbook.apbx" "playbooks/$filename"
+            url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main/playbooks/$filename"
+            storage="repository"
+          else
+            tag="$(jq -r '.finalTag' "$RUNNER_TEMP/manifest.json")"
+            cp "$RUNNER_TEMP/playbook.apbx" "$RUNNER_TEMP/$filename"
+            if ! gh release view "$tag" >/dev/null 2>&1; then
+              gh release create "$tag" --title "$(jq -r '.name' "$RUNNER_TEMP/manifest.json") v$(jq -r '.version' "$RUNNER_TEMP/manifest.json")" --notes "APBX publicado automaticamente pelo painel de licencas KT WIRZADE. Confira o SHA-256 no catalogo."
+            fi
+            gh release upload "$tag" "$RUNNER_TEMP/$filename" --clobber
+            encoded="$(node -p "encodeURIComponent(process.argv[1])" "$filename")"
+            url="https://github.com/${GITHUB_REPOSITORY}/releases/download/$tag/$encoded"
+            storage="release"
+          fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "storage=$storage" >> "$GITHUB_OUTPUT"
+
+      - name: Atualizar catalogo
+        if: ${{ inputs.dry_run == false }}
+        run: node .github/scripts/update-upload-catalog.mjs "$RUNNER_TEMP/manifest.json" '${{ steps.target.outputs.url }}' '${{ steps.target.outputs.storage }}'
+
+      - name: Publicar alteracoes
+        if: ${{ inputs.dry_run == false }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'KT WIRZADE Licensing'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/catalog.json playbooks
+          git commit -m "catalog: publish $(jq -r '.productCode' "$RUNNER_TEMP/manifest.json") v$(jq -r '.version' "$RUNNER_TEMP/manifest.json")"
+          git pull --rebase origin main
+          git push origin HEAD:main

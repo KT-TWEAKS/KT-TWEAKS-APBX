@@ -87,6 +87,8 @@ npm run build     # build estático em dist/
 
 O site é servido pela Vercel em **https://kt-tweaks-apbx.vercel.app** — framework Astro detectado automaticamente (build: `astro build`, output: `dist/`). A pasta `playbooks/` da raiz fica fora do deploy (`.vercelignore`); ela existe como fonte dos downloads via `raw.githubusercontent.com`.
 
+O painel privado de licenças pode publicar novos pacotes e atualizações pelo workflow `publish-apbx.yml`. O arquivo é remontado, tem tamanho e SHA-256 conferidos e segue automaticamente para `playbooks/` quando possui menos de 100 MiB ou para GitHub Releases quando alcança esse limite. A execução também atualiza `public/catalog.json`; a conexão GitHub–Vercel publica o site após cada alteração.
+
 ## Licença
 
 Os playbooks pertencem à comunidade AME (cada um com sua licença original). Este repositório faz curadoria, análise e distribuição; qualquer adaptação é identificada no catálogo e acompanhada de hash SHA-256.
