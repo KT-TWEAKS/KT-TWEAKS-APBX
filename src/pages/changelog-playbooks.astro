@@ -418,7 +418,7 @@ import '../styles/changelog-playbooks.css';
             </div>
 </div>
         </div>
-    </div></section>
+    </section>
 
     <section class="sec pad" style="border-top:1px solid var(--bdr2)"><div class="wrap">
         <div data-reveal><div class="s-eyebrow">ORIGINAIS</div><h2 class="s-title">Playbooks <span class="hl">Ja Compativel</span></h2><p style="color:var(--t2);margin-top:16px;font-size:16px;max-width:700px">Playbooks que ja suportavam Windows 10 em suas versoes originais. kelvenapk apenas disponibilizou para download.</p></div>
@@ -775,4 +775,23 @@ import '../styles/changelog-playbooks.css';
             });
         });
 </script>
+<section class="sec pad" id="catalogo-live" style="border-top:1px solid var(--bdr2)"><div class="wrap">
+  <div class="s-eyebrow">ATUALIZAÇÕES AUTOMÁTICAS</div><h2 class="s-title">Histórico do <span class="hl">catálogo verificado</span></h2>
+  <p style="color:var(--t2);margin:14px 0 24px">Cada aprovação, atualização ou retirada feita no painel oficial gera uma entrada pública.</p>
+  <div id="live-changes" class="live-changes">Carregando histórico…</div>
+</div></section>
+<script is:inline>
+const loadJson=url=>fetch(url,{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
+Promise.all([loadJson('/catalog.json'),loadJson('https://licensing-site.vercel.app/api/playbooks')]).then(([catalog,registry])=>{
+  const history=catalog&&Array.isArray(catalog.changes)?catalog.changes:[];
+  const known=new Set(history.map(x=>String(x.productCode).toLowerCase()));
+  const fallback=registry&&Array.isArray(registry.playbooks)?registry.playbooks.filter(p=>p.downloadUrl&&p.analysis&&!known.has(String(p.productCode).toLowerCase())).map(p=>({productCode:p.productCode,name:p.name,version:p.version,date:p.publishedAt||p.verifiedAt,summary:p.publicNotes||'Playbook verificado e disponibilizado no catálogo oficial.'})):[];
+  const el=document.getElementById('live-changes'), items=[...history,...fallback].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  el.innerHTML=items.length?items.map(x=>`<article class="live-change"><div><b>${esc(x.name)}</b> <span>v${esc(x.version)}</span></div><time>${new Date(x.date).toLocaleString('pt-BR')}</time><p>${esc(x.summary)}</p></article>`).join(''):'<div class="live-change">As próximas publicações verificadas aparecerão aqui automaticamente.</div>';
+}).catch(()=>{document.getElementById('live-changes').textContent='Histórico temporariamente indisponível.'});
+</script>
+<style is:inline>
+.live-changes{display:grid;gap:12px}.live-change{padding:17px 19px;border:1px solid var(--bdr2);border-radius:14px;background:rgba(139,92,246,.045)}.live-change>div{font-size:16px}.live-change span{font:11px var(--fm);color:var(--vi)}.live-change time{font:10px var(--fm);color:var(--t3)}.live-change p{margin-top:8px;color:var(--t2);font-size:13px}
+</style>
 </BaseLayout>
