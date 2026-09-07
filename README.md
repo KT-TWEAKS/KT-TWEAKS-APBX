@@ -31,7 +31,7 @@ Este repositório hospeda o site (Astro 5, saída estática) e os arquivos dos *
 - **Downloads diretos** — 13 playbooks via raw do GitHub e 3 pesados (>100MB) via [Releases](https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/tag/v1.0)
 - **Comparação** — coloque playbooks lado a lado e veja tamanho, ações, serviços, registro e nível de risco
 - **Detalhes** — relatório de auditoria de cada playbook (o que ele toca no sistema), gerado com o mesmo motor do **APBX Developer** do [KT WIRZADE](https://github.com/KT-TWEAKS/KT-WIRZADE)
-- **Verificação de integridade** — todos os 16 playbooks são checados por hash SHA-256; o selo ✓ Verificado garante que o arquivo não foi alterado
+- **Verificação de integridade** — todos os 16 playbooks são checados por hash SHA-256; o selo ✓ Verificado vincula cada download ao arquivo analisado
 
 ## Como usar com o KT WIRZADE
 
@@ -89,4 +89,4 @@ O site é servido pela Vercel em **https://kt-tweaks-apbx.vercel.app** — frame
 
 ## Licença
 
-Os playbooks pertencem à comunidade AME (cada um com sua licença original). Este repositório faz apenas curadoria e distribuição direta, **sem modificações** nos pacotes.
+Os playbooks pertencem à comunidade AME (cada um com sua licença original). Este repositório faz curadoria, análise e distribuição; qualquer adaptação é identificada no catálogo e acompanhada de hash SHA-256.
