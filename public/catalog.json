@@ -1,6 +1,87 @@
 {
   "schemaVersion": 1,
-  "updatedAt": null,
-  "playbooks": [],
-  "changes": []
+  "updatedAt": "2026-09-15T22:52:18.376Z",
+  "playbooks": [
+    {
+      "productCode": "FSOS-X",
+      "name": "FSOS-X R11H2",
+      "author": "by FRAMESYNC",
+      "version": "11.2",
+      "description": "FSOS-X fully optimizes your stock Windows for better responsiveness, max performance and zero tracking. This release is geared towards competitive gamers.\n\n⚡ Pro-level PC optimizations available now. Visit framesynclabs.com for more info.",
+      "category": "gaming",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-09-15T22:52:18.376Z",
+      "publishedAt": "2026-09-15T22:52:18.376Z",
+      "sha256": "75d0e6a716f722d452d7ed9b9d403c9b9ef20207f35a84ada4213e043fc62741",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-fsos-x-v11.2/FSOS-XR11H2.apbx",
+      "website": "https://framesynclabs.com",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "FSOS-XR11H2.apbx",
+        "sizeBytes": 436280934,
+        "sha256": "75D0E6A716F722D452D7ED9B9D403C9B9EF20207F35A84ADA4213E043FC62741",
+        "engineVersion": "1.0.1",
+        "totalFiles": 199,
+        "totalActions": 1731,
+        "taskFiles": 8,
+        "networkRequired": 0,
+        "parseErrors": 0,
+        "risks": [
+          "Comando que muda permissoes de sistema: $dotDefault = 'Registry::HKEY_USERS\\.DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'\ntry { Remove-ItemProperty -P...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que muda permissoes de sistema: try {\n  $patterns = @('Microsoft.WindowsStore','Microsoft.StorePurchaseApp')\n  Get-AppxPackage -AllUsers -ErrorAction Si...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que muda permissoes de sistema: $svcList = @('Sense','WinDefend','MsSecCore','wscsvc','WdFilter','WdNisDrv','WdNisSvc','MsSecWfp','MsSecFlt','wtd','webt...  <Configuration/Tasks/phase2-strip.yml>",
+          "Toca em area critica (System32\\drivers) via remocao de arquivo  <Configuration/Tasks/phase2-strip.yml>",
+          "Toca em area critica (System32\\drivers) via remocao de arquivo  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que muda permissoes de sistema: try {\n  $shRoot = Join-Path $env:windir 'System32\\SecurityHealth'\n  if (Test-Path $shRoot) {\n    $removed = New-Object S...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que muda permissoes de sistema: $taskDir = Join-Path $env:windir 'System32\\Tasks\\Microsoft\\Windows\\Windows Defender'\nif (Test-Path -LiteralPath $taskDir...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que reinicia/desliga a maquina: $build = 0\ntry { $build = [int](Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion' -Name Curren...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que muda permissoes de sistema: function Take-ClsidOwnership {\n  param([string]$subKey)\n  try {\n    $adminSid = New-Object System.Security.Principal.Sec...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que modifica dados de boot: bcdedit /set hypervisorlaunchtype off  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que muda permissoes de sistema: function Start-Bounded {\n  param($f, $a, $ms)\n  try {\n    $p = $null\n    if ($a -and $a.Trim()) { $p = Start-Process -Fi...  <Configuration/Tasks/phase2-strip.yml>",
+          "Comando que reinicia/desliga a maquina: $stock = @{\n  'HvHost'             = 3\n  'hvservice'          = 0\n  'hvcrash'            = 3\n  'hyperkbd'           = 3\n...  <Configuration/Tasks/phase3-harden.yml>",
+          "Comando que modifica dados de boot: $stock = @{\n  'HvHost'             = 3\n  'hvservice'          = 0\n  'hvcrash'            = 3\n  'hyperkbd'           = 3\n...  <Configuration/Tasks/phase3-harden.yml>",
+          "Comando que reinicia/desliga a maquina: $nicClass = 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e972-e325-11ce-bfc1-08002be10318}'\nif (Test-Path $nicClas...  <Configuration/Tasks/phase4-gaming.yml>",
+          "Comando que reinicia/desliga a maquina: $packages = @(\n  'MicrosoftWindows.Client.CBS_cw5n1h2txyewy',\n  'Microsoft.UI.Xaml.CBS_8wekyb3d8bbwe',\n  'MicrosoftWindo...  <Configuration/Tasks/phase5-apply.yml>"
+        ],
+        "severity": "high",
+        "riskScore": 100,
+        "actionCounts": {
+          "registry": 739,
+          "services": 105,
+          "files": 8,
+          "downloads": 0,
+          "commands": 215,
+          "apps": 158,
+          "others": 506
+        },
+        "supportedBuilds": [
+          "19044",
+          "19045",
+          "22631",
+          "26100",
+          "26200",
+          "26300"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-09-15T22:42:03.256Z"
+      }
+    }
+  ],
+  "changes": [
+    {
+      "id": "FSOS-X-1789512738382",
+      "productCode": "FSOS-X",
+      "name": "FSOS-X R11H2",
+      "version": "11.2",
+      "type": "published",
+      "date": "2026-09-15T22:52:18.376Z",
+      "storage": "release",
+      "summary": "Novo playbook v11.2 analisado e publicado."
+    }
+  ]
 }
