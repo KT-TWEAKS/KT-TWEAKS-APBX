@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T22:58:55.629Z",
+  "updatedAt": "2026-10-08T22:59:56.214Z",
   "playbooks": [
     {
       "productCode": "AtomOS",
@@ -525,9 +525,89 @@
         "optionsCount": 0,
         "analyzedAt": "2026-10-08T22:48:02.279Z"
       }
+    },
+    {
+      "productCode": "XOS",
+      "name": "XOS Playbook v0.777",
+      "author": "XOS",
+      "version": "0.777",
+      "description": "XOS is a playbook that focuses on improving gaming performance and privacy.",
+      "category": "gaming",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-08T22:59:56.214Z",
+      "publishedAt": "2026-10-08T22:59:56.214Z",
+      "sha256": "3d65dd63cfe8736ce409be2f5e979f21386f38f0dbe3793a4c7b4b0f0dde6f2e",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-xos-v0.777/XOS-V0.777.apbx",
+      "website": "https://discord.gg/XTYEjZNPgX",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "XOS V0.777.apbx",
+        "sizeBytes": 9438532,
+        "sha256": "3D65DD63CFE8736CE409BE2F5E979F21386F38F0DBE3793A4C7B4B0F0DDE6F2E",
+        "engineVersion": "1.0.1",
+        "totalFiles": 30,
+        "totalActions": 803,
+        "taskFiles": 1,
+        "networkRequired": 0,
+        "parseErrors": 0,
+        "risks": [
+          "Comando que remove tarefas agendadas: $s = 'sc.exe stop MDCoreSvc; sc.exe stop WinDefend; sc.exe stop WdNisSvc; Start-Sleep -Seconds 5;' +\n     'reg add HKLM\\...  <Configuration/custom.yml>",
+          "Comando que modifica dados de boot: bcdedit.exe /deletevalue useplatformclock  <Configuration/custom.yml>",
+          "Comando que modifica dados de boot: bcdedit.exe /deletevalue useplatformtick  <Configuration/custom.yml>",
+          "Comando que modifica dados de boot: bcdedit.exe /set bootmenupolicy legacy  <Configuration/custom.yml>",
+          "Comando que modifica dados de boot: bcdedit.exe /timeout 10  <Configuration/custom.yml>",
+          "Comando que modifica dados de boot: bcdedit.exe /set {current} description \"XOS-Playbook-V0.777\"  <Configuration/custom.yml>",
+          "Comando que muda permissoes de sistema: if (-not (Test-Path -LiteralPath 'Registry::HKEY_CLASSES_ROOT\\RunAsTI')) { Write-Warning 'runasti.reg was not imported: ...  <Configuration/custom.yml>"
+        ],
+        "severity": "high",
+        "riskScore": 82,
+        "actionCounts": {
+          "registry": 516,
+          "services": 52,
+          "files": 13,
+          "downloads": 0,
+          "commands": 146,
+          "apps": 1,
+          "others": 75
+        },
+        "supportedBuilds": [
+          "17763",
+          "18362",
+          "18363",
+          "19041",
+          "19042",
+          "19043",
+          "19044",
+          "19045",
+          "22000",
+          "22621",
+          "22631",
+          "26100",
+          "26200",
+          "26300",
+          "28000"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-08T22:59:40.334Z"
+      }
     }
   ],
   "changes": [
+    {
+      "id": "XOS-1791500396238",
+      "productCode": "XOS",
+      "name": "XOS Playbook v0.777",
+      "version": "0.777",
+      "type": "published",
+      "date": "2026-10-08T22:59:56.214Z",
+      "storage": "release",
+      "summary": "Novo playbook v0.777 analisado e publicado."
+    },
     {
       "id": "SapphireOS-1791500335828",
       "productCode": "SapphireOS",
