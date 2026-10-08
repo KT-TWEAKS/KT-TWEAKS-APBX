@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T22:53:04.080Z",
+  "updatedAt": "2026-10-08T22:58:55.629Z",
   "playbooks": [
     {
       "productCode": "AtomOS",
@@ -261,6 +261,73 @@
       }
     },
     {
+      "productCode": "SapphireOS",
+      "name": "SapphireOS",
+      "author": "Sapphire",
+      "version": "0.0.3",
+      "description": "The Playbook for SapphireOS",
+      "category": "gaming",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-08T22:58:55.629Z",
+      "publishedAt": "2026-10-08T22:58:55.629Z",
+      "sha256": "6188b89c1eac537e4b5affabd53972306c72c8f35b49f4ed7b3bca55d5c55766",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-sapphireos-v0.0.3/SapphireOS.apbx",
+      "website": null,
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "SapphireOS.apbx",
+        "sizeBytes": 24645050,
+        "sha256": "6188B89C1EAC537E4B5AFFABD53972306C72C8F35B49F4ED7B3BCA55D5C55766",
+        "engineVersion": "1.0.1",
+        "totalFiles": 196,
+        "totalActions": 959,
+        "taskFiles": 8,
+        "networkRequired": 4,
+        "parseErrors": 0,
+        "risks": [
+          "4 download(s)/etapa(s) precisam de internet durante a aplicacao.",
+          "Comando que modifica dados de boot: bcdedit /set {current} description \"SapphireOS\"  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set {current} recoveryenabled no  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set {current} disableelamdrivers yes  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set {current} integrityservices disable  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set {current} hypervisorlaunchtype off  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set {current} vm off  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Comando que modifica dados de boot: bcdedit /set {current} vsmlaunchtype off  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Download executavel: https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/8.0.20/windowsdesktop-runtime-8.0.20-win-x64.exe  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Download executavel: https://github.com/abbodi1406/vcredist/releases/download/v0.101.0/VisualCppRedist_AIO_x86_x64.exe  <Configuration/SapphireOS/tweaks/commands.yml>",
+          "Download executavel: https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v4.4.198/OpenShellSetup_4_4_198.exe  <Configuration/SapphireOS/tweaks/commands.yml>"
+        ],
+        "severity": "high",
+        "riskScore": 100,
+        "actionCounts": {
+          "registry": 493,
+          "services": 246,
+          "files": 10,
+          "downloads": 3,
+          "commands": 55,
+          "apps": 72,
+          "others": 80
+        },
+        "supportedBuilds": [
+          "19044",
+          "19045",
+          "22621",
+          "22631",
+          "26100",
+          "26200"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-08T22:58:30.505Z"
+      }
+    },
+    {
       "productCode": "48",
       "name": "SynergyOS",
       "author": "by Kwanteks",
@@ -461,6 +528,16 @@
     }
   ],
   "changes": [
+    {
+      "id": "SapphireOS-1791500335828",
+      "productCode": "SapphireOS",
+      "name": "SapphireOS",
+      "version": "0.0.3",
+      "type": "published",
+      "date": "2026-10-08T22:58:55.629Z",
+      "storage": "release",
+      "summary": "Novo playbook v0.0.3 analisado e publicado."
+    },
     {
       "id": "RapidOS-1791499984104",
       "productCode": "RapidOS",
