@@ -27,12 +27,6 @@ const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
         <div class="hero-actions"><a class="button button-primary" href="#catalogo">Explorar catálogo <span>↓</span></a><a class="button button-ghost" href="/changelog-playbooks">Ver atualizações <span>↗</span></a></div>
         <div class="trust-row"><span>✓ SHA-256 público</span><span>✓ Download direto</span><span>✓ Status verificado</span></div>
       </div>
-      <div class="hero-console" aria-label="Fluxo de publicação">
-        <div class="console-top"><span class="console-label">PUBLICATION PIPELINE</span><span class="live-dot">FLOW</span></div>
-        <div class="console-flow" role="tablist" aria-label="Etapas de publicação"><button class="flow-node done is-active" type="button" role="tab" aria-selected="true" aria-controls="pipeline-panel-0" data-pipeline-step="0"><b>01</b><span>Upload</span><small>arquivo recebido</small></button><div class="flow-line done"></div><button class="flow-node done" type="button" role="tab" aria-selected="false" aria-controls="pipeline-panel-1" data-pipeline-step="1"><b>02</b><span>Audit</span><small>estrutura analisada</small></button><div class="flow-line done"></div><button class="flow-node current" type="button" role="tab" aria-selected="false" aria-controls="pipeline-panel-2" data-pipeline-step="2"><b>03</b><span>Release</span><small>link permanente</small></button></div>
-        <div class="pipeline-detail" aria-live="polite"><div id="pipeline-panel-0" data-pipeline-panel="0"><span>REGISTRO</span><strong>O arquivo entra no fluxo de publicação e recebe uma identificação de versão.</strong></div><div id="pipeline-panel-1" data-pipeline-panel="1" hidden><span>VERIFICAÇÃO</span><strong>A estrutura, a análise e o SHA-256 são conferidos antes de aparecer no catálogo.</strong></div><div id="pipeline-panel-2" data-pipeline-panel="2" hidden><span>DISTRIBUIÇÃO</span><strong>O APBX fica como asset de GitHub Release; o deploy público guarda apenas o catálogo.</strong></div></div>
-        <div class="console-foot"><span>storage</span><strong data-pipeline-value>GitHub Releases</strong><span class="console-check">●</span></div>
-      </div>
     </div>
   </section>
   <section class="metrics shell" aria-label="Resumo do catálogo"><div><strong>{playbooks.length.toString().padStart(2, '0')}</strong><span>publicados</span></div><div><strong>{categories.length.toString().padStart(2, '0')}</strong><span>categorias</span></div><div><strong>100%</strong><span>verificados</span></div><div><strong>0</strong><span>arquivos no deploy</span></div></section>
@@ -47,11 +41,5 @@ const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
     const source = JSON.parse(safeJson); const search = document.querySelector('#catalog-search'); const buttons = [...document.querySelectorAll('[data-filter]')]; const cards = [...document.querySelectorAll('[data-card]')]; const empty = document.querySelector('#no-results'); let filter = 'all';
     function render(){const query=(search?.value||'').trim().toLowerCase();let visible=0;cards.forEach((card)=>{const match=(!query||card.dataset.search.includes(query))&&(filter==='all'||card.dataset.category===filter);card.hidden=!match;if(match)visible++;});if(empty)empty.hidden=visible>0||cards.length===0;}
     search?.addEventListener('input',render); buttons.forEach((button)=>button.addEventListener('click',()=>{filter=button.dataset.filter;buttons.forEach((item)=>item.classList.toggle('active',item===button));render();})); void source;
-  </script>
-  <script is:inline>
-    const pipelineSteps = [...document.querySelectorAll('[data-pipeline-step]')]; const pipelinePanels = [...document.querySelectorAll('[data-pipeline-panel]')];
-    function activatePipeline(index, moveFocus = false) { const next = Math.max(0, Math.min(index, pipelineSteps.length - 1)); pipelineSteps.forEach((step, stepIndex) => { const active = stepIndex === next; step.classList.toggle('is-active', active); step.setAttribute('aria-selected', active ? 'true' : 'false'); step.setAttribute('tabindex', active ? '0' : '-1'); }); pipelinePanels.forEach((panel, panelIndex) => { panel.hidden = panelIndex !== next; }); if (moveFocus) pipelineSteps[next].focus(); }
-    pipelineSteps.forEach((step, index) => { step.addEventListener('click', () => activatePipeline(index)); step.addEventListener('keydown', (event) => { let next = index; if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next += 1; if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next -= 1; if (event.key === 'Home') next = 0; if (event.key === 'End') next = pipelineSteps.length - 1; if (next !== index) { event.preventDefault(); activatePipeline(next < 0 ? pipelineSteps.length - 1 : next >= pipelineSteps.length ? 0 : next, true); } }); });
-    if (pipelineSteps.length && pipelinePanels.length) activatePipeline(0);
   </script>
 </BaseLayout>

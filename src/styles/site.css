@@ -36,6 +36,7 @@ main,.site-footer{position:relative;z-index:1}
 .site-nav{background:rgba(255,255,255,.055);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);border-color:rgba(255,255,255,.11)}
 .nav-link:hover,.nav-link.active{background:rgba(155,124,255,.14)}
 .hero-console,.catalog-card,.manifest-card,.compare-table,.timeline-card{background:linear-gradient(145deg,rgba(24,27,42,.72),rgba(10,14,24,.64));backdrop-filter:blur(26px) saturate(140%);-webkit-backdrop-filter:blur(26px) saturate(140%);box-shadow:0 24px 80px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.055)}
+.hero-grid{grid-template-columns:minmax(0,1fr);max-width:820px}
 .hero-console{position:relative;overflow:hidden}
 .hero-console:after,.catalog-card:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.08),transparent 28%,transparent 72%,rgba(86,217,232,.06));opacity:.7}
 .hero-console>* ,.catalog-card>*{position:relative;z-index:1}
