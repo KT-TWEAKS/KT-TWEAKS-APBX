@@ -1,23 +1,18 @@
 import fs from 'node:fs';
 
 const [manifestPath, downloadUrl, storage, customCatalogPath] = process.argv.slice(2);
-if (!manifestPath || !downloadUrl || !storage) throw new Error('Argumentos de publicacao ausentes.');
+if (!manifestPath || !downloadUrl || storage !== 'release') throw new Error('Publicação inválida: APBX deve usar GitHub Releases.');
+
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const catalogPath = customCatalogPath || 'public/catalog.json';
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+catalog.schemaVersion = 2;
 catalog.playbooks ||= [];
 catalog.changes ||= [];
 
 const now = new Date().toISOString();
 const key = String(manifest.productCode).toLowerCase();
-const prior = catalog.playbooks.find(item => String(item.productCode).toLowerCase() === key);
-if (prior?.storage === 'repository' && prior.downloadUrl) {
-  try {
-    const oldName = decodeURIComponent(new URL(prior.downloadUrl).pathname.split('/').pop());
-    const oldPath = `playbooks/${oldName}`;
-    if (oldName !== manifest.targetFile && /^[A-Za-z0-9._-]+\.apbx$/i.test(oldName) && fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-  } catch (_) {}
-}
+const prior = catalog.playbooks.find((item) => String(item.productCode).toLowerCase() === key);
 const item = {
   productCode: manifest.productCode,
   name: manifest.name,
@@ -36,11 +31,11 @@ const item = {
   website: manifest.website || null,
   git: manifest.git || null,
   publicNotes: manifest.publicNotes || '',
-  storage,
+  storage: 'release',
   analysis: manifest.analysis || {},
 };
 
-catalog.playbooks = catalog.playbooks.filter(entry => String(entry.productCode).toLowerCase() !== key);
+catalog.playbooks = catalog.playbooks.filter((entry) => String(entry.productCode).toLowerCase() !== key);
 catalog.playbooks.push(item);
 catalog.playbooks.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 catalog.updatedAt = now;
@@ -51,7 +46,7 @@ catalog.changes.unshift({
   version: manifest.version,
   type: prior ? 'updated' : 'published',
   date: now,
-  storage,
+  storage: 'release',
   summary: manifest.publicNotes || (prior ? `Arquivo e analise atualizados para v${manifest.version}.` : `Novo playbook v${manifest.version} analisado e publicado.`),
 });
 catalog.changes = catalog.changes.slice(0, 100);
