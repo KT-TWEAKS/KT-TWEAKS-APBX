@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T22:52:26.080Z",
+  "updatedAt": "2026-10-08T22:53:04.080Z",
   "playbooks": [
     {
       "productCode": "AtomOS",
@@ -147,6 +147,63 @@
         ],
         "optionsCount": 0,
         "analyzedAt": "2026-10-08T22:38:52.098Z"
+      }
+    },
+    {
+      "productCode": "RapidOS",
+      "name": "Rapid Playbook v1.3",
+      "author": "Rapid Team",
+      "version": "1.3",
+      "description": "Rapid Community enhances usability and optimizes the experience without sacrificing stability.\n\nRapidOS supports 22H2, 23H2, 24H2, 25H2 builds.\n\n⚠️ It's important to comprehend that after installing this playbook, you can undo it.",
+      "category": "balanced",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-08T22:53:04.080Z",
+      "publishedAt": "2026-10-08T22:53:04.080Z",
+      "sha256": "73bc95cbfd04afdd77a384161a316af8225f5c3eb59d4d89b0a4699345f12445",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-rapidos-v1.3/RapidOS.apbx",
+      "website": "https://rapid-community.ru/",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "RapidOS.apbx",
+        "sizeBytes": 2511219,
+        "sha256": "73BC95CBFD04AFDD77A384161A316AF8225F5C3EB59D4D89B0A4699345F12445",
+        "engineVersion": "1.0.1",
+        "totalFiles": 177,
+        "totalActions": 500,
+        "taskFiles": 74,
+        "networkRequired": 0,
+        "parseErrors": 0,
+        "risks": [
+          "Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <Boot configuration (Configuration/Core/System/Boot.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set debug no  <Boot configuration (Configuration/Core/System/Boot.yml)>",
+          "Comando que modifica dados de boot: bcdedit /timeout 15  <Boot configuration (Configuration/Core/System/Boot.yml)>",
+          "Comando que remove tarefas agendadas: $user = whoami; Register-ScheduledTask -TaskName 'gpupdate' -Action (New-ScheduledTaskAction -Execute 'powershell' -Argu...  <Finalize installation (Configuration/Core/System/Finalize.yml)>"
+        ],
+        "severity": "high",
+        "riskScore": 49,
+        "actionCounts": {
+          "registry": 289,
+          "services": 29,
+          "files": 0,
+          "downloads": 0,
+          "commands": 93,
+          "apps": 5,
+          "others": 84
+        },
+        "supportedBuilds": [
+          "19045",
+          "22621",
+          "22631",
+          "26100",
+          "26200"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-08T22:52:55.162Z"
       }
     },
     {
@@ -404,6 +461,16 @@
     }
   ],
   "changes": [
+    {
+      "id": "RapidOS-1791499984104",
+      "productCode": "RapidOS",
+      "name": "Rapid Playbook v1.3",
+      "version": "1.3",
+      "type": "published",
+      "date": "2026-10-08T22:53:04.080Z",
+      "storage": "release",
+      "summary": "Novo playbook v1.3 analisado e publicado."
+    },
     {
       "id": "48-1791499946096",
       "productCode": "48",
