@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T22:31:03.034Z",
+  "updatedAt": "2026-10-08T22:34:57.427Z",
   "playbooks": [
     {
       "productCode": "64",
@@ -130,9 +130,73 @@
         "optionsCount": 0,
         "analyzedAt": "2026-10-08T22:29:37.905Z"
       }
+    },
+    {
+      "productCode": "32",
+      "name": "ReviOS Playbook",
+      "author": "Revision",
+      "version": "26.04",
+      "description": "This Playbook will help you quickly deploy ReviOS on your current system.",
+      "category": "balanced",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-08T22:34:57.427Z",
+      "publishedAt": "2026-10-08T22:34:57.427Z",
+      "sha256": "03c74cf3baecb869e4300b65d6340246a494d135c4f5d081a3abdc055ddd32c1",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-32-v26.04/Revi-PB-26.04.apbx",
+      "website": "https://revi.cc",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "Revi-PB-26.04.apbx",
+        "sizeBytes": 1179888,
+        "sha256": "03C74CF3BAECB869E4300B65D6340246A494D135C4F5D081A3ABDC055DDD32C1",
+        "engineVersion": "1.0.1",
+        "totalFiles": 83,
+        "totalActions": 1377,
+        "taskFiles": 53,
+        "networkRequired": 5,
+        "parseErrors": 0,
+        "risks": [
+          "5 download(s)/etapa(s) precisam de internet durante a aplicacao."
+        ],
+        "severity": "medium",
+        "riskScore": 4,
+        "actionCounts": {
+          "registry": 838,
+          "services": 21,
+          "files": 2,
+          "downloads": 4,
+          "commands": 67,
+          "apps": 6,
+          "others": 439
+        },
+        "supportedBuilds": [
+          "19044",
+          "19045",
+          "22631",
+          "26100",
+          "26200"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-08T22:34:45.166Z"
+      }
     }
   ],
   "changes": [
+    {
+      "id": "32-1791498897450",
+      "productCode": "32",
+      "name": "ReviOS Playbook",
+      "version": "26.04",
+      "type": "published",
+      "date": "2026-10-08T22:34:57.427Z",
+      "storage": "release",
+      "summary": "Novo playbook v26.04 analisado e publicado."
+    },
     {
       "id": "AtomOS-1791498663054",
       "productCode": "AtomOS",
