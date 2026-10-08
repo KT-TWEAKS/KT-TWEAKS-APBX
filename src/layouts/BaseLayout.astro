@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import '../styles/header-tweak.css';
 
 interface Props {
   title: string;
@@ -33,12 +34,12 @@ const navItem = (key: Props['active']) => active === key ? 'nav-link active' : '
         <a class={navItem('compare')} href="/comparar">Comparar</a>
         <a class={navItem('changelog')} href="/changelog-playbooks">Changelog</a>
       </nav>
-      <a class="header-link" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <div class="header-actions"><a class="header-link header-link-secondary" href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer">KT WIRZADE <span aria-hidden="true">↗</span></a><a class="header-link" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
     </header>
     <main><slot /></main>
     <footer class="site-footer">
       <div><span class="footer-dot"></span><strong>KT TWEAKS</strong><span class="muted">/ APBX catalog</span></div>
-      <p>Arquivos publicados pelo painel oficial, verificados por SHA-256.</p>
+      <p>Arquivos publicados pelo fluxo oficial, verificados por SHA-256. <a href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer">Conheça o KT WIRZADE ↗</a></p>
     </footer>
   </body>
 </html>
