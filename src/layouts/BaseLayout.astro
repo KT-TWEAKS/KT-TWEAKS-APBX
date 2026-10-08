@@ -1,24 +1,44 @@
 ---
+import '../styles/site.css';
+
 interface Props {
   title: string;
-  description?: string;
+  description: string;
+  active?: 'home' | 'compare' | 'changelog';
 }
-const { title, description } = Astro.props;
+
+const { title, description, active = 'home' } = Astro.props;
+const navItem = (key: Props['active']) => active === key ? 'nav-link active' : 'nav-link';
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#0b0d12" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`https://kt-tweaks-apbx.vercel.app${Astro.url.pathname}`} />
     <title>{title}</title>
-    {description && <meta name="description" content={description}>}
-    <slot name="head-extra" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-    <slot />
-</body>
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="KT APBX início">
+        <span class="brand-mark">KT</span>
+        <span class="brand-copy"><strong>APBX</strong><small>verified catalog</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a class={navItem('home')} href="/">Catálogo</a>
+        <a class={navItem('compare')} href="/comparar">Comparar</a>
+        <a class={navItem('changelog')} href="/changelog-playbooks">Changelog</a>
+      </nav>
+      <a class="header-link" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer">
+      <div><span class="footer-dot"></span><strong>KT TWEAKS</strong><span class="muted">/ APBX catalog</span></div>
+      <p>Arquivos publicados pelo painel oficial, verificados por SHA-256.</p>
+    </footer>
+  </body>
 </html>
