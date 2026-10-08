@@ -39,7 +39,7 @@ const navItem = (key: Props['active']) => active === key ? 'nav-link active' : '
         <a class={navItem('changelog')} href="/changelog-playbooks">Changelog</a>
         <a class={navItem('faq')} href="/faq">FAQ</a>
       </nav>
-      <div class="header-actions"><a class="header-link header-link-secondary" href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer">KT WIRZADE <span aria-hidden="true">↗</span></a><a class="header-link" href="/termos">Termos</a><a class="header-link header-link-github" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+      <div class="header-actions"><a class="header-link header-link-secondary" href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer" aria-label="Conhecer o aplicativo KT WIRZADE">KT WIRZADE <span aria-hidden="true">↗</span></a><a class="header-link" href="https://kt-wirzade-site.vercel.app/docs/fluxo-apbx" target="_blank" rel="noreferrer">Fluxo <span aria-hidden="true">↗</span></a><a class="header-link" href="/termos">Termos</a><a class="header-link header-link-github" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
     </header>
     <main><slot /></main>
     <footer class="site-footer">
