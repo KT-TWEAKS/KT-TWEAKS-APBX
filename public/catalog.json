@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T22:50:21.701Z",
+  "updatedAt": "2026-10-08T22:52:26.080Z",
   "playbooks": [
     {
       "productCode": "AtomOS",
@@ -204,6 +204,65 @@
       }
     },
     {
+      "productCode": "48",
+      "name": "SynergyOS",
+      "author": "by Kwanteks",
+      "version": "1.6.0",
+      "description": "SynergyOS is an official verified playbook that delivers a high-performance Windows transformation designed for gamers, power users, and latency enthusiasts.",
+      "category": "balanced",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-08T22:52:26.080Z",
+      "publishedAt": "2026-10-08T22:52:26.080Z",
+      "sha256": "3a940cedf063fc743cb05de1e852ae260715d25dc872467efbe974f38afddacd",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-48-v1.6.0/SynergyOS.apbx",
+      "website": "https://discord.gg/kwanteks",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "SynergyOS.apbx",
+        "sizeBytes": 19668754,
+        "sha256": "3A940CEDF063FC743CB05DE1E852AE260715D25DC872467EFBE974F38AFDDACD",
+        "engineVersion": "1.0.1",
+        "totalFiles": 117,
+        "totalActions": 409,
+        "taskFiles": 9,
+        "networkRequired": 2,
+        "parseErrors": 0,
+        "risks": [
+          "2 download(s)/etapa(s) precisam de internet durante a aplicacao.",
+          "Download executavel: https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x64.exe  <Software (Configuration/Tasks/software.yml)>",
+          "Download executavel: https://aka.ms/dotnet/8.0/windowsdesktop-runtime-win-x86.exe  <Software (Configuration/Tasks/software.yml)>"
+        ],
+        "severity": "high",
+        "riskScore": 43,
+        "actionCounts": {
+          "registry": 189,
+          "services": 60,
+          "files": 5,
+          "downloads": 2,
+          "commands": 37,
+          "apps": 67,
+          "others": 49
+        },
+        "supportedBuilds": [
+          "19044",
+          "19045",
+          "22000",
+          "22621",
+          "22631",
+          "22635",
+          "26100",
+          "26200"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-08T22:51:59.918Z"
+      }
+    },
+    {
       "productCode": "64",
       "name": "UltraOS v1.1.1",
       "author": "UltraOS",
@@ -345,6 +404,16 @@
     }
   ],
   "changes": [
+    {
+      "id": "48-1791499946096",
+      "productCode": "48",
+      "name": "SynergyOS",
+      "version": "1.6.0",
+      "type": "published",
+      "date": "2026-10-08T22:52:26.080Z",
+      "storage": "release",
+      "summary": "Novo playbook v1.6.0 analisado e publicado."
+    },
     {
       "id": "64-1791499821719",
       "productCode": "64",
