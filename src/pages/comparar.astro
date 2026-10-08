@@ -2,16 +2,76 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
 const catalog = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'catalog.json'), 'utf8'));
-const playbooks = Array.isArray(catalog.playbooks) ? catalog.playbooks.filter((item: any) => item?.verified) : [];
+const isPublishedPlaybook = (item: any) => Boolean(
+  item?.verified &&
+  /^https:\/\//i.test(String(item?.downloadUrl || '')) &&
+  /^[0-9a-f]{64}$/i.test(String(item?.sha256 || '')),
+);
+const playbooks = Array.isArray(catalog.playbooks) ? catalog.playbooks.filter(isPublishedPlaybook) : [];
 const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
 ---
 <BaseLayout title="Comparar APBX — KT APBX" description="Compare playbooks APBX verificados lado a lado." active="compare">
-  <section class="page-hero shell"><div class="eyebrow">FERRAMENTA DE DECISÃO</div><h1>Compare antes de aplicar.</h1><p>Coloque até três playbooks lado a lado e veja o que muda em escopo, risco, tamanho e compatibilidade.</p></section>
-  <section class="compare-section shell"><div class="compare-picker">{['first', 'second', 'third'].map((slot, index) => <label class="select-card"><span>PLAYBOOK {String(index + 1).padStart(2, '0')}</span><select data-select={slot}><option value="">Selecionar playbook…</option>{playbooks.map((item: any) => <option value={item.productCode}>{item.name} · v{item.version}</option>)}</select></label>)}</div><div id="compare-output" class="compare-output"><div class="empty-state compact"><span class="empty-icon">⇄</span><h3>Selecione dois ou mais itens</h3><p>As diferenças aparecem aqui conforme você escolhe.</p></div></div></section>
+  <section class="page-hero shell compare-hero">
+    <div class="eyebrow"><span class="pulse"></span> KT APBX / REVIEW LADO A LADO</div>
+    <h1>Compare antes de aplicar.</h1>
+    <p>Veja risco, escopo, compatibilidade e integridade em uma leitura única. Só releases verificadas e com download publicado entram nesta tela.</p>
+    <div class="compare-hero-meta"><span><i>✓</i> origem verificada</span><span><i>⌁</i> até 3 playbooks</span><span><i>↗</i> download direto</span></div>
+  </section>
+  <section class="compare-section shell">
+    <div class="compare-control-card">
+      <div class="compare-control-copy"><div class="eyebrow">MONTE SUA REVISÃO</div><h2>Escolha os pontos de partida.</h2><p>Comece com dois itens para ativar a leitura comparativa. O terceiro é opcional.</p></div>
+      <button class="button button-ghost compare-reset" id="compare-reset" type="button">Limpar seleção</button>
+      <div class="compare-picker">
+        {['first', 'second', 'third'].map((slot, index) => <label class="select-card"><span>PLAYBOOK {String(index + 1).padStart(2, '0')}</span><select data-select={slot} aria-label={`Selecionar playbook ${index + 1}`}><option value="">Selecionar playbook…</option>{playbooks.map((item: any) => <option value={item.productCode}>{item.name} · v{item.version}</option>)}</select></label>)}
+      </div>
+      {playbooks.length < 2 ? <div class="compare-availability"><i>ⓘ</i><div><strong>Comparador pronto para o próximo release.</strong><span>Há {playbooks.length} playbook verificado disponível; a comparação lado a lado aparece assim que outro APBX for publicado.</span></div></div> : null}
+    </div>
+    <div id="compare-output" class="compare-output"><div class="empty-state compact"><span class="empty-icon">⇄</span><h3>Selecione dois ou mais itens</h3><p>A comparação mostra o que muda antes de você baixar e revisar no KT WIRZADE.</p></div></div>
+  </section>
   <script is:inline define:vars={{ safeJson }}>
-    const items = JSON.parse(safeJson); const selects = [...document.querySelectorAll('[data-select]')]; const output = document.querySelector('#compare-output'); const esc = (value) => String(value ?? '').replace(/[&<>"']/g,(char)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[char]); const size = (value) => { const bytes=Number(value||0); return bytes?`${(bytes/1048576).toFixed(1)} MB`:'—'; };
-    function render(){const chosen=selects.map((select)=>items.find((item)=>item.productCode===select.value)).filter(Boolean);if(chosen.length<2){output.innerHTML='<div class="empty-state compact"><span class="empty-icon">⇄</span><h3>Selecione dois ou mais itens</h3><p>As diferenças aparecem aqui conforme você escolhe.</p></div>';return;}const rows=[['Versão',(item)=>`v${item.version||'—'}`],['Autor',(item)=>item.author||'—'],['Categoria',(item)=>item.category||'—'],['Auditoria',(item)=>item.analysis?.severity||'auditado'],['Tamanho',(item)=>size(item.analysis?.sizeBytes)],['Ações',(item)=>item.analysis?.totalActions||'—'],['Builds',(item)=>(item.analysis?.supportedBuilds||[]).join(', ')||'—'],['SHA-256',(item)=>item.sha256||'—']];output.innerHTML=`<div class="compare-table"><div class="compare-table-head"><span>CRITÉRIO</span>${chosen.map((item)=>`<strong>${esc(item.name)}</strong>`).join('')}</div>${rows.map(([label,read])=>`<div class="compare-row"><span>${label}</span>${chosen.map((item)=>`<b>${esc(read(item))}</b>`).join('')}</div>`).join('')}<div class="compare-table-actions">${chosen.map((item)=>`<a class="button button-primary" href="${esc(item.downloadUrl)}" target="_blank" rel="noreferrer">Baixar ${esc(item.name)} ↗</a>`).join('')}</div></div>`;}
-    selects.forEach((select)=>select.addEventListener('change',render));
+    const items = JSON.parse(safeJson);
+    const selects = [...document.querySelectorAll('[data-select]')];
+    const output = document.querySelector('#compare-output');
+    const reset = document.querySelector('#compare-reset');
+    const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[char]);
+    const size = (value) => { const bytes = Number(value || 0); return bytes ? `${(bytes / 1048576).toFixed(1)} MB` : '—'; };
+    const category = { gaming:'Gaming', performance:'Performance', privacy:'Privacidade', lightweight:'Leve', balanced:'Balanceado' };
+    const severity = { ok:'Baixo risco', low:'Baixo risco', medium:'Risco médio', high:'Alto risco', critical:'Crítico' };
+    const severityTone = (value) => ['ok','low','medium','high','critical'].includes(String(value)) ? String(value) : 'unknown';
+    const severityText = (value) => severity[value] || 'Auditado';
+    const list = (value) => Array.isArray(value) && value.length ? value.join(', ') : '—';
+    const valueOf = (item, key) => {
+      if (key === 'version') return `v${item.version || '—'}`;
+      if (key === 'category') return category[item.category] || item.category || 'Balanceado';
+      if (key === 'severity') return severityText(item.analysis?.severity);
+      if (key === 'riskScore') return Number.isFinite(Number(item.analysis?.riskScore)) ? `${Number(item.analysis.riskScore)}/100` : '—';
+      if (key === 'size') return size(item.analysis?.sizeBytes);
+      if (key === 'actions') return Number(item.analysis?.totalActions || 0).toLocaleString('pt-BR');
+      if (key === 'files') return Number(item.analysis?.totalFiles || 0).toLocaleString('pt-BR');
+      if (key === 'network') return Number(item.analysis?.networkRequired || 0) > 0 ? 'Necessita rede' : 'Sem rede declarada';
+      if (key === 'builds') return list(item.analysis?.supportedBuilds);
+      if (key === 'hash') return item.sha256 || '—';
+      if (key === 'code') return item.productCode || '—';
+      return item[key] || '—';
+    };
+    function render() {
+      const chosen = selects.map((select) => items.find((item) => String(item.productCode) === select.value)).filter(Boolean);
+      if (chosen.length < 2) {
+        output.innerHTML = '<div class="empty-state compact"><span class="empty-icon">⇄</span><h3>Selecione dois ou mais itens</h3><p>A comparação mostra o que muda antes de você baixar e revisar no KT WIRZADE.</p></div>';
+        return;
+      }
+      const rows = [
+        ['ProductCode', 'code'], ['Versão', 'version'], ['Autor', 'author'], ['Categoria', 'category'],
+        ['Auditoria', 'severity'], ['Pontuação de risco', 'riskScore'], ['Tamanho', 'size'], ['Ações', 'actions'],
+        ['Arquivos', 'files'], ['Rede', 'network'], ['Builds compatíveis', 'builds'], ['SHA-256', 'hash'],
+      ];
+      const summaries = chosen.map((item) => `<article class="compare-selection-card"><div class="compare-selection-top"><span class="card-index">${esc(item.productCode)}</span><span class="compare-verified"><i>✓</i> Verificado no WIRZADE</span></div><h3>${esc(item.name)}</h3><p>${esc(item.publicNotes || item.description || 'Release publicada no catálogo oficial.')}</p><div class="compare-selection-metrics"><span><small>RISCO</small><b class="severity-${severityTone(item.analysis?.severity)}">${esc(severityText(item.analysis?.severity))}</b></span><span><small>AÇÕES</small><b>${esc(valueOf(item, 'actions'))}</b></span><span><small>VERSÃO</small><b>${esc(valueOf(item, 'version'))}</b></span></div><a class="text-link" href="${esc(item.downloadUrl)}" target="_blank" rel="noreferrer">Abrir download <span>↗</span></a></article>`).join('');
+      const tableRows = rows.map(([label, key]) => { const values = chosen.map((item) => String(valueOf(item, key))); const different = new Set(values).size > 1; return `<div class="compare-row${different ? ' is-different' : ''}"><span>${label}</span>${values.map((value) => `<b>${esc(value)}</b>`).join('')}</div>`; }).join('');
+      output.innerHTML = `<div class="compare-results"><div class="compare-results-head"><div><div class="eyebrow">REVISÃO CONCLUÍDA</div><h2>${chosen.length} releases verificadas lado a lado</h2><p>Linhas destacadas mostram onde existe diferença entre os itens selecionados.</p></div><span class="compare-results-badge"><i>✓</i> somente catálogo verificado</span></div><div class="compare-selection-grid">${summaries}</div><div class="compare-table" style="--compare-columns:${chosen.length}"><div class="compare-table-head"><span>CRITÉRIO</span>${chosen.map((item) => `<div class="compare-head-item"><strong>${esc(item.name)}</strong><small>v${esc(item.version || '—')} · ${esc(item.productCode)}</small></div>`).join('')}</div>${tableRows}<div class="compare-table-actions">${chosen.map((item) => `<a class="button button-primary" href="${esc(item.downloadUrl)}" target="_blank" rel="noreferrer">Baixar ${esc(item.name)} ↗</a>`).join('')}</div></div><p class="compare-footnote"><i>ⓘ</i> Verificado confirma a origem, o hash e o download publicado. Ainda assim, abra o APBX no KT WIRZADE e leia as ações antes de aplicar.</p></div>`;
+    }
+    selects.forEach((select) => select.addEventListener('change', render));
+    reset?.addEventListener('click', () => { selects.forEach((select) => { select.value = ''; }); render(); });
   </script>
 </BaseLayout>
