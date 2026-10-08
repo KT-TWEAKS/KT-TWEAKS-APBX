@@ -32,7 +32,6 @@ const cleanCatalogDescription = (value: unknown) => {
     docUrl,
   };
 };
-const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
 ---
 <BaseLayout title="KT APBX — catálogo verificado" description="Catálogo oficial de playbooks APBX verificados pelo KT WIRZADE.">
   <section class="hero shell">
@@ -54,9 +53,9 @@ const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
     <div class="no-results" id="no-results" hidden><strong>Nada encontrado.</strong><span>Tente outro nome ou remova o filtro de categoria.</span></div>
   </section>
   <section class="manifest-section shell"><div class="manifest-card"><div><div class="eyebrow">COMO FUNCIONA</div><h2>Uma fonte, um hash, um download.</h2><p>O repositório público guarda apenas o catálogo. O arquivo APBX fica como asset de GitHub Release, evitando o limite de arquivos do repositório e mantendo cada versão rastreável.</p><div class="manifest-actions"><a class="button button-primary" href="https://kt-wirzade-site.vercel.app/docs/fluxo-apbx" target="_blank" rel="noreferrer">Ler o fluxo no WIRZADE ↗</a><a class="button button-ghost" href="/comparar">Comparar playbooks</a></div></div><div class="manifest-side"><div class="manifest-list"><div><b>01</b><span>Registro operacional separado</span></div><div><b>02</b><span>Auditoria e SHA-256</span></div><div><b>03</b><span>Release e catálogo atualizados</span></div></div><p class="manifest-note">Nenhum link de administração é publicado nesta interface.</p></div></div></section>
-  <script is:inline define:vars={{ safeJson }}>
-    const source = JSON.parse(safeJson); const search = document.querySelector('#catalog-search'); const buttons = [...document.querySelectorAll('[data-filter]')]; const cards = [...document.querySelectorAll('[data-card]')]; const empty = document.querySelector('#no-results'); let filter = 'all';
+  <script is:inline>
+    const search = document.querySelector('#catalog-search'); const buttons = [...document.querySelectorAll('[data-filter]')]; const cards = [...document.querySelectorAll('[data-card]')]; const empty = document.querySelector('#no-results'); let filter = 'all';
     function render(){const query=(search?.value||'').trim().toLowerCase();let visible=0;cards.forEach((card)=>{const match=(!query||card.dataset.search.includes(query))&&(filter==='all'||card.dataset.category===filter);card.hidden=!match;if(match)visible++;});if(empty)empty.hidden=visible>0||cards.length===0;}
-    search?.addEventListener('input',render); buttons.forEach((button)=>button.addEventListener('click',()=>{filter=button.dataset.filter;buttons.forEach((item)=>item.classList.toggle('active',item===button));render();})); void source;
+    search?.addEventListener('input',render); buttons.forEach((button)=>button.addEventListener('click',()=>{filter=button.dataset.filter;buttons.forEach((item)=>item.classList.toggle('active',item===button));render();}));
   </script>
 </BaseLayout>
