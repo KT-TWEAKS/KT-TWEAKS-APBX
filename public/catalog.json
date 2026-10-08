@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T21:37:25.000Z",
+  "updatedAt": "2026-10-08T22:31:03.034Z",
   "playbooks": [
     {
       "productCode": "64",
@@ -37,7 +37,10 @@
           "Comando que modifica dados de boot: bcdedit /timeout 10",
           "Comando que modifica dados de boot: bcdedit /set bootmenupolicy legacy"
         ],
-        "supportedBuilds": ["26100", "26200"],
+        "supportedBuilds": [
+          "26100",
+          "26200"
+        ],
         "optionsCount": 0,
         "actionCounts": {
           "registry": 421,
@@ -49,9 +52,97 @@
           "others": 1912
         }
       }
+    },
+    {
+      "productCode": "AtomOS",
+      "name": "Atom Playbook",
+      "author": "Project Atom",
+      "version": "0.0.8",
+      "description": "Strip Windows to the best possible. Lowest CPU, RAM and disk usage.",
+      "category": "balanced",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-08T22:31:03.034Z",
+      "publishedAt": "2026-10-08T22:31:03.034Z",
+      "sha256": "c790ef47d0891e3e64481dcb865f65f0de3349ac02ff6aae90c339051e69c251",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-atomos-v0.0.8/Atom.Playbook.v0.0.8.apbx",
+      "website": "https://www.atom-os.com/",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "Atom.Playbook.v0.0.8.apbx",
+        "sizeBytes": 125001407,
+        "sha256": "C790EF47D0891E3E64481DCB865F65F0DE3349AC02FF6AAE90C339051E69C251",
+        "engineVersion": "1.0.1",
+        "totalFiles": 232,
+        "totalActions": 1127,
+        "taskFiles": 15,
+        "networkRequired": 0,
+        "parseErrors": 0,
+        "risks": [
+          "Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que modifica dados de boot: bcdedit /deletevalue useplatformclock  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set {current} nx optin  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set {current} recoveryenabled no  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set {current} disableelamdrivers yes  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set bootmenupolicy Legacy  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set {current} hypervisorlaunchtype off  <Performance (Configuration/Tasks/05-performance.yml)>",
+          "Comando que remove tarefas agendadas: schtasks /Delete /TN \"\\Microsoft\\Windows\\AppxAllUserStore\\UScheduler\" /F 2>nul  <Final (Configuration/Tasks/10-final.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set disabledynamictick yes  <Gaming (Configuration/Tasks/12-gaming.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set useplatformtick yes  <Gaming (Configuration/Tasks/12-gaming.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set tscsyncpolicy enhanced  <Gaming (Configuration/Tasks/12-gaming.yml)>"
+        ],
+        "severity": "high",
+        "riskScore": 100,
+        "actionCounts": {
+          "registry": 527,
+          "services": 174,
+          "files": 0,
+          "downloads": 0,
+          "commands": 76,
+          "apps": 187,
+          "others": 163
+        },
+        "supportedBuilds": [
+          "19044",
+          "19045",
+          "22000",
+          "22621",
+          "22631",
+          "23620",
+          "26100",
+          "26200",
+          "27000",
+          "27100",
+          "27200",
+          "27300",
+          "27400",
+          "27500",
+          "27600",
+          "27700",
+          "27800",
+          "27900",
+          "28000"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-08T22:29:37.905Z"
+      }
     }
   ],
   "changes": [
+    {
+      "id": "AtomOS-1791498663054",
+      "productCode": "AtomOS",
+      "name": "Atom Playbook",
+      "version": "0.0.8",
+      "type": "published",
+      "date": "2026-10-08T22:31:03.034Z",
+      "storage": "release",
+      "summary": "Novo playbook v0.0.8 analisado e publicado."
+    },
     {
       "id": "64-20261008213725",
       "productCode": "64",
