@@ -58,3 +58,20 @@ main,.site-footer{position:relative;z-index:1}
 .card-notice a{color:#ded5ff;text-decoration:none;white-space:nowrap;transition:color .2s ease,transform .2s ease}
 .card-notice a:hover{color:#fff;transform:translateX(2px)}
 @media(max-width:680px){.card-notice{align-items:flex-start;flex-direction:column;gap:6px}.card-notice a{white-space:normal}}
+/* Category reading: classification is visible before opening a release. */
+.category-guide{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:-4px 0 24px;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.025);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.category-guide-label{margin-right:4px;color:#697286;font:9px var(--mono);letter-spacing:.12em}
+.category-guide-item{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border:1px solid rgba(255,255,255,.07);border-radius:999px;color:#dce0ea;font-size:10px}
+.category-guide-item small{color:var(--muted);font-size:10px}
+.category-guide-item i{width:6px;height:6px;border-radius:50%;background:var(--violet);box-shadow:0 0 10px currentColor}
+.category-guide-gaming i{color:#ffbc75;background:#ffbc75}.category-guide-performance i{color:var(--cyan);background:var(--cyan)}.category-guide-balanced i{color:var(--green);background:var(--green)}
+.category-tag{display:inline-flex;align-items:center;gap:6px}
+.category-tag:before{font-size:9px;color:var(--violet)}
+.category-tag[data-category="gaming"]{color:#ffd09a;background:rgba(255,188,117,.09);border-color:rgba(255,188,117,.22)}.category-tag[data-category="gaming"]:before{content:"◈";color:#ffbc75}
+.category-tag[data-category="performance"]{color:#a8eaff;background:rgba(119,216,255,.08);border-color:rgba(119,216,255,.22)}.category-tag[data-category="performance"]:before{content:"↗";color:var(--cyan)}
+.category-tag[data-category="balanced"]{color:#a8efc8;background:rgba(126,226,174,.08);border-color:rgba(126,226,174,.2)}.category-tag[data-category="balanced"]:before{content:"◌";color:var(--green)}
+.catalog-card[data-category="gaming"]{--category-glow:rgba(255,188,117,.1)}.catalog-card[data-category="performance"]{--category-glow:rgba(119,216,255,.1)}.catalog-card[data-category="balanced"]{--category-glow:rgba(126,226,174,.08)}
+.catalog-card:before{content:"";position:absolute;inset:0 0 auto;height:2px;border-radius:15px 15px 0 0;background:linear-gradient(90deg,transparent,var(--category-glow),transparent);opacity:.9}
+.card-meta{grid-template-columns:1.1fr .95fr .8fr}
+@media(max-width:920px){.card-meta{grid-template-columns:1fr 1fr}.card-meta span:last-child{grid-column:1/-1}}
+@media(max-width:680px){.category-guide{align-items:flex-start;display:grid;grid-template-columns:1fr 1fr}.category-guide-label{grid-column:1/-1}.category-guide-item{justify-content:flex-start}.card-meta{grid-template-columns:1fr 1fr}.card-meta span:last-child{grid-column:auto}}
