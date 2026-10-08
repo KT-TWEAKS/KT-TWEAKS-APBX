@@ -46,3 +46,10 @@ main,.site-footer{position:relative;z-index:1}
 .button-ghost,.search-field,.filter-button,.header-link{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 @media(max-width:680px){.site-header{background:rgba(10,12,24,.58);backdrop-filter:blur(35px) saturate(180%);-webkit-backdrop-filter:blur(35px) saturate(180%)}.site-nav{background:rgba(255,255,255,.055)}.platinum-grid-overlay{opacity:.18}.hero-console{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}}
 @media(prefers-reduced-motion:reduce){.platinum-webgl{opacity:.75}.catalog-card,.button{transition:none}}
+.card-description{min-height:0;margin:10px 0 12px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.card-notice{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:9px 10px;border:1px solid rgba(255,208,131,.2);border-radius:10px;background:linear-gradient(135deg,rgba(255,208,131,.09),rgba(255,255,255,.025));color:#ffd083;font:10px/1.4 var(--mono);letter-spacing:.02em}
+.card-notice span{display:flex;align-items:center;gap:7px}
+.card-notice span::before{content:'⚠';font-size:12px;color:#ffd083}
+.card-notice a{color:#ded5ff;text-decoration:none;white-space:nowrap;transition:color .2s ease,transform .2s ease}
+.card-notice a:hover{color:#fff;transform:translateX(2px)}
+@media(max-width:680px){.card-notice{align-items:flex-start;flex-direction:column;gap:6px}.card-notice a{white-space:normal}}
