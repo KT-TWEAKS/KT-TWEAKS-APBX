@@ -1,0 +1,126 @@
+name: Publicar APBX enviado pelo licensing
+run-name: Publicar APBX upload ${{ inputs.upload_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      upload_id:
+        description: Identificador do envio
+        required: true
+        type: string
+      staging_tag:
+        description: Tag da release temporaria
+        required: true
+        type: string
+      release_id:
+        description: ID da release temporaria
+        required: true
+        type: string
+      dry_run:
+        description: Apenas validar montagem e hash
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-apbx-catalog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Baixar partes e manifesto
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_ID" =~ ^[0-9]+$ ]]
+          mkdir -p "$RUNNER_TEMP/apbx-parts"
+          gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets" --paginate --jq '.[] | [.name,.url] | @tsv' > "$RUNNER_TEMP/assets.tsv"
+          while IFS=$'\t' read -r name url; do
+            [[ "$name" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,100}(\.part|\.json)$ ]] || { echo "Nome de asset invalido." >&2; exit 1; }
+            case "$name" in
+              *.part) gh api "$url" -H 'Accept: application/octet-stream' > "$RUNNER_TEMP/apbx-parts/$name" ;;
+              manifest.json) gh api "$url" -H 'Accept: application/octet-stream' > "$RUNNER_TEMP/manifest.json" ;;
+            esac
+          done < "$RUNNER_TEMP/assets.tsv"
+          test -s "$RUNNER_TEMP/manifest.json"
+          test -n "$(find "$RUNNER_TEMP/apbx-parts" -type f -name '*.part' -print -quit)"
+          find "$RUNNER_TEMP/apbx-parts" -type f -name '*.part' -print0 | sort -z | xargs -0 cat > "$RUNNER_TEMP/playbook.apbx"
+
+      - name: Validar arquivo remontado e manifesto
+        shell: bash
+        run: |
+          set -euo pipefail
+          filename="$(jq -er '.targetFile | strings' "$RUNNER_TEMP/manifest.json")"
+          [[ "$filename" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,100}\.apbx$ && "$filename" != *..* ]] || { echo "Nome de arquivo de destino invalido." >&2; exit 1; }
+          expected="$(jq -er '.sha256 | strings | ascii_downcase' "$RUNNER_TEMP/manifest.json")"
+          [[ "$expected" =~ ^[a-f0-9]{64}$ ]] || { echo "SHA-256 invalido no manifesto." >&2; exit 1; }
+          actual="$(sha256sum "$RUNNER_TEMP/playbook.apbx" | cut -d' ' -f1)"
+          test "$actual" = "$expected"
+          expected_size="$(jq -er '.sizeBytes | numbers' "$RUNNER_TEMP/manifest.json")"
+          [[ "$expected_size" =~ ^[0-9]+$ ]] || { echo "Tamanho invalido no manifesto." >&2; exit 1; }
+          actual_size="$(stat -c%s "$RUNNER_TEMP/playbook.apbx")"
+          test "$actual_size" = "$expected_size"
+
+      - name: Encerrar teste de montagem
+        if: ${{ inputs.dry_run == true }}
+        run: echo "Arquivo remontado e hash confirmado."
+
+      - name: Publicar sempre como GitHub Release
+        if: ${{ inputs.dry_run == false }}
+        id: target
+        shell: bash
+        run: |
+          set -euo pipefail
+          filename="$(jq -er '.targetFile | strings' "$RUNNER_TEMP/manifest.json")"
+          tag="$(jq -er '.finalTag | strings' "$RUNNER_TEMP/manifest.json")"
+          [[ "$tag" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,100}$ && "$tag" != *..* ]] || { echo "Tag de destino invalida." >&2; exit 1; }
+          cp "$RUNNER_TEMP/playbook.apbx" "$RUNNER_TEMP/$filename"
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            title="$(jq -er '.name | strings' "$RUNNER_TEMP/manifest.json") v$(jq -er '.version | strings' "$RUNNER_TEMP/manifest.json")"
+            gh release create "$tag" --title "$title" --notes "APBX publicado automaticamente. Confira o SHA-256 no catalogo."
+          fi
+          gh release upload "$tag" "$RUNNER_TEMP/$filename" --clobber
+          encoded="$(node -p "encodeURIComponent(process.argv[1])" "$filename")"
+          echo "url=https://github.com/$GITHUB_REPOSITORY/releases/download/$tag/$encoded" >> "$GITHUB_OUTPUT"
+          echo "storage=release" >> "$GITHUB_OUTPUT"
+
+      - name: Atualizar catalogo
+        if: ${{ inputs.dry_run == false }}
+        env:
+          MANIFEST_PATH: ${{ runner.temp }}/manifest.json
+          DOWNLOAD_URL: ${{ steps.target.outputs.url }}
+          STORAGE: ${{ steps.target.outputs.storage }}
+        run: node .github/scripts/update-upload-catalog.mjs "$MANIFEST_PATH" "$DOWNLOAD_URL" "$STORAGE"
+
+      - name: Publicar alteracoes
+        if: ${{ inputs.dry_run == false }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'KT WIRZADE Licensing'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/catalog.json
+          if git diff --cached --quiet; then
+            echo "Catalogo sem alteracoes de metadados."
+            exit 0
+          fi
+          git commit -m "catalog: publish APBX release"
+          git pull --rebase origin main
+          git push origin HEAD:main

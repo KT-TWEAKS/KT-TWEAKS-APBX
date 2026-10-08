@@ -1,0 +1,17 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const catalog = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'catalog.json'), 'utf8'));
+const playbooks = Array.isArray(catalog.playbooks) ? catalog.playbooks.filter((item: any) => item?.verified) : [];
+const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
+---
+<BaseLayout title="Comparar APBX — KT APBX" description="Compare playbooks APBX verificados lado a lado." active="compare">
+  <section class="page-hero shell"><div class="eyebrow">FERRAMENTA DE DECISÃO</div><h1>Compare antes de aplicar.</h1><p>Coloque até três playbooks lado a lado e veja o que muda em escopo, risco, tamanho e compatibilidade.</p></section>
+  <section class="compare-section shell"><div class="compare-picker">{['first', 'second', 'third'].map((slot, index) => <label class="select-card"><span>PLAYBOOK {String(index + 1).padStart(2, '0')}</span><select data-select={slot}><option value="">Selecionar playbook…</option>{playbooks.map((item: any) => <option value={item.productCode}>{item.name} · v{item.version}</option>)}</select></label>)}</div><div id="compare-output" class="compare-output"><div class="empty-state compact"><span class="empty-icon">⇄</span><h3>Selecione dois ou mais itens</h3><p>As diferenças aparecem aqui conforme você escolhe.</p></div></div></section>
+  <script is:inline define:vars={{ safeJson }}>
+    const items = JSON.parse(safeJson); const selects = [...document.querySelectorAll('[data-select]')]; const output = document.querySelector('#compare-output'); const esc = (value) => String(value ?? '').replace(/[&<>"']/g,(char)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[char]); const size = (value) => { const bytes=Number(value||0); return bytes?`${(bytes/1048576).toFixed(1)} MB`:'—'; };
+    function render(){const chosen=selects.map((select)=>items.find((item)=>item.productCode===select.value)).filter(Boolean);if(chosen.length<2){output.innerHTML='<div class="empty-state compact"><span class="empty-icon">⇄</span><h3>Selecione dois ou mais itens</h3><p>As diferenças aparecem aqui conforme você escolhe.</p></div>';return;}const rows=[['Versão',(item)=>`v${item.version||'—'}`],['Autor',(item)=>item.author||'—'],['Categoria',(item)=>item.category||'—'],['Auditoria',(item)=>item.analysis?.severity||'auditado'],['Tamanho',(item)=>size(item.analysis?.sizeBytes)],['Ações',(item)=>item.analysis?.totalActions||'—'],['Builds',(item)=>(item.analysis?.supportedBuilds||[]).join(', ')||'—'],['SHA-256',(item)=>item.sha256||'—']];output.innerHTML=`<div class="compare-table"><div class="compare-table-head"><span>CRITÉRIO</span>${chosen.map((item)=>`<strong>${esc(item.name)}</strong>`).join('')}</div>${rows.map(([label,read])=>`<div class="compare-row"><span>${label}</span>${chosen.map((item)=>`<b>${esc(read(item))}</b>`).join('')}</div>`).join('')}<div class="compare-table-actions">${chosen.map((item)=>`<a class="button button-primary" href="${esc(item.downloadUrl)}" target="_blank" rel="noreferrer">Baixar ${esc(item.name)} ↗</a>`).join('')}</div></div>`;}
+    selects.forEach((select)=>select.addEventListener('change',render));
+  </script>
+</BaseLayout>

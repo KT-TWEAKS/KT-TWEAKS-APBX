@@ -1,0 +1,57 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const catalogPath = path.join(process.cwd(), 'public', 'catalog.json');
+const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+const playbooks = Array.isArray(catalog.playbooks) ? catalog.playbooks.filter((item: any) => item?.verified && item?.downloadUrl && item?.sha256) : [];
+const categories = [...new Set(playbooks.map((item: any) => item.category).filter(Boolean))];
+const categoryLabel: Record<string, string> = { gaming: 'Gaming', performance: 'Performance', privacy: 'Privacidade', lightweight: 'Leve', balanced: 'Balanceado' };
+const severityLabel: Record<string, string> = { ok: 'Baixo risco', low: 'Baixo risco', medium: 'Risco médio', high: 'Alto risco', critical: 'Crítico', unknown: 'Auditado' };
+const formatBytes = (value: unknown) => {
+  const bytes = Number(value || 0);
+  if (!bytes) return 'Tamanho não informado';
+  if (bytes >= 1024 ** 3) return `${(bytes / 1024 ** 3).toFixed(1)} GB`;
+  return `${(bytes / 1024 ** 2).toFixed(1)} MB`;
+};
+const safeJson = JSON.stringify(playbooks).replace(/</g, '\\u003c');
+---
+<BaseLayout title="KT APBX — catálogo verificado" description="Catálogo oficial de playbooks APBX verificados pelo KT WIRZADE.">
+  <section class="hero shell">
+    <div class="eyebrow"><span class="pulse"></span> KT WIRZADE · APBX RELEASES VERIFICADAS</div>
+    <div class="hero-grid">
+      <div>
+        <h1>Playbooks para um Windows <em>mais seu.</em></h1>
+        <p class="hero-lead">Descubra, compare e baixe APBX auditados. Cada arquivo publicado aqui nasce no painel de registro e chega com origem, versão e hash verificáveis.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#catalogo">Explorar catálogo <span>↓</span></a><a class="button button-ghost" href="/changelog-playbooks">Ver atualizações <span>↗</span></a></div>
+        <div class="trust-row"><span>✓ SHA-256 público</span><span>✓ Download direto</span><span>✓ Status verificado</span></div>
+      </div>
+      <div class="hero-console" aria-label="Fluxo de publicação">
+        <div class="console-top"><span class="console-label">PUBLICATION PIPELINE</span><span class="live-dot">FLOW</span></div>
+        <div class="console-flow" role="tablist" aria-label="Etapas de publicação"><button class="flow-node done is-active" type="button" role="tab" aria-selected="true" aria-controls="pipeline-panel-0" data-pipeline-step="0"><b>01</b><span>Upload</span><small>arquivo recebido</small></button><div class="flow-line done"></div><button class="flow-node done" type="button" role="tab" aria-selected="false" aria-controls="pipeline-panel-1" data-pipeline-step="1"><b>02</b><span>Audit</span><small>estrutura analisada</small></button><div class="flow-line done"></div><button class="flow-node current" type="button" role="tab" aria-selected="false" aria-controls="pipeline-panel-2" data-pipeline-step="2"><b>03</b><span>Release</span><small>link permanente</small></button></div>
+        <div class="pipeline-detail" aria-live="polite"><div id="pipeline-panel-0" data-pipeline-panel="0"><span>REGISTRO</span><strong>O arquivo entra no fluxo de publicação e recebe uma identificação de versão.</strong></div><div id="pipeline-panel-1" data-pipeline-panel="1" hidden><span>VERIFICAÇÃO</span><strong>A estrutura, a análise e o SHA-256 são conferidos antes de aparecer no catálogo.</strong></div><div id="pipeline-panel-2" data-pipeline-panel="2" hidden><span>DISTRIBUIÇÃO</span><strong>O APBX fica como asset de GitHub Release; o deploy público guarda apenas o catálogo.</strong></div></div>
+        <div class="console-foot"><span>storage</span><strong data-pipeline-value>GitHub Releases</strong><span class="console-check">●</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="metrics shell" aria-label="Resumo do catálogo"><div><strong>{playbooks.length.toString().padStart(2, '0')}</strong><span>publicados</span></div><div><strong>{categories.length.toString().padStart(2, '0')}</strong><span>categorias</span></div><div><strong>100%</strong><span>verificados</span></div><div><strong>0</strong><span>arquivos no deploy</span></div></section>
+  <section class="catalog-section shell" id="catalogo">
+    <div class="section-heading"><div><div class="eyebrow">CATÁLOGO OFICIAL</div><h2>Escolha seu ponto de partida</h2></div><p>Somente itens verificados e com download publicado aparecem aqui.</p></div>
+    <div class="catalog-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" placeholder="Buscar por nome, autor ou código…" autocomplete="off" /></label><div class="filter-group" role="group" aria-label="Filtrar por categoria"><button class="filter-button active" data-filter="all">Todos</button>{categories.map((category) => <button class="filter-button" data-filter={category}>{categoryLabel[category] || category}</button>)}</div></div>
+    {playbooks.length > 0 ? <div class="catalog-grid" id="catalog-grid">{playbooks.map((item: any, index: number) => { const severity = item.analysis?.severity || 'unknown'; const tags = Array.isArray(item.tags) ? item.tags.slice(0, 4) : []; return <article class="catalog-card" data-card data-category={item.category || 'balanced'} data-search={`${item.name} ${item.author} ${item.productCode} ${tags.join(' ')}`.toLowerCase()}><div class="card-top"><span class="card-index">{String(index + 1).padStart(2, '0')}</span><span class="verified"><i>✓</i> Verificado</span></div><div class="card-title-row"><h3>{item.name}</h3><span class="version">v{item.version}</span></div><p class="card-description">{item.description || 'Playbook publicado no catálogo oficial.'}</p><div class="tag-row"><span class="category-tag">{categoryLabel[item.category] || item.category || 'Balanceado'}</span>{tags.map((tag: string) => <span class="tag">{tag}</span>)}</div><div class="card-meta"><span><small>AUTHOR</small>{item.author || 'Desconhecido'}</span><span><small>AUDIT</small><b class={`severity severity-${severity}`}>{severityLabel[severity] || 'Auditado'}</b></span></div><div class="card-foot"><span class="file-size">{formatBytes(item.analysis?.sizeBytes)}</span><a class="download-link" href={item.downloadUrl} target="_blank" rel="noreferrer">Download <span>↗</span></a></div><details class="hash-details"><summary>Verificar integridade</summary><code>{item.sha256}</code></details></article>; })}</div> : <div class="empty-state"><span class="empty-icon">◌</span><h3>O próximo release começa aqui.</h3><p>Nenhum APBX verificado foi publicado ainda. O catálogo será atualizado quando uma nova versão for aprovada internamente.</p><span class="empty-note">Publicação controlada · downloads somente de releases verificados</span></div>}
+    <div class="no-results" id="no-results" hidden><strong>Nada encontrado.</strong><span>Tente outro nome ou remova o filtro de categoria.</span></div>
+  </section>
+  <section class="manifest-section shell"><div class="manifest-card"><div><div class="eyebrow">COMO FUNCIONA</div><h2>Uma fonte, um hash, um download.</h2><p>O repositório público guarda apenas o catálogo. O arquivo APBX fica como asset de GitHub Release, evitando o limite de arquivos do repositório e mantendo cada versão rastreável.</p><div class="manifest-actions"><a class="button button-primary" href="https://kt-wirzade-site.vercel.app/docs/fluxo-apbx" target="_blank" rel="noreferrer">Ler o fluxo no WIRZADE ↗</a><a class="button button-ghost" href="/comparar">Comparar playbooks</a></div></div><div class="manifest-side"><div class="manifest-list"><div><b>01</b><span>Registro operacional separado</span></div><div><b>02</b><span>Auditoria e SHA-256</span></div><div><b>03</b><span>Release e catálogo atualizados</span></div></div><p class="manifest-note">Nenhum link de administração é publicado nesta interface.</p></div></div></section>
+  <script is:inline define:vars={{ safeJson }}>
+    const source = JSON.parse(safeJson); const search = document.querySelector('#catalog-search'); const buttons = [...document.querySelectorAll('[data-filter]')]; const cards = [...document.querySelectorAll('[data-card]')]; const empty = document.querySelector('#no-results'); let filter = 'all';
+    function render(){const query=(search?.value||'').trim().toLowerCase();let visible=0;cards.forEach((card)=>{const match=(!query||card.dataset.search.includes(query))&&(filter==='all'||card.dataset.category===filter);card.hidden=!match;if(match)visible++;});if(empty)empty.hidden=visible>0||cards.length===0;}
+    search?.addEventListener('input',render); buttons.forEach((button)=>button.addEventListener('click',()=>{filter=button.dataset.filter;buttons.forEach((item)=>item.classList.toggle('active',item===button));render();})); void source;
+  </script>
+  <script is:inline>
+    const pipelineSteps = [...document.querySelectorAll('[data-pipeline-step]')]; const pipelinePanels = [...document.querySelectorAll('[data-pipeline-panel]')];
+    function activatePipeline(index, moveFocus = false) { const next = Math.max(0, Math.min(index, pipelineSteps.length - 1)); pipelineSteps.forEach((step, stepIndex) => { const active = stepIndex === next; step.classList.toggle('is-active', active); step.setAttribute('aria-selected', active ? 'true' : 'false'); step.setAttribute('tabindex', active ? '0' : '-1'); }); pipelinePanels.forEach((panel, panelIndex) => { panel.hidden = panelIndex !== next; }); if (moveFocus) pipelineSteps[next].focus(); }
+    pipelineSteps.forEach((step, index) => { step.addEventListener('click', () => activatePipeline(index)); step.addEventListener('keydown', (event) => { let next = index; if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next += 1; if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next -= 1; if (event.key === 'Home') next = 0; if (event.key === 'End') next = pipelineSteps.length - 1; if (next !== index) { event.preventDefault(); activatePipeline(next < 0 ? pipelineSteps.length - 1 : next >= pipelineSteps.length ? 0 : next, true); } }); });
+    if (pipelineSteps.length && pipelinePanels.length) activatePipeline(0);
+  </script>
+</BaseLayout>
