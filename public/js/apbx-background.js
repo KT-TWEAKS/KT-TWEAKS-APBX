@@ -81,28 +81,48 @@ void main(){vec2 uv=(gl_FragCoord.xy-0.5*u_res)/u_res.y;float t=u_time*0.08;floa
   const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : ((callback) => window.setTimeout(() => callback(Date.now()), 1000 / 30));
   const caf = window.cancelAnimationFrame ? window.cancelAnimationFrame.bind(window) : window.clearTimeout.bind(window);
   let frameId = 0;
+  let elapsed = 0;
+  let lastFrame = 0;
 
   const resize = () => {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const ratioLimit = window.innerWidth <= 768 ? 1.35 : 1.75;
+    const ratio = Math.min(window.devicePixelRatio || 1, ratioLimit);
     canvas.width = Math.max(1, Math.floor(window.innerWidth * ratio));
     canvas.height = Math.max(1, Math.floor(window.innerHeight * ratio));
     gl.viewport(0, 0, canvas.width, canvas.height);
   };
 
   const frame = (now) => {
+    if (!lastFrame) lastFrame = now;
+    elapsed += Math.min(now - lastFrame, 50);
+    lastFrame = now;
     gl.uniform2f(resolution, canvas.width, canvas.height);
-    gl.uniform1f(time, reduced ? 0 : now * 0.001);
+    gl.uniform1f(time, reduced ? 0 : elapsed * 0.001);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     if (!reduced) frameId = raf(frame);
   };
 
+  const stop = () => {
+    if (frameId) caf(frameId);
+    frameId = 0;
+    lastFrame = 0;
+  };
+
+  const start = () => {
+    if (!frameId) frameId = raf(frame);
+  };
+
   canvas.addEventListener('webglcontextlost', (event) => {
     event.preventDefault();
-    caf(frameId);
+    stop();
     useFallback();
   }, { passive: false });
 
   resize();
   window.addEventListener('resize', resize, { passive: true });
-  frameId = raf(frame);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
+  if (!document.hidden) start();
 })();

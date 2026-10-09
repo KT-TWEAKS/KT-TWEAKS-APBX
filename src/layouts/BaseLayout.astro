@@ -10,6 +10,7 @@ interface Props {
 
 const { title, description, active = 'home' } = Astro.props;
 const navItem = (key: Props['active']) => active === key ? 'nav-link active' : 'nav-link';
+const canonicalUrl = new URL(Astro.url.pathname, 'https://kt-tweaks-apbx.vercel.app').toString();
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -17,14 +18,28 @@ const navItem = (key: Props['active']) => active === key ? 'nav-link active' : '
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#0b0d12" />
+    <meta name="color-scheme" content="dark" />
     <meta name="description" content={description} />
-    <link rel="canonical" href={`https://kt-tweaks-apbx.vercel.app${Astro.url.pathname}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KT APBX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content="https://kt-tweaks-apbx.vercel.app/kt-logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://kt-tweaks-apbx.vercel.app/kt-logo.png" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/kt-logo.png" />
+    <link rel="apple-touch-icon" href="/kt-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
     <canvas id="platinum-webgl" class="platinum-webgl" aria-hidden="true"></canvas>
     <div class="platinum-vignette" aria-hidden="true"></div>
     <div class="platinum-grid-overlay" aria-hidden="true"></div>
@@ -34,14 +49,14 @@ const navItem = (key: Props['active']) => active === key ? 'nav-link active' : '
         <span class="brand-copy"><strong>KT APBX</strong><small>verified release catalog</small></span>
       </a>
       <nav class="site-nav" aria-label="Navegação principal">
-        <a class={navItem('home')} href="/">Catálogo</a>
-        <a class={navItem('compare')} href="/comparar">Comparar</a>
-        <a class={navItem('changelog')} href="/changelog-playbooks">Changelog</a>
-        <a class={navItem('faq')} href="/faq">FAQ</a>
+        <a class={navItem('home')} href="/" aria-current={active === 'home' ? 'page' : undefined}>Catálogo</a>
+        <a class={navItem('compare')} href="/comparar" aria-current={active === 'compare' ? 'page' : undefined}>Comparar</a>
+        <a class={navItem('changelog')} href="/changelog-playbooks" aria-current={active === 'changelog' ? 'page' : undefined}>Changelog</a>
+        <a class={navItem('faq')} href="/faq" aria-current={active === 'faq' ? 'page' : undefined}>FAQ</a>
       </nav>
       <div class="header-actions"><a class="header-link header-link-secondary" href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer" aria-label="Conhecer o aplicativo KT WIRZADE">KT WIRZADE <span aria-hidden="true">↗</span></a><a class="header-link" href="https://kt-wirzade-site.vercel.app/docs/fluxo-apbx" target="_blank" rel="noreferrer">Fluxo <span aria-hidden="true">↗</span></a><a class="header-link" href="/termos">Termos</a><a class="header-link header-link-github" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
     </header>
-    <main><slot /></main>
+    <main id="main-content" tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <div><span class="footer-dot"></span><strong>KT TWEAKS</strong><span class="muted">/ KT APBX</span></div>
       <p>Arquivos publicados pelo fluxo oficial, verificados por SHA-256. <a href="/termos">Termos e limites</a> · <a href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer">Conheça o KT WIRZADE ↗</a></p>
