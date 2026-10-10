@@ -1,7 +1,60 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-10-08T22:59:56.214Z",
+  "updatedAt": "2026-10-10T14:30:42.735Z",
   "playbooks": [
+    {
+      "productCode": "64",
+      "name": "Atlas v0.5.0",
+      "author": "Atlas",
+      "version": "0.5.0",
+      "description": "╭───────────── ⚠️ 𝗖𝗿𝗶𝘁𝗶𝗰𝗮𝗹 ⚠️ ─────────────╮\n│         Read the Atlas documentation first.       │\n│                https://docs.atlasos.net/                 │\n╰───────────────────────────────────────╯\n\nAtlas makes your computer snappier and more private with lots of usability improvements.",
+      "category": "gaming",
+      "tags": [],
+      "featured": false,
+      "source": "ktw",
+      "verified": true,
+      "verifiedAt": "2026-10-10T14:30:42.735Z",
+      "publishedAt": "2026-10-08T21:37:25.000Z",
+      "sha256": "13c4d8e7fc0ed38c37c5942ebcabf7f636389972e6de391a192ae649967602d8",
+      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-64-v0.5.0/AtlasPlaybook_v0.5.0-hotfix.apbx",
+      "website": "https://atlasos.net",
+      "git": null,
+      "publicNotes": "",
+      "storage": "release",
+      "analysis": {
+        "file": "AtlasPlaybook_v0.5.0-hotfix.apbx",
+        "sizeBytes": 48024713,
+        "sha256": "13C4D8E7FC0ED38C37C5942EBCABF7F636389972E6DE391A192AE649967602D8",
+        "engineVersion": "1.0.1",
+        "totalFiles": 540,
+        "totalActions": 2500,
+        "taskFiles": 191,
+        "networkRequired": 0,
+        "parseErrors": 0,
+        "risks": [
+          "Comando que reinicia/desliga a maquina: del \"%ProgramData%\\Microsoft\\Diagnosis\\ETLLogs\\AutoLogger\\DiagTrack*\" \"%ProgramData%\\Microsoft\\Diagnosis\\ETLLogs\\Shutdow...  <Disallow Telemetry and Data Collection (Configuration/tweaks/privacy/telemetry/disallow-data-collection.yml)>",
+          "Comando que modifica dados de boot: bcdedit /timeout 10  <Configure Boot Configuration (Configuration/tweaks/qol/bcdedit-tweaks.yml)>",
+          "Comando que modifica dados de boot: bcdedit /set bootmenupolicy legacy  <Configure Boot Configuration (Configuration/tweaks/qol/bcdedit-tweaks.yml)>"
+        ],
+        "severity": "high",
+        "riskScore": 45,
+        "actionCounts": {
+          "registry": 421,
+          "services": 13,
+          "files": 1,
+          "downloads": 0,
+          "commands": 104,
+          "apps": 49,
+          "others": 1912
+        },
+        "supportedBuilds": [
+          "26100",
+          "26200"
+        ],
+        "optionsCount": 0,
+        "analyzedAt": "2026-10-10T14:29:46.559Z"
+      }
+    },
     {
       "productCode": "AtomOS",
       "name": "Atom Playbook",
@@ -387,56 +440,6 @@
       }
     },
     {
-      "productCode": "64",
-      "name": "UltraOS v1.1.1",
-      "author": "UltraOS",
-      "version": "1.1.1",
-      "description": "╭───────────────── ⚠️ 𝗖𝗿𝗶𝘁𝗶𝗰𝗮𝗹 ⚠️ ─────────────────╮\n│   Read the UltraOS documentation first.            │\n│   https://github.com/UltraOS-Project/playbook       │\n╰──────────────────────────────────────────────────────╯\n\nUltraOS makes Windows snappier, more private and more yours - with Safe, Balanced and Extreme presets, full backups and an install report.",
-      "category": "balanced",
-      "tags": [],
-      "featured": false,
-      "source": "ktw",
-      "verified": true,
-      "verifiedAt": "2026-10-08T22:50:21.701Z",
-      "publishedAt": "2026-10-08T21:37:25.000Z",
-      "sha256": "a5617ab2278f42180aad148b41c2af80b90ed9641b1a80e7a4bf1aec94f14d4a",
-      "downloadUrl": "https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/releases/download/apbx-64-v1.1.1/UltraOS-Playbook-v1.1.1.apbx",
-      "website": "https://github.com/UltraOS-Project",
-      "git": null,
-      "publicNotes": "",
-      "storage": "release",
-      "analysis": {
-        "file": "UltraOS-Playbook-v1.1.1.apbx",
-        "sizeBytes": 166424,
-        "sha256": "A5617AB2278F42180AAD148B41C2AF80B90ED9641B1A80E7A4BF1AEC94F14D4A",
-        "engineVersion": "1.0.1",
-        "totalFiles": 77,
-        "totalActions": 1115,
-        "taskFiles": 39,
-        "networkRequired": 0,
-        "parseErrors": 0,
-        "risks": [],
-        "severity": "ok",
-        "riskScore": 0,
-        "actionCounts": {
-          "registry": 312,
-          "services": 31,
-          "files": 0,
-          "downloads": 0,
-          "commands": 39,
-          "apps": 80,
-          "others": 653
-        },
-        "supportedBuilds": [
-          "26100",
-          "26200",
-          "26300"
-        ],
-        "optionsCount": 0,
-        "analyzedAt": "2026-10-08T22:50:12.836Z"
-      }
-    },
-    {
       "productCode": "Vain",
       "name": "Vain playbook",
       "author": "V1.4.0",
@@ -598,6 +601,16 @@
     }
   ],
   "changes": [
+    {
+      "id": "64-1791642642762",
+      "productCode": "64",
+      "name": "Atlas v0.5.0",
+      "version": "0.5.0",
+      "type": "updated",
+      "date": "2026-10-10T14:30:42.735Z",
+      "storage": "release",
+      "summary": "Arquivo e analise atualizados para v0.5.0."
+    },
     {
       "id": "XOS-1791500396238",
       "productCode": "XOS",
