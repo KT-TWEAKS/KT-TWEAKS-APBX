@@ -1,8 +1,6 @@
 <div align="center">
 
-# KT APBX
-
-**Catálogo verificado de playbooks `.apbx` para o [KT WIRZADE](https://github.com/KT-TWEAKS/KT-WIRZADE).**
+<img src="docs/img/banner-apbx.png" alt="KT APBX — Catálogo verificado de playbooks .apbx para o KT WIRZADE" width="100%" />
 
 [![Site](https://img.shields.io/badge/Site-kt--tweaks--apbx.vercel.app-2560E9)](https://kt-tweaks-apbx.vercel.app) [![Painel](https://img.shields.io/badge/Painel-KT_WIRZADE-blueviolet)](https://github.com/KT-TWEAKS/KT-WIRZADE) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
