@@ -40,6 +40,7 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://kt-tweaks-apbx.vercel.
   </head>
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <canvas class="kt-atmosphere" data-kt-atmosphere aria-hidden="true"></canvas>
     <canvas id="platinum-webgl" class="platinum-webgl" aria-hidden="true"></canvas>
     <div class="platinum-vignette" aria-hidden="true"></div>
     <div class="platinum-grid-overlay" aria-hidden="true"></div>
@@ -63,5 +64,6 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://kt-tweaks-apbx.vercel.
       <p>Arquivos publicados pelo fluxo oficial, verificados por SHA-256. <a href="/termos">Termos e limites</a> · <a href="https://kt-wirzade-site.vercel.app" target="_blank" rel="noreferrer">Conheça o KT WIRZADE ↗</a></p>
     </footer>
     <script is:inline src="/js/apbx-background.js"></script>
+    <script type="module" src="/js/kt-atmosphere.js"></script>
   </body>
 </html>
