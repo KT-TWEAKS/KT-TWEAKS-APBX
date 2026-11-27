@@ -1,0 +1,12 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const catalog = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'catalog.json'), 'utf8'));
+const changes = Array.isArray(catalog.changes) ? catalog.changes : [];
+const dateLabel = (value: string) => value ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'medium' }).format(new Date(value)) : 'Data não informada';
+---
+<BaseLayout title="Changelog — KT APBX" description="Histórico de publicações e atualizações do catálogo APBX." active="changelog">
+  <section class="page-hero shell"><div class="eyebrow">HISTÓRICO DE RELEASES</div><h1>O catálogo deixa rastros.</h1><p>Cada aprovação, atualização ou retirada feita no painel privado gera um evento público para você acompanhar a origem do arquivo.</p></section>
+  <section class="timeline-section shell">{changes.length ? <div class="timeline">{changes.map((change: any) => <article class="timeline-item"><div class="timeline-marker"></div><div class="timeline-date">{dateLabel(change.date)}</div><div class="timeline-card"><div class="card-top"><span class="card-index">{change.type === 'updated' ? 'UPD' : 'NEW'}</span><span class="version">v{change.version || '—'}</span></div><h2>{change.name || change.productCode}</h2><p>{change.summary || 'Catálogo atualizado.'}</p><code>{change.productCode}</code></div></article>)}</div> : <div class="empty-state"><span class="empty-icon">◷</span><h3>Sem eventos publicados ainda.</h3><p>O primeiro APBX verificado aparecerá neste histórico automaticamente.</p><a class="button button-primary" href="/">Voltar ao catálogo</a></div>}</section>
+</BaseLayout>

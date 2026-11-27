@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const questions = [
+  ['O que é um APBX?', 'É um playbook empacotado para descrever mudanças de forma legível, versionada e auditável antes de chegar ao KT WIRZADE.'],
+  ['De onde vem o download?', 'O catálogo não hospeda o arquivo no deploy. Cada download aponta para o asset de uma GitHub Release oficial, mantendo a versão e a origem rastreáveis.'],
+  ['O que significa verificado?', 'Significa que o registro passou pelo fluxo de publicação, possui metadados públicos, análise registrada e SHA-256 disponível para conferência.'],
+  ['O catálogo executa alguma coisa?', 'Não. Esta página apenas apresenta metadados e links de release. A aplicação acontece localmente no KT WIRZADE, depois que você lê e confirma o playbook.'],
+  ['Como comparar dois playbooks?', 'Abra Comparar, selecione dois ou três itens e confira versão, autor, categoria, ações, builds, tamanho e hash lado a lado.'],
+  ['O hash substitui uma análise de segurança?', 'Não. O hash confirma integridade do arquivo recebido; ele não garante que uma alteração seja adequada para todos os computadores. Leia o escopo e os avisos antes de aplicar.'],
+  ['Como uma atualização aparece aqui?', 'Uma publicação aprovada atualiza o catálogo público e adiciona um evento no Changelog. O site não expõe o painel privado usado para registrar a release.'],
+];
+---
+
+<BaseLayout title="FAQ — KT APBX" description="Perguntas frequentes sobre o catálogo público de playbooks APBX verificados." active="faq">
+  <section class="page-hero shell">
+    <div class="eyebrow">RESPOSTAS DIRETAS</div>
+    <h1>Antes do download,<br /><em>tire a dúvida.</em></h1>
+    <p>O catálogo é público e simples de consultar. O fluxo de registro continua separado; aqui você encontra apenas o que precisa para decidir com contexto.</p>
+  </section>
+  <section class="faq-section shell">
+    <div class="faq-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="faq-search" type="search" placeholder="Buscar uma pergunta…" autocomplete="off" /></label><span class="faq-count">{questions.length.toString().padStart(2, '0')} respostas públicas</span></div>
+    <div class="faq-list" id="faq-list">
+      {questions.map(([question, answer], index) => <details class="faq-item" data-faq data-search={`${question} ${answer}`.toLowerCase()} open={index === 0}><summary><span>{String(index + 1).padStart(2, '0')}</span><strong>{question}</strong><i aria-hidden="true">+</i></summary><p>{answer}</p></details>)}
+    </div>
+    <div class="no-results" id="faq-empty" hidden><strong>Nenhuma resposta encontrada.</strong><span>Tente outro termo ou limpe a busca.</span></div>
+  </section>
+  <section class="manifest-section shell"><div class="manifest-card faq-callout"><div><div class="eyebrow">DECISÃO INFORMADA</div><h2>Integridade é parte do fluxo.</h2><p>Confira o hash no cartão, leia o changelog e use o KT WIRZADE para revisar o impacto antes de aplicar qualquer alteração.</p></div><div class="manifest-actions"><a class="button button-primary" href="/comparar">Comparar playbooks</a><a class="button button-ghost" href="/termos">Ver termos e limites</a></div></div></section>
+  <script is:inline>
+    const input = document.querySelector('#faq-search'); const items = [...document.querySelectorAll('[data-faq]')]; const empty = document.querySelector('#faq-empty');
+    function filterFaq(){ const query = (input?.value || '').trim().toLowerCase(); let count = 0; items.forEach((item) => { const match = !query || item.dataset.search.includes(query); item.hidden = !match; if (match) count += 1; }); if (empty) empty.hidden = count > 0; }
+    input?.addEventListener('input', filterFaq);
+  </script>
+</BaseLayout>

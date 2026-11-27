@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Termos e limites — KT APBX" description="Termos de uso, integridade, responsabilidade e limites do catálogo público KT APBX." active="terms">
+  <section class="page-hero shell">
+    <div class="eyebrow">TERMOS PÚBLICOS · ATUALIZADO EM 2026</div>
+    <h1>Clareza antes<br /><em>de aplicar.</em></h1>
+    <p>Este catálogo distribui referências verificadas para uso consciente. Leia os limites abaixo antes de baixar ou aplicar qualquer playbook.</p>
+  </section>
+  <section class="terms-layout shell">
+    <aside class="terms-index"><span>ÍNDICE</span><a href="#escopo">Escopo</a><a href="#integridade">Integridade</a><a href="#responsabilidade">Responsabilidade</a><a href="#privacidade">Privacidade</a><a href="#contato">Correções</a></aside>
+    <div class="terms-content">
+      <article id="escopo" class="terms-block"><span>01 / ESCOPO</span><h2>O catálogo é uma vitrine de releases.</h2><p>O KT APBX apresenta metadados de playbooks publicados no fluxo oficial da KT TWEAKS. Ele não executa arquivos, não altera o Windows e não substitui a leitura da documentação do KT WIRZADE.</p></article>
+      <article id="integridade" class="terms-block"><span>02 / INTEGRIDADE</span><h2>Verificado não significa universalmente seguro.</h2><p>O selo indica que o registro possui origem, versão, análise e SHA-256 públicos. Antes de usar, confira se o download veio de uma release oficial e se o hash recebido corresponde ao cartão exibido.</p></article>
+      <article id="responsabilidade" class="terms-block"><span>03 / RESPONSABILIDADE</span><h2>Você decide o que entra no seu computador.</h2><p>Playbooks podem alterar configurações, serviços, arquivos ou registro do Windows. Faça backup, leia as ações e confirme compatibilidade com seu build. O usuário é responsável por testar, aplicar, interromper ou reverter a operação no ambiente local.</p></article>
+      <article id="privacidade" class="terms-block"><span>04 / PRIVACIDADE</span><h2>O catálogo público não pede sua máquina.</h2><p>Esta interface não solicita login, chaves, licenças ou dados do computador para consultar o catálogo. O download abre a origem pública da release. Não envie informações pessoais em arquivos de issue ou em playbooks compartilhados.</p></article>
+      <article id="contato" class="terms-block"><span>05 / CORREÇÕES</span><h2>Encontrou um registro incorreto?</h2><p>Use os canais públicos do repositório para relatar hash incompatível, descrição desatualizada ou link quebrado. O registro pode ser corrigido, atualizado ou retirado do catálogo após revisão.</p><div class="manifest-actions"><a class="button button-primary" href="https://github.com/KT-TWEAKS/KT-TWEAKS-APBX/issues" target="_blank" rel="noreferrer">Relatar no GitHub ↗</a><a class="button button-ghost" href="/">Voltar ao catálogo</a></div></article>
+    </div>
+  </section>
+</BaseLayout>
