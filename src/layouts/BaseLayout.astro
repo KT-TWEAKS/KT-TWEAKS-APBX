@@ -25,11 +25,11 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://kt-tweaks-apbx.vercel.
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content="https://kt-tweaks-apbx.vercel.app/kt-logo.png" />
+    <meta property="og:image" content="https://kt-tweaks-apbx.vercel.app/kt-tweaks-banner.png" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://kt-tweaks-apbx.vercel.app/kt-logo.png" />
+    <meta name="twitter:image" content="https://kt-tweaks-apbx.vercel.app/kt-tweaks-banner.png" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/kt-logo.png" />
     <link rel="apple-touch-icon" href="/kt-logo.png" />
@@ -48,6 +48,7 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://kt-tweaks-apbx.vercel.
         <span class="brand-mark">KT</span>
         <span class="brand-copy"><strong>KT APBX</strong><small>verified release catalog</small></span>
       </a>
+      <span class="org-signal" aria-label="Uma ferramenta da organização KT TWEAKS"><i aria-hidden="true">✦</i> KT TWEAKS</span>
       <nav class="site-nav" aria-label="Navegação principal">
         <a class={navItem('home')} href="/" aria-current={active === 'home' ? 'page' : undefined}>Catálogo</a>
         <a class={navItem('compare')} href="/comparar" aria-current={active === 'compare' ? 'page' : undefined}>Comparar</a>

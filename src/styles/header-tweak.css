@@ -1,2 +1,4 @@
 .header-actions{display:flex;align-items:center;gap:8px}.header-link-secondary{color:#d5caff;border-color:rgba(155,124,255,.22)}
+.org-signal{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid rgba(155,124,255,.2);border-radius:999px;color:#cfc3ff;background:rgba(155,124,255,.055);font:9px var(--mono);letter-spacing:.12em;white-space:nowrap}.org-signal i{font-style:normal;color:var(--violet);font-size:12px;filter:drop-shadow(0 0 7px var(--violet))}
 @media(max-width:680px){.header-link-secondary{display:none}.header-actions{margin-left:auto}}
+@media(max-width:1040px){.org-signal{display:none}}
